@@ -8,8 +8,8 @@
 		<version>2.2.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.uca.capas.dev</groupId>
-	<artifactId>PNC_Proyecto</artifactId>
+	<groupId>devART.uca</groupId>
+	<artifactId>PNC_Proyect</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PNC_Proyecto</name>
 	<description>Proyecto N-Capas</description>
