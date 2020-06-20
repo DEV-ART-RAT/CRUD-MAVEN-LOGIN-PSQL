@@ -1,14 +1,14 @@
 # Proyecto : Modulo de Administracion de Estudiantes
 ## ¿Como usar?
 ### Instrucciones:
->>> Puerto: localhost:8080/
->>> Base de Datos: ADMINISTRACION
+* Puerto: https://localhost:8080/
+* Base de Datos: ADMINISTRACION
 
 ### Requisitos:
->>> Ide de Java (Eclipse,Intellij IDEA,...)
->>> Maven
->>> PostgreSQL 12
->>> Java JDK 1.8
+* Ide de Java (Eclipse,Intellij IDEA,...)
+* Maven
+* PostgreSQL 12
+* Java JDK 1.8
 
 
 ## Descargas
