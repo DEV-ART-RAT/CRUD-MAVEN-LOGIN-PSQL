@@ -1,4 +1,4 @@
-package devART.uca.capas;
+package devART.uca.capas.config;
 import java.util.Properties;
 
 import javax.sql.DataSource;
