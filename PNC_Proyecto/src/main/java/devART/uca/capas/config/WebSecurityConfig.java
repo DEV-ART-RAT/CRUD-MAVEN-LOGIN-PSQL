@@ -84,5 +84,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         db.setDataSource(dataSource);
         return db;
     }
+    
+    
+   //remember me 
+ // Token stored in Table (Persistent_Logins)
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+        db.setDataSource(this.dataSource);
+        return db;
+    }
+     
+    // Token stored in Memory (Of Web Server).
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
+        return memory;
+    }
  
 }
