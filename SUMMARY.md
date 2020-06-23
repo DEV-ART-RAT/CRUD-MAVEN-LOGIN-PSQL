@@ -1,5 +1,16 @@
 # Table of contents
 
 * [Proyecto Capas](README.md)
-* [¿Que necesito para usar la app?](que-necesito-para-usar-la-app.md)
+* [Instrucciones](instrucciones.md)
+* [Requisitos](requisitos.md)
+* [Descargas](descargas.md)
+
+## Imagenes
+
+* [Definicion](imagenes/definicion.md)
+* [Aplicacion](imagenes/aplicacion.md)
+
+---
+
+* [Autores](autores.md)
 
