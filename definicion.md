@@ -179,18 +179,12 @@ información de la nota cursada. Todos los campos son de carácter obligatorio, 
 
 1. Expediente de estudiante \(30%\). Cada punto vale 5%
    1. Búsqueda de estudiantes por nombre o apellido
-   2. Agregar nuevo expediente
-   3. Editar expediente ya existente d.
-
-![](.gitbook/assets/32.png)
-
-Column
-
-e.
-
-f.
-
-1. Materias cursadas \(30%\). Cada punto vale 7.5%
+   2.  Agregar nuevo expediente
+   3. Editar expediente ya existente 
+   4. Columna "Materias aprobadas" 
+   5. Columna "Materias "reprobadas" 
+   6. Columna "promedio"
+2. Materias cursadas \(30%\). Cada punto vale 7.5%
    1. Encabezado con nombre del estudiante
    2. Agregar materia cursada
    3. Editar materia cursada
