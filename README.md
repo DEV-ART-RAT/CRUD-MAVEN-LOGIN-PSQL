@@ -2,6 +2,10 @@
 
 ## ¿Como usar?
 
+{% page-ref page="que-necesito-para-usar-la-app.md" %}
+
+
+
 ### Instrucciones:
 
 * Puerto: [https://localhost:8080/](https://localhost:8080/)
