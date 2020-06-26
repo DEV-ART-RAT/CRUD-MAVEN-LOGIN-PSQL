@@ -2,7 +2,7 @@ package devART.uca.capas.config;
 
 import javax.sql.DataSource;
 
-import org.o7planning.sbsecurity.service.UserDetailsServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import devART.uca.capas.service.UserDetailsServiceImpl;
  
 @Configuration
 @EnableWebSecurity
@@ -85,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return db;
     }
     
-    
+  /*
    //remember me 
  // Token stored in Table (Persistent_Logins)
     @Bean
@@ -101,5 +103,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
         return memory;
     }
- 
+ */
 }
