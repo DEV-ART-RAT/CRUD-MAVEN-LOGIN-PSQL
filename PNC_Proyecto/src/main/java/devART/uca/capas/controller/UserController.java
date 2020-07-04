@@ -71,7 +71,7 @@ public class UserController {
  
             model.addAttribute("userInfo", userInfo);
  
-            String message = "Hi " + principal.getName() //
+            String message = "Ingreso No Autorizado <br>" + principal.getName() //
                     + "<br> You do not have permission to access this page!";
             model.addAttribute("message", message);
  

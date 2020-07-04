@@ -59,9 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	//limitando sesiones por usuario
     	http.sessionManagement().maximumSessions(1);
-    	//http        .sessionManagement()            .maximumSessions(1)
-                //.maxSessionsPreventsLogin(true)                .sessionRegistry(sessionRegistry());
- 
+    	
+    	
         http.csrf().disable();
  
         // The pages does not require login
