@@ -1,5 +1,9 @@
 package devART.uca.capas.config;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
@@ -10,9 +14,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationException;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import devART.uca.capas.service.UserDetailsServiceImpl;
  
@@ -43,6 +54,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    
+    	
+    	
+    	//limitando sesiones por usuario
+    	http.sessionManagement().maximumSessions(1);
+    	//http        .sessionManagement()            .maximumSessions(1)
+                //.maxSessionsPreventsLogin(true)                .sessionRegistry(sessionRegistry());
  
         http.csrf().disable();
  
@@ -80,12 +98,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
     }
  
-    @Bean
+    
+
+	@Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
         db.setDataSource(dataSource);
         return db;
     }
+   
     
   /*
    //remember me 
@@ -104,4 +125,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return memory;
     }
  */
+    
 }
