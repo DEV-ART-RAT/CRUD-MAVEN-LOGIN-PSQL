@@ -2,7 +2,7 @@ package devART.uca.capas.controller;
 
 import java.security.Principal;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.utils.WebUtils;
  
 @Controller
 public class UserController {
+	@Autowired
+	UserDetailsServiceImpl userService;
  
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
