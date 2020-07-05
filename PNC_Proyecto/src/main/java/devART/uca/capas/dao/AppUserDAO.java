@@ -9,10 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uca.capas.domain.Libro;
 
 import devART.uca.capas.domain.AppUser;
-import devART.uca.capas.domain.Estudiante;
  
 @Repository
 @Transactional

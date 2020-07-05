@@ -11,6 +11,7 @@ public class WebUtils {
         StringBuilder sb = new StringBuilder();
  
         sb.append("UserName:").append(user.getUsername());
+        sb.append(" State: ").append(user.isEnabled());
  
         Collection<GrantedAuthority> authorities = user.getAuthorities();
         if (authorities != null && !authorities.isEmpty()) {
