@@ -27,14 +27,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
  
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    	
         AppUser appUser = this.appUserDAO.findUserAccount(userName);
  
+        //verificando si usuario existe
         if (appUser == null) {
             System.out.println("User not found! " + userName);
-            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+            throw new UsernameNotFoundException("Usuario " + userName + " no se encontro en Base de Datos");
+        }
+        if(!appUser.isEnabled()) {
+        	System.out.println("User not Active! " + userName);
+            throw new UsernameNotFoundException("Usuario " + userName + " no se encuentra activa, pedir activacion a Administrador");
         }
  
-        System.out.println("Found User: " + appUser);
+        //System.out.println("Found User: " + appUser);
  
         // [ROLE_USER, ROLE_ADMIN,..]
         List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());

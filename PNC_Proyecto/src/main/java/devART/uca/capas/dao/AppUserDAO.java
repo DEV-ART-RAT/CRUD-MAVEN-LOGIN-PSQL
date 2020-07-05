@@ -5,10 +5,14 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uca.capas.domain.Libro;
+
 import devART.uca.capas.domain.AppUser;
+import devART.uca.capas.domain.Estudiante;
  
 @Repository
 @Transactional
@@ -30,5 +34,21 @@ public class AppUserDAO {
             return null;
         }
     }
+    
+    //insert and update user
+    public void insert(AppUser user) throws DataAccessException {
+    	try {
+			if(user.getUserId()==null)
+				entityManager.persist(user);
+			else {
+				entityManager.merge(user);
+				entityManager.flush();
+			}
+		}catch(Throwable e) {
+			e.printStackTrace();
+		}		
+	}
+    
+    
  
 }
