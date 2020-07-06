@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import devART.uca.capas.domain.Expediente;
 import devART.uca.capas.domain.Materia;
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
@@ -122,5 +123,62 @@ public class UserController {
 		mav.setViewName("ingresarMateria");
 		return mav;
 	}
+
+    //cordinador
+    @RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
+    public String coordinadorpage(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Expediente/coordinador";
+    }
+    @RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
+    public String expediente(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Expediente/buscarExpediente";
+    }
+    @RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
+    public String editarexpediente(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Expediente/editarExpediente";
+    }
+    @RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
+    public String resultadoExpediente(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Expediente/resultadobusquedaExpediente";
+    }
+    @RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
+    public String materiascursadas(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "MateriasCursadas";
+    }
+    
+    @RequestMapping("/guardarExpediente")
+	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			
+			mav.setViewName("/");
+		}else {
+
+			mav.setViewName("/Expediente/coordi");
+		}
+		expediente = new Expediente();
+    	mav.addObject("expediente", expediente);
+		return mav;
+	}
+
+    @RequestMapping(value = { "/NuevoExpediente" }, method = RequestMethod.GET)
+    public ModelAndView NuevoExpediente() {
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("expediente", new Expediente());
+		mav.setViewName("/Expediente/AgregarExpediente");
+        return mav;
+    }
  
 }
