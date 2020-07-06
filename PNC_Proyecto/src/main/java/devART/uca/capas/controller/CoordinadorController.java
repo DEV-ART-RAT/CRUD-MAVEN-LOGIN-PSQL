@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -105,6 +106,34 @@ public class CoordinadorController {
 		mav.setViewName("/Coordinador/AgregarExpediente");
         return mav;
     }
+    
+    @RequestMapping(value="/buscarexpediente", method=RequestMethod.POST)
+	public ModelAndView filtrar(@RequestParam(value="busqueda") String cadena,@RequestParam Long tipo) 
+	{	
+		ModelAndView mav = new ModelAndView();
+		List<Expediente> expedientes = null;
+		try {
+			if (tipo ==1) {
+				System.out.println(cadena);
+				expedientes = expedienteService.filtrarPorNombre(cadena);
+
+			}
+			if (tipo ==2) {
+				System.out.println(cadena);
+				expedientes = expedienteService.filtrarPorApellido(cadena);
+
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("expedientes", expedientes);
+		mav.setViewName("/Coordinador/coordinador");
+		
+		return mav;
+	}
+
  
 }
 

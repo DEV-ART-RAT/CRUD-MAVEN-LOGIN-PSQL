@@ -12,6 +12,7 @@ import devART.uca.capas.domain.Materia;
 public interface ExpedienteService {
 	public List<Expediente> findAllExpe() throws DataAccessException;
 	public void insert(Expediente expediente) throws DataAccessException;
-
+	public List<Expediente> filtrarPorNombre(String cadena) throws DataAccessException;
+	public List<Expediente> filtrarPorApellido(String cadena) throws DataAccessException;
 
 }

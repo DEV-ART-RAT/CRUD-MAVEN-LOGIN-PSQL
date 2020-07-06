@@ -28,4 +28,12 @@ public class ExpedienteServiceImpl implements ExpedienteService{
 		// TODO Auto-generated method stub
 		expedienteRepo.save(expediente);
 	}
+	@Override
+	public List<Expediente> filtrarPorNombre(String cadena)  throws DataAccessException {
+		return expedienteRepo.mostrarPorNombre(cadena);
+	}
+	@Override
+	public List<Expediente> filtrarPorApellido(String cadena)throws DataAccessException {
+		return expedienteRepo.mostrarPorApellido(cadena);
+	}
 }
