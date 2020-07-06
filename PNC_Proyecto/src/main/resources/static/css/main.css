@@ -1,0 +1,34 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    background-color: #d9d7d9;
+}
+
+.barMenu{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #3e4048;
+	align-items: center;
+	
+}
+
+.barMenuHead, .barMenuElements{
+	display: flex;
+	flex-direction: row;
+}
+
+.buttonMenu{
+	text-decoration: none;
+	color: white;
+	margin: 0.5em;
+}
+
+.buttonMenu:hover{
+	text-decoration: none;
+	color: #8080c0;
+}
+
+.barMenuHead .buttonMenu{
+	font-size:1.2em;
+}

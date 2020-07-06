@@ -2,48 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
 	    <title>Login</title>
-	    <!--JQUERY-->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <!-- Los iconos tipo Solid de Fontawesome-->
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	    <!-- Nuestro css-->
 	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
    </head>
    <body class="tumbaNazarik">
-         <h1 th:text="${message}"></h1>
-   
-      <!-- Include _menu.html -->
-      <th:block th:include="/_menu"></th:block>
+      <div class="barMenu">
+      	<div class="barMenuHead">
+      		<a class="buttonMenu" href="/">Nazarick</a>
+      	</div>
+      	<div class="barMenuElements">
+      		<a class="buttonMenu" href="registrarUsuario">Registrarte</a>
+      		<a class="buttonMenu" href="login">Iniciar Sesion</a>
+      	</div>
+      </div>
+      <h1 th:text="${message}"></h1>
       <div class="modal-dialog text-center">
       		<div class="col-sm-8 main-section">
-      			<!-- Include _menu.html
-      			 <h1>Login</h1>
-      			  -->
-           		 <div class="modal-content">
+      			<div class="modal-content">
             		<div class="col-12 user-img">
                     	<img src="static/img/user.png" th:src="@{/img/user.png}"/>
                 	</div>
-				       
-				     
-				       
-				      <!-- /login?error=true -->
 				      <div th:if="${#request.getParameter('error') == 'true'}"
 				            style="color:red;margin:10px 0px;">
-				         Login Failed!!!<br />
-				         Reason :
+				         Hubo un error en el inicio de sesion<br />
+				         debido a:
 				         <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
 				            th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message }">
 				                Static summary
 				         </span>
-				            
 				      </div>
-				      <!-- 
-				      <h3>Enter user name and password:</h3>
-				       -->
 				      <form class="col-12"  name='f' th:action="@{/j_spring_security_check}" method='POST'>
 				      		<div class="form-group" id="user-group">
 	                        	<input type='text' class="form-control" placeholder="Nombre de usuario"  name='username' value=''>
@@ -52,19 +44,13 @@
 		                        <input type='password' class="form-control" placeholder="Contrasenia" name='password' />
 		                    </div>
 		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
-		                    <a href="registarUsuario" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Reistrarse </a>
+		                    <br>
+		                    <span>No tienes cuenta?<a class="buttonMenu" href="registrarUsuario" >Registrate</a> </span>
 				      </form>
-				       
-				      <br>
-				      Username/pass:
-				      <ul>
-				        <li>dbuser1/123</li>
-				        <li>dbadmin1/123</li>
-				      </ul>  
+				      <br> 
 	            </div>
 	        </div>
 	    </div>
    </body>
     
 </html>
-

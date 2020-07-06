@@ -2,25 +2,9 @@
 <html xmlms:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-	<title>Nuevo expediente</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+<title>Insert title here</title>
 </head>
 <body>
-	<div class="barMenu">
-     	<div class="barMenuHead">
-     		<a class="buttonMenu" href="/userInfo">Nazarick</a>
-     	</div>
-     	<div class="barMenuElements">
-     		<a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
-     		<a class="buttonMenu" href="logout">Salir</a>
-     	</div>
-     </div> 
 <h1 th:text="${message}"></h1>
 <form method="post" th:action="@{/guardarExpediente}" th:object="${expediente}">
 		<h1>Nuevo Expediente</h1>

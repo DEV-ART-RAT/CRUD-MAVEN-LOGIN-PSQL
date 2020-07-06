@@ -76,23 +76,20 @@ public class UserController {
  
         return "loginPage";
     }
+    
  
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "logoutSuccessfulPage";
+        model.addAttribute("title", "Login");
+        return "welcomePage";
     }
  
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
  
         // After user login successfully.
-        String userName = principal.getName();
- 
-        //System.out.println("User Name: " + userName );
- 
+        String userName = principal.getName(); 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
  
@@ -118,17 +115,17 @@ public class UserController {
         return "403Page";
     }
     
-    @RequestMapping("/registarUsuario")
+    @RequestMapping("/registrarUsuario")
    	public ModelAndView ingresarUsuario() {
    		ModelAndView mav = new ModelAndView();
    		System.out.println("aqui estoy registrando :v");
    		AppUser appuser = new AppUser();
    		mav.addObject("userNew", appuser);
-   		mav.setViewName("logupPage");
+   		mav.setViewName("registerPage");
    		return mav;
    	}
     
-    @RequestMapping("/validarRegistarUsuario")
+    @RequestMapping("/validarRegistrarUsuario")
    	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,BindingResult result,@RequestParam Long role ) {
     	ModelAndView mav = new ModelAndView(); 
 		if(!result.hasErrors()) {
@@ -148,7 +145,7 @@ public class UserController {
 						mav.addObject("userNew", new AppUser());
 						mav.addObject("message", "Error Usuario ya existe");
 						System.out.println("usuario ya existe");
-						mav.setViewName("logupPage");
+						mav.setViewName("registerPage");
 						return mav;
 					}
 				}catch (Exception e) {
@@ -164,7 +161,7 @@ public class UserController {
 			AppUser appuser = new AppUser();
 	   		mav.addObject("userNew", appuser);
 			mav.addObject("message", "No se pudo ingresar");
-			mav.setViewName("logupPage");
+			mav.setViewName("registrarPage");
 		}
 		return mav;
 

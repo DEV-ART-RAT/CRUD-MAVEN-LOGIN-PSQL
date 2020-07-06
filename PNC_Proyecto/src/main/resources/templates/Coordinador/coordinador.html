@@ -2,12 +2,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+ 		<title>Coordinador</title>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
 </head>
 <body>
-	<th:block th:include="/_menu"></th:block>
- 	<a th:href="@{/expediente}">Expediente</a>
- 	<a th:href="@{/macursa}">Materias Cursadas</a>
- 
+	<div class="barMenu">
+     	<div class="barMenuHead">
+     		<a class="buttonMenu" href="/userInfo">Nazarick</a>
+     	</div>
+     	<div class="barMenuElements">
+     		<a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
+     		<a class="buttonMenu" href="logout">Salir</a>
+     	</div>
+    </div> 
+      
+	<h1>Buscar Expediente</h1>
+		
+	<h3>Buscar alumno</h3>
+	<select >
+				<option><th></th></option>
+	</select>
+			
+	<h3>Valor de busqueda</h3>
+	<select >
+				<option><th>Nombre</th></option>
+				<option><th>Apellido</th></option>
+	</select>
+	<input	type="text">
+	
+			<input type="button" value="Buscar" onclick="location.href='./resultadoExpediente'" />
+			
 </body>
 </html>

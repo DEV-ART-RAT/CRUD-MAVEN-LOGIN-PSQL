@@ -2,14 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
       <title th:utext="${title}"></title>
+     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
    </head>
-    
-   <body>
-    
-      <!-- Include _menu.html -->
-      <th:block th:include="/_menu"></th:block>  
-       
-      <h2>Message : <span th:utext="${message}"></span></h2>
+   <body>    
+      <div class="barMenu">
+      	<div class="barMenuHead">
+      		<a class="buttonMenu" href="/">Nazarick</a>
+      	</div>
+      	<div class="barMenuElements">
+      		<a class="buttonMenu" href="registrarUsuario">Registrarte</a>
+      		<a class="buttonMenu" href="userInfo">Coordinador</a>
+      		<a class="buttonMenu" href="admin">Administrador</a>
+      	</div>
+      </div>
        
    </body>
 </html>
