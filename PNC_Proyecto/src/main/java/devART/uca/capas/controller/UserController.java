@@ -1,6 +1,9 @@
 package devART.uca.capas.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 import javax.validation.Valid;
 
@@ -18,11 +21,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import devART.uca.capas.domain.AppUser;
 import devART.uca.capas.domain.Materia;
 import devART.uca.capas.domain.UserRole;
 import devART.uca.capas.service.AppRoleService;
 import devART.uca.capas.service.AppUserService;
+=======
+import devART.uca.capas.domain.Expediente;
+import devART.uca.capas.domain.Materia;
+import devART.uca.capas.service.ExpedienteServiceImpl;
+>>>>>>> 92b32bd799edefbf3b90848892c606758ae40c56
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.service.UserRoleService;
@@ -33,6 +42,9 @@ import devART.uca.capas.utils.WebUtils;
 public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userService;
+	
+	@Autowired
+	ExpedienteServiceImpl expedienteService;
 	
 	@Autowired
 	MateriaService materiaService;
@@ -61,7 +73,7 @@ public class UserController {
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
          
-        return "adminPage";
+        return "/Administrador/administrador";
     }
  
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -82,14 +94,14 @@ public class UserController {
         // After user login successfully.
         String userName = principal.getName();
  
-        System.out.println("User Name: " + userName );
+        //System.out.println("User Name: " + userName );
  
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
  
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
  
-        return "userInfoPage";
+        return "/Coordinador/coordinador";
     }
     
     @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -156,7 +168,7 @@ public class UserController {
 	public ModelAndView ingresarMateria() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("materia", new Materia());
-		mav.setViewName("ingresarMateria");
+		mav.setViewName("/Administrador/ingresarMateria");
 		return mav;
 	}
 	
@@ -179,5 +191,74 @@ public class UserController {
 		mav.setViewName("ingresarMateria");
 		return mav;
 	}
+
+    //cordinador
+    @RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
+    public String coordinadorpage(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Coordinador/coordinador";
+    }
+    @RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
+    public String expediente(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Coordinador/buscarExpediente";
+    }
+    @RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
+    public String editarexpediente(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Coordinador/editarExpediente";
+    }
+    @RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
+    public String resultadoExpediente(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "/Coordinador/resultadobusquedaExpediente";
+    }
+    @RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
+    public String materiascursadas(Model model) {
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("message", "This is welcome page!");
+        return "MateriasCursadas";
+    }
+    
+    @RequestMapping("/guardarExpediente")
+	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
+		
+		ModelAndView mav = new ModelAndView();
+		if(!result.hasErrors()) {
+			try {
+				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate ahora = LocalDate.now();
+				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
+				System.out.println("Fecha NAch es  "+fechaNac);
+				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
+				Period periodo = Period.between(fechaNac, ahora);
+				expediente.setS_edad(Integer.toString(periodo.getYears()));
+				expedienteService.insert(expediente);
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			expediente = new Expediente();
+			mav.addObject("expediente", expediente); 
+			mav.addObject("message", "Estudiante Guardado!");
+		}
+
+		mav.setViewName("/Coordinador/AgregarExpediente");
+		return mav;
+	}
+
+    @RequestMapping("/NuevoExpediente")
+    public ModelAndView NuevoExpediente() {
+    	ModelAndView mav = new ModelAndView();
+    	Expediente expediente=new Expediente();
+    	mav.addObject("expediente", expediente);
+		mav.setViewName("/Coordinador/AgregarExpediente");
+        return mav;
+    }
  
 }
