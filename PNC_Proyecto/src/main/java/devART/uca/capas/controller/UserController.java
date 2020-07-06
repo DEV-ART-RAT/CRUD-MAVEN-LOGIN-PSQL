@@ -169,12 +169,13 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		if(!result.hasErrors()) {
 			try {
-//				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//				LocalDate ahora = LocalDate.now();
-//				
-//				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
-//				Period periodo = Period.between(fechaNac, ahora);
-//				expediente.setS_edad(Integer.toString(periodo.getYears()));
+				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate ahora = LocalDate.now();
+				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
+				System.out.println("Fecha NAch es  "+fechaNac);
+				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
+				Period periodo = Period.between(fechaNac, ahora);
+				expediente.setS_edad(Integer.toString(periodo.getYears()));
 				expedienteService.insert(expediente);
 				
 			}catch (Exception e) {
