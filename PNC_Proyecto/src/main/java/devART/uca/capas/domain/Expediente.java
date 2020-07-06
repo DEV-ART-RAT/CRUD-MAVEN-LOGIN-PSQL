@@ -18,16 +18,20 @@ public class Expediente {
 	@Column(name="c_expediente")
 	private Integer codigo;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_nombre")
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_nombre;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_apellido")
 	@Size(message = "El apellido no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_apellido;
 	//TODO(9 caracteres alfanumericos)
+	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_carne")
 	@Pattern(regexp = "^[0-9]{9}$", message = "El carne debe tener exactamente 9 digitos")
 	@NotEmpty(message = "Este campo no puede estar vacio")
@@ -35,37 +39,43 @@ public class Expediente {
 	
 	@NotNull(message = "El campo Fecha no puede quedar vacio")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "f_nacimiento")
-	private Date fnacimiento;
+	@Column(name = "d_fnacimiento")
+	private Date d_fnacimiento;
 	
-	@Column(name = "i_edad")
-	private Integer i_edad;
+	@Column(name = "s_edad")
+	private String s_edad;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_direccion")
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_direccion;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_telefonof")
-	@Pattern(regexp = "^[0-9]{8}$", message = "El carne debe tener exactamente 9 digitos")
+	@Pattern(regexp = "^[0-9]{8}$", message = "El carne debe tener exactamente 8 digitos")
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_telefonof;
 
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_telefonom")
-	@Pattern(regexp = "^[0-9]{8}$", message = "El carne debe tener exactamente 9 digitos")
+	@Pattern(regexp = "^[0-9]{8}$", message = "El carne debe tener exactamente 8 digitos")
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_telefonom;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_institucion")
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_institucion;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_nombrePadre")
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_nombrePadre;
 	
+	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_nombreMadre")
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
@@ -106,19 +116,19 @@ public class Expediente {
 	}
 
 	public Date getFnacimiento() {
-		return fnacimiento;
+		return d_fnacimiento;
 	}
 
 	public void setFnacimiento(Date fnacimiento) {
-		this.fnacimiento = fnacimiento;
+		this.d_fnacimiento = fnacimiento;
 	}
 
-	public Integer getI_edad() {
-		return i_edad;
+	public String getI_edad() {
+		return s_edad;
 	}
 
-	public void setI_edad(Integer i_edad) {
-		this.i_edad = i_edad;
+	public void setI_edad(String s_edad) {
+		this.s_edad = s_edad;
 	}
 
 	public String getS_direccion() {

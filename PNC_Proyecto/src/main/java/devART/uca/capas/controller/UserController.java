@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import devART.uca.capas.domain.Expediente;
 import devART.uca.capas.domain.Materia;
+import devART.uca.capas.service.ExpedienteServiceImpl;
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.utils.WebUtils;
@@ -27,6 +28,9 @@ import devART.uca.capas.utils.WebUtils;
 public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userService;
+	
+	@Autowired
+	ExpedienteServiceImpl expedienteService;
 	
 	@Autowired
 	MateriaService materiaService;
@@ -163,7 +167,7 @@ public class UserController {
 		
 		if(result.hasErrors()) {
 			
-			mav.setViewName("/");
+			mav.setViewName("/Expediente/AgregarExpediente");
 		}else {
 
 			mav.setViewName("/Expediente/coordi");
