@@ -14,6 +14,8 @@
 	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
    </head>
    <body class="tumbaNazarik">
+         <h1 th:text="${message}"></h1>
+   
       <!-- Include _menu.html -->
       <th:block th:include="/_menu"></th:block>
       <div class="modal-dialog text-center">

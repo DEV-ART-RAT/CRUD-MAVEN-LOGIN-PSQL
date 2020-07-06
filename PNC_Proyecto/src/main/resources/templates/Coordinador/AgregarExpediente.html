@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1 th:text="${message}"></h1>
 <form method="post" th:action="@{/guardarExpediente}" th:object="${expediente}">
 		<h1>Nuevo Expediente</h1>
 		

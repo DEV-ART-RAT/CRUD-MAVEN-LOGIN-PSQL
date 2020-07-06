@@ -112,7 +112,10 @@ select * from app_role;
 select * from user_role;
 select * from persistent_logins;
 */
-
+CREATE TABLE public.materia(
+	cod_materia varchar(6) not null,
+	nombre_materia varchar(30) not null
+);
 
 
 CREATE TABLE public.expediente(
@@ -122,13 +125,13 @@ CREATE TABLE public.expediente(
 	s_carne varchar(9) not null,
 	d_fnacimiento varchar(15) not null,
 	s_edad varchar(3) not null,
-	s_direccion varchar(50) not null,
+	s_direccion varchar(100) not null,
 	s_telefonof varchar(8) not null,
 	s_telefonom varchar(8) not null,
 	s_institucion varchar(50) not null,
 	s_nombrePadre varchar(50) not null,
 	s_nombreMadre varchar(50) not null
 )
-drop table public.expediente
+-- drop table public.expediente
 
-select * from public.expediente
+-- select * from public.expediente

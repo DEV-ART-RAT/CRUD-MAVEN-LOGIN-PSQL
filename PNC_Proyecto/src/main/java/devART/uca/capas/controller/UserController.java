@@ -122,46 +122,43 @@ public class UserController {
    	public ModelAndView ingresarUsuario() {
    		ModelAndView mav = new ModelAndView();
    		System.out.println("aqui estoy registrando :v");
-   		mav.addObject("userNew", new AppUser());
+   		AppUser appuser = new AppUser();
+   		mav.addObject("userNew", appuser);
    		mav.setViewName("logupPage");
    		return mav;
    	}
     
     @RequestMapping("/validarRegistarUsuario")
-   	public String ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam Long role, BindingResult result) {
-    	//ModelAndView mav = new ModelAndView(); 
-		if(!result.hasErrors()) {
-			try {
+   	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam Long role, BindingResult result) {
+    	ModelAndView mav = new ModelAndView(); 
+		if(result.hasErrors()) {
+			mav.setViewName("logupPage");
+		}else {
 				//System.out.println("role: "+role);
 				//usery.setUserId((long) 5);
 				//System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
-				if(userServices.findOne(usery.getUserName())==null) {
-					
-				
-				usery.setEnabled(false);
-				//usery.setUserId((long) 5);
-				usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
-				userServices.insert(usery);
-				
-				
-				
-				userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
-				System.out.println("se ingreso usuario: "+usery.toString());
-				}
-				
-				else {
+				if(userServices.findOne(usery.getUserName())==null) 
+				{
+					usery.setEnabled(false);
+					//usery.setUserId((long) 5);
+					usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
+					userServices.insert(usery);
+					userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
+					System.out.println("se ingreso usuario: "+usery.toString());
+				}else {
+					mav.addObject("userNew", new AppUser());
+					mav.addObject("message", "Error Usuario ya existe");
 					System.out.println("usuario ya existe");
-					return "redirect:/registarUsuario";
+					mav.setViewName("logupPage");
+					return mav;
 				}
-				
-			}catch (Exception e) {
-				System.out.println("megaF con usuario");
-				e.printStackTrace();
-			}
-						
+	   		AppUser appuser = new AppUser();
+	   		mav.addObject("userNew", appuser);
+	   		mav.addObject("message", "Usuario ingresado!");
+			mav.setViewName("loginPage");
 		}
-		//mav.setViewName("ingresarMateria");
-		return "redirect:/welcome";
+		return mav;
+
    	}
     
     @RequestMapping("/ingresarMateria")
