@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,17 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
 import devART.uca.capas.domain.AppUser;
+import devART.uca.capas.domain.Expediente;
 import devART.uca.capas.domain.Materia;
 import devART.uca.capas.domain.UserRole;
 import devART.uca.capas.service.AppRoleService;
 import devART.uca.capas.service.AppUserService;
-=======
-import devART.uca.capas.domain.Expediente;
-import devART.uca.capas.domain.Materia;
 import devART.uca.capas.service.ExpedienteServiceImpl;
->>>>>>> 92b32bd799edefbf3b90848892c606758ae40c56
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.service.UserRoleService;
@@ -152,6 +147,11 @@ public class UserController {
 				
 				userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
 				System.out.println("se ingreso usuario: "+usery.toString());
+				}
+				
+				else {
+					System.out.println("usuario ya existe");
+					return "redirect:/registarUsuario";
 				}
 				
 			}catch (Exception e) {
