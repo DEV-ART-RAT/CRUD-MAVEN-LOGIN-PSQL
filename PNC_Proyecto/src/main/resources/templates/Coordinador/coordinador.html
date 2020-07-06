@@ -20,23 +20,43 @@
      		<a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
      		<a class="buttonMenu" href="logout">Salir</a>
      	</div>
-    </div> 
-      
+    </div>
 	<h1>Buscar Expediente</h1>
-		
 	<h3>Buscar alumno</h3>
 	<select >
-				<option><th></th></option>
+		<option><th></th></option>
 	</select>
-			
 	<h3>Valor de busqueda</h3>
 	<select >
-				<option><th>Nombre</th></option>
-				<option><th>Apellido</th></option>
+		<option><th>Nombre</th></option>
+		<option><th>Apellido</th></option>
 	</select>
 	<input	type="text">
-	
-			<input type="button" value="Buscar" onclick="location.href='./resultadoExpediente'" />
+	<input type="button" value="Buscar" onclick="location.href='./resultadoExpediente'" />
+	<div class="wrap-contact100">
+		<table class="table table-sm table-dark">
+			<thead>
+				<th scope="col">Codigo</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Carnet</th>
+				<th scope="col">Institucion</th>
+				<th scope="col">Edad</th>
+				<th scope="col">Telefono</th>
+			</thead>
+			<th:block th:each="e, row: ${expedientes}">
+				<tr>
+					<td th:text="${e.codigo}"/>
+					<td th:text="${e.s_nombre}"/>
+					<td th:text="${e.s_apellido}"/>
+					<td th:text="${e.s_carne}"/>
+					<td th:text="${e.s_institucion}"/>
+					<td th:text="${e.s_edad}"/>
+					<td th:text="${e.s_telefonom}"/>
+				</tr>
+			</th:block>
+		</table>
+	</div>
 			
 </body>
 </html>

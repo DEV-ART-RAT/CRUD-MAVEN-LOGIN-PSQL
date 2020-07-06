@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -77,7 +78,6 @@ public class UserController {
         return "loginPage";
     }
     
- 
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Login");
@@ -85,16 +85,41 @@ public class UserController {
     }
  
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
+    public ModelAndView listado() {
+		ModelAndView mav = new ModelAndView();
+		
+		List<Expediente> expedientes = null;
+		try {
+			
+			expedientes = expedienteService.findAllExpe();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("expedientes", expedientes);
+		mav.setViewName("/Coordinador/coordinador");
+		
+		return mav;
+    }
+     
+    /*
+     
+		
+		public String userInfo(Model model, Principal principal) {
  
-        // After user login successfully.
         String userName = principal.getName(); 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
  
         return "/Coordinador/coordinador";
+        
     }
+	} 
+      
+     
+     */
     
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
