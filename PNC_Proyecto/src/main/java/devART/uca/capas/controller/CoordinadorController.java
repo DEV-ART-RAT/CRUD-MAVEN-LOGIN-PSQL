@@ -113,6 +113,9 @@ public class CoordinadorController {
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		try {
+			if (cadena==""){
+				expedientes = expedienteService.findAllExpe();
+			}else {
 			if (tipo ==1) {
 				System.out.println(cadena);
 				expedientes = expedienteService.filtrarPorNombre(cadena);
@@ -122,7 +125,7 @@ public class CoordinadorController {
 				System.out.println(cadena);
 				expedientes = expedienteService.filtrarPorApellido(cadena);
 
-			}
+			}}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
