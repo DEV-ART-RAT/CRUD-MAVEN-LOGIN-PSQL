@@ -69,6 +69,11 @@ CREATE TABLE Persistent_Logins (
      
 );
 
+CREATE TABLE public.materia(
+	cod_materia varchar(6) not null,
+	nombre_materia varchar(30) not null
+);
+
 /*
 insert into App_User (USER_ID, USER_NAME, ENCRYTED_PASSWORD, ENABLED)
 values (2, 'dbuser1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 1);

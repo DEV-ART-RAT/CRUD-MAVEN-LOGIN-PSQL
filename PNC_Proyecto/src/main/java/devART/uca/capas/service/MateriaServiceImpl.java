@@ -40,7 +40,8 @@ public class MateriaServiceImpl implements MateriaService {
 	@Override
 	public Materia findOne(Integer codigo) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return materiaDAO.findOne(codigo);
+		return null;
 	}
+
 
 }

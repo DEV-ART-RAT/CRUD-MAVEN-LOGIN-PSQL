@@ -18,9 +18,10 @@ import javax.validation.constraints.Size;
 public class Materia {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="cod_materia")
-	private Integer codigo;
+	@Size(message = "La materia no debe superar los 6 caracteres", max = 6)
+	@NotEmpty(message = "Este campo no puede estar vacio")
+	private String codigo;
 	
 	@Column(name="nombre_materia")
 	@Size(message = "La materia no debe superar los 30 caracteres", max = 30)
@@ -35,11 +36,11 @@ public class Materia {
 	public Materia() {
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

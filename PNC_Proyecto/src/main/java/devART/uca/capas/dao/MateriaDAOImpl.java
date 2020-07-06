@@ -30,7 +30,7 @@ public class MateriaDAOImpl implements MateriaDAO{
 
 	@Override
 	@Transactional
-	public Materia findOne(Integer codigo) throws DataAccessException {
+	public Materia findOne(String codigo) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return  entityManager.find(Materia.class, codigo);
 	}

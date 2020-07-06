@@ -8,7 +8,7 @@ public interface MateriaDAO {
 	
 	public List<Materia> findAll() throws DataAccessException;
 	
-	public Materia findOne(Integer codigo) throws DataAccessException;
+	public Materia findOne(String codigo) throws DataAccessException;
 	
 	public void insert(Materia materia) throws DataAccessException;
 	

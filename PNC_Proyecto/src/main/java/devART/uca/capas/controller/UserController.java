@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import devART.uca.capas.domain.Materia;
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
@@ -105,7 +104,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/nuevaMateria")
-	public ModelAndView newCategoria(@Valid @ModelAttribute Materia materia, BindingResult result) {
+	public ModelAndView newMateria(@Valid @ModelAttribute Materia materia, BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView(); 
 		if(!result.hasErrors()) {
@@ -117,10 +116,10 @@ public class UserController {
 			}
 			
 			materia = new Materia();
-			mav.addObject("materia", materia);
+			mav.addObject("materia", materia); 
 			
 		}
-		mav.setViewName("index");
+		mav.setViewName("ingresarMateria");
 		return mav;
 	}
  

@@ -15,6 +15,12 @@
 					
 				<div class="wrap-input100 rs1-wrap-input100 validate-input fullsize"
 					data-validate="Name is required">
+					<span  th:errors="*{codigo}"></span> 
+					<input  th:field="*{codigo}" type="text" name="codigo"
+						placeholder="Codigo de materia">
+				</div>
+				<div class="wrap-input100 rs1-wrap-input100 validate-input fullsize"
+					data-validate="Name is required">
 					<span  th:errors="*{materia}"></span> 
 					<input  th:field="*{materia}" type="text" name="materia"
 						placeholder="Nombre de la Materia">
@@ -22,7 +28,7 @@
 				
 				<input type="submit" value="Guardar materia">
 			</form>
-			<a class="contact100-more" href="/userInfo" style="text-decoration:none; color: #000;">Volver</a>
+			<a href="/userInfo" style="text-decoration:none; color: #000;">Volver</a>
 		</div>
 	</div>
 
