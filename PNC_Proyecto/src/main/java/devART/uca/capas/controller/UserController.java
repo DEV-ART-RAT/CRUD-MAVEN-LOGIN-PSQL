@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import devART.uca.capas.domain.AppUser;
 import devART.uca.capas.domain.Materia;
+import devART.uca.capas.service.AppUserService;
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
+import devART.uca.capas.utils.EncrytedPasswordUtils;
 import devART.uca.capas.utils.WebUtils;
  
 @Controller
@@ -29,6 +33,9 @@ public class UserController {
 	
 	@Autowired
 	MateriaService materiaService;
+	
+	@Autowired
+	AppUserService userServices;
  
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -94,6 +101,39 @@ public class UserController {
  
         return "403Page";
     }
+    
+    @RequestMapping("/registarUsuario")
+   	public ModelAndView ingresarUsuario() {
+   		ModelAndView mav = new ModelAndView();
+   		System.out.println("aqui estoy registrando :v");
+   		mav.addObject("userNew", new AppUser());
+   		mav.setViewName("logupPage");
+   		return mav;
+   	}
+    
+    @RequestMapping("/validarRegistarUsuario")
+   	public String ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam int role, BindingResult result) {
+    	//ModelAndView mav = new ModelAndView(); 
+		if(!result.hasErrors()) {
+			try {
+				System.out.println("role: "+role);
+				//usery.setUserId((long) 5);
+				System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
+				usery.setEnabled(false);
+				//usery.setUserId((long) 5);
+				usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
+				userServices.insert(usery);
+				System.out.println("se ingreso usuario: "+usery.toString());
+				
+			}catch (Exception e) {
+				System.out.println("megaF con usuario");
+				e.printStackTrace();
+			}
+						
+		}
+		//mav.setViewName("ingresarMateria");
+		return "redirect:/welcome";
+   	}
     
     @RequestMapping("/ingresarMateria")
 	public ModelAndView ingresarMateria() {

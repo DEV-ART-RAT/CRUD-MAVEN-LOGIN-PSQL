@@ -25,19 +25,19 @@ public class AppUserServiceImpl implements AppUserService{
 	@Override
 	@Transactional
 	public void insert(AppUser user) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	@Transactional
-	public void delete(AppUser user) throws DataAccessException {
 		userDAO.insert(user);
 		
 	}
 
 	@Override
 	@Transactional
+	public void delete(AppUser user) throws DataAccessException {
+		System.out.println("stoy en service");
+		userDAO.insert(user);
+		
+	}
+
+	@Override
 	public AppUser findOne(String userName) throws DataAccessException {
 		return userDAO.findUserAccount(userName);
 	}
