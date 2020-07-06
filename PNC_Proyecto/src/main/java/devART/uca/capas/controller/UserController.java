@@ -129,33 +129,42 @@ public class UserController {
    	}
     
     @RequestMapping("/validarRegistarUsuario")
-   	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam Long role, BindingResult result) {
+   	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,BindingResult result,@RequestParam Long role ) {
     	ModelAndView mav = new ModelAndView(); 
-		if(result.hasErrors()) {
-			mav.setViewName("logupPage");
-		}else {
+		if(!result.hasErrors()) {
+			try {
 				//System.out.println("role: "+role);
 				//usery.setUserId((long) 5);
 				//System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
-				if(userServices.findOne(usery.getUserName())==null) 
-				{
-					usery.setEnabled(false);
-					//usery.setUserId((long) 5);
-					usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
-					userServices.insert(usery);
-					userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
-					System.out.println("se ingreso usuario: "+usery.toString());
-				}else {
-					mav.addObject("userNew", new AppUser());
-					mav.addObject("message", "Error Usuario ya existe");
-					System.out.println("usuario ya existe");
-					mav.setViewName("logupPage");
-					return mav;
+					if(userServices.findOne(usery.getUserName())==null) 
+					{
+						usery.setEnabled(false);
+						//usery.setUserId((long) 5);
+						usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
+						userServices.insert(usery);
+						userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
+						System.out.println("se ingreso usuario: "+usery.toString());
+					}else {
+						mav.addObject("userNew", new AppUser());
+						mav.addObject("message", "Error Usuario ya existe");
+						System.out.println("usuario ya existe");
+						mav.setViewName("logupPage");
+						return mav;
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
 				}
 	   		AppUser appuser = new AppUser();
 	   		mav.addObject("userNew", appuser);
 	   		mav.addObject("message", "Usuario ingresado!");
 			mav.setViewName("loginPage");
+			
+		}
+		else {
+			AppUser appuser = new AppUser();
+	   		mav.addObject("userNew", appuser);
+			mav.addObject("message", "No se pudo ingresar");
+			mav.setViewName("logupPage");
 		}
 		return mav;
 
@@ -259,3 +268,6 @@ public class UserController {
     }
  
 }
+
+
+//https://stackoverflow.com/questions/24802681/org-springframework-validation-beanpropertybindingresult-exception
