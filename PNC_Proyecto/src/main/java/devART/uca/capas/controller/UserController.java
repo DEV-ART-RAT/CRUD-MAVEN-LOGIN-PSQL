@@ -128,7 +128,13 @@ public class UserController {
     @RequestMapping("/validarRegistrarUsuario")
    	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,BindingResult result,@RequestParam Long role ) {
     	ModelAndView mav = new ModelAndView(); 
-		if(!result.hasErrors()) {
+		if(result.hasErrors()) {
+			//AppUser appuser = new AppUser();
+//	   		mav.addObject("userNew", usery);
+//			mav.addObject("message", "No se pudo ingresar");
+			mav.setViewName("registerPage");
+		}
+		else {
 			try {
 				//System.out.println("role: "+role);
 				//usery.setUserId((long) 5);
@@ -155,13 +161,6 @@ public class UserController {
 	   		mav.addObject("userNew", appuser);
 	   		mav.addObject("message", "Usuario ingresado!");
 			mav.setViewName("loginPage");
-			
-		}
-		else {
-			AppUser appuser = new AppUser();
-	   		mav.addObject("userNew", appuser);
-			mav.addObject("message", "No se pudo ingresar");
-			mav.setViewName("registrarPage");
 		}
 		return mav;
 
