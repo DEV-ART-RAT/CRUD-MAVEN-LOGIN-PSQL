@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Nueva Materia</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+	<div>
+		<div>
+			<form  th:action="@{/nuevaMateria}" th:object="${materia}" method="post">
+				<span > Nueva materia </span>
+					
+				<div class="wrap-input100 rs1-wrap-input100 validate-input fullsize"
+					data-validate="Name is required">
+					<span  th:errors="*{materia}"></span> 
+					<input  th:field="*{materia}" type="text" name="materia"
+						placeholder="Nombre de la Materia">
+				</div>
+				
+				<input type="submit" value="Guardar materia">
+			</form>
+			<a class="contact100-more" href="/userInfo" style="text-decoration:none; color: #000;">Volver</a>
+		</div>
+	</div>
+
+</body>
+</html>

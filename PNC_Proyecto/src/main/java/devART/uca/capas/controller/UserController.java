@@ -2,16 +2,24 @@ package devART.uca.capas.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import devART.uca.capas.domain.Materia;
+import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.utils.WebUtils;
  
@@ -19,6 +27,9 @@ import devART.uca.capas.utils.WebUtils;
 public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userService;
+	
+	@Autowired
+	MateriaService materiaService;
  
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -84,5 +95,33 @@ public class UserController {
  
         return "403Page";
     }
+    
+    @RequestMapping("/ingresarMateria")
+	public ModelAndView ingresarMateria() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("materia", new Materia());
+		mav.setViewName("ingresarMateria");
+		return mav;
+	}
+	
+	@PostMapping("/nuevaMateria")
+	public ModelAndView newCategoria(@Valid @ModelAttribute Materia materia, BindingResult result) {
+		
+		ModelAndView mav = new ModelAndView(); 
+		if(!result.hasErrors()) {
+			try {
+				materiaService.insert(materia);
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			materia = new Materia();
+			mav.addObject("materia", materia);
+			
+		}
+		mav.setViewName("index");
+		return mav;
+	}
  
 }
