@@ -53,7 +53,7 @@ public class UserController {
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
          
-        return "adminPage";
+        return "/Administrador/administrador";
     }
  
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -74,14 +74,14 @@ public class UserController {
         // After user login successfully.
         String userName = principal.getName();
  
-        System.out.println("User Name: " + userName );
+        //System.out.println("User Name: " + userName );
  
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
  
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
  
-        return "userInfoPage";
+        return "/Coordinador/coordinador";
     }
     
     @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -107,7 +107,7 @@ public class UserController {
 	public ModelAndView ingresarMateria() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("materia", new Materia());
-		mav.setViewName("ingresarMateria");
+		mav.setViewName("/Administrador/ingresarMateria");
 		return mav;
 	}
 	
@@ -136,25 +136,25 @@ public class UserController {
     public String coordinadorpage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        return "/Expediente/coordinador";
+        return "/Coordinador/coordinador";
     }
     @RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
     public String expediente(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        return "/Expediente/buscarExpediente";
+        return "/Coordinador/buscarExpediente";
     }
     @RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
     public String editarexpediente(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        return "/Expediente/editarExpediente";
+        return "/Coordinador/editarExpediente";
     }
     @RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
     public String resultadoExpediente(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        return "/Expediente/resultadobusquedaExpediente";
+        return "/Coordinador/resultadobusquedaExpediente";
     }
     @RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
     public String materiascursadas(Model model) {
@@ -187,7 +187,7 @@ public class UserController {
 			mav.addObject("message", "Estudiante Guardado!");
 		}
 
-		mav.setViewName("/Expediente/AgregarExpediente");
+		mav.setViewName("/Coordinador/AgregarExpediente");
 		return mav;
 	}
 
@@ -196,7 +196,7 @@ public class UserController {
     	ModelAndView mav = new ModelAndView();
     	Expediente expediente=new Expediente();
     	mav.addObject("expediente", expediente);
-		mav.setViewName("/Expediente/AgregarExpediente");
+		mav.setViewName("/Coordinador/AgregarExpediente");
         return mav;
     }
  
