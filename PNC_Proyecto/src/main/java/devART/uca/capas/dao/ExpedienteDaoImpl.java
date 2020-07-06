@@ -11,7 +11,7 @@ import org.springframework.dao.DataAccessException;
 
 import devART.uca.capas.domain.Expediente;
 
-public class ExpedienteDaoImpl {
+public class ExpedienteDaoImpl implements ExpedienteDao{
 	@PersistenceContext(unitName="capas")
 	private EntityManager entityManager;
 
@@ -27,13 +27,23 @@ public class ExpedienteDaoImpl {
 	}
 
 
-//	@Override
-//	@Transactional
-//	public void insert(Estudiante estudiante) throws DataAccessException {
-//		
-//		entityManager.persist(estudiante);		
-//		
-//	}
+	@Override
+	@Transactional
+	public void insert(Expediente expediente) throws DataAccessException {
+		
+		// TODO Auto-generated method stub
+		try {
+			if(expediente.getCodigo()==null)
+				entityManager.persist(expediente);
+			else {
+				entityManager.merge(expediente);
+				entityManager.flush();
+			}
+		}catch(Throwable e) {
+			e.printStackTrace();
+		}	
+		
+	}
 //
 //	@Override
 //	@Transactional
@@ -49,4 +59,11 @@ public class ExpedienteDaoImpl {
 //	public Estudiante findOne(Integer id) throws DataAccessException {
 //		return entityManager.find(Estudiante.class, id);
 //	}
+
+
+	@Override
+	public Expediente findOne(Integer id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

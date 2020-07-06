@@ -19,11 +19,11 @@
 		<br>
 			
 		<h3>Carnet de Minoridad: <input type="text" id="s_carne" th:field="*{s_carne}" ></h3>
-					<span th:errors="*{s_carne}" style="color:red;"></span>
+					<span th:errors="${s_carne}" style="color:red;"></span>
 		<br>
 		
-		<h3>Fecha nacimiento:<input id="fnacimiento" type="date" th:field="*{fnacimiento}" > </h3>
-					<span th:errors="*{fnacimiento}" style="color:red;"></span>
+		<h3>Fecha nacimiento:<input id="d_fnacimiento" type="date" th:field="*{d_fnacimiento}" > </h3>
+					<span th:errors="*{d_fnacimiento}" style="color:red;"></span>
 		<br>
 		
 		<h3>Edad: </h3>

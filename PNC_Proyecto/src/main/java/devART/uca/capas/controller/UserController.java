@@ -164,16 +164,19 @@ public class UserController {
 	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView();
-		
-		if(result.hasErrors()) {
+		if(!result.hasErrors()) {
+			try {
+				expedienteService.insert(expediente);
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 			
-			mav.setViewName("/Expediente/AgregarExpediente");
-		}else {
-
-			mav.setViewName("/Expediente/coordi");
+			expediente = new Expediente();
+			mav.addObject("expediente", expediente); 
+			
 		}
-		expediente = new Expediente();
-    	mav.addObject("expediente", expediente);
+		mav.setViewName("/Expediente/AgregarExpediente");
 		return mav;
 	}
 

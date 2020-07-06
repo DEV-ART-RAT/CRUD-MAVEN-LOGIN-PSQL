@@ -10,9 +10,9 @@ public interface ExpedienteDao {
 	
 	public List<Expediente> findAllexpediente() throws DataAccessException;
 	
-//	public Estudiante findOne(Integer id) throws DataAccessException;
+	public Expediente findOne(Integer id) throws DataAccessException;
 //	
-//	public void insert(Estudiante estudiante) throws DataAccessException;
+	public void insert(Expediente estudiante) throws DataAccessException;
 //	
 //	public void delete(Integer codigo) throws DataAccessException;
 }
