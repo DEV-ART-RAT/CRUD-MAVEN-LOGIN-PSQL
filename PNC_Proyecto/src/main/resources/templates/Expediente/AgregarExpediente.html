@@ -9,46 +9,46 @@
 		<h1>Nuevo Expediente</h1>
 		
 		<h3>Nombre: 
-			<input type="text" id="s_nombre" th:field="*{s_nombre}" ></h3>
-		<span th:errors="*{s_nombre}" style="color:red;"></span>
+			<input type="text" id="s_nombre" th:field="${expediente.s_nombre}" ></h3>
+		<span th:errors="${expediente.s_nombre}" style="color:red;"></span>
 		<br>
 					
 		<h3>Apellido: 
-			<input type="text" id="s_apellido" th:field="*{s_apellido}" ></h3>
-			<span th:errors="*{s_apellido}" style="color:red;"></span>
+			<input type="text" id="s_apellido" th:field="${expediente.s_apellido}" ></h3>
+			<span th:errors="${expediente.s_apellido}" style="color:red;"></span>
 		<br>
 			
-		<h3>Carnet de Minoridad: <input type="text" id="s_carne" th:field="*{s_carne}" ></h3>
-					<span th:errors="${s_carne}" style="color:red;"></span>
+		<h3>Carnet de Minoridad: <input type="text" id="s_carne" th:field="${expediente.s_carne}" ></h3>
+					<span th:errors="${expediente.s_carne}" style="color:red;"></span>
 		<br>
 		
-		<h3>Fecha nacimiento:<input id="d_fnacimiento" type="date" th:field="*{d_fnacimiento}" > </h3>
-					<span th:errors="*{d_fnacimiento}" style="color:red;"></span>
+		<h3>Fecha nacimiento:<input id="d_fnacimiento" type="date" th:field="${expediente.d_fnacimiento}" > </h3>
+					<span th:errors="${expediente.d_fnacimiento}" style="color:red;"></span>
 		<br>
 		
 		<h3>Edad: </h3>
 		
 		<h3>Direccion de vivienda: 
-			<input type="text" id="s_direccion" th:field="*{s_direccion}" ></h3>
-					<span th:errors="*{s_direccion}" style="color:red;"></span>
+			<input type="text" id="s_direccion" th:field="${expediente.s_direccion}" ></h3>
+					<span th:errors="${expediente.s_direccion}" style="color:red;"></span>
 		<br>
 		
 		<h3>Telefono fijo:
-			 <input type="text" id="s_telefonof" th:field="*{s_telefonof}" ></h3>
-					<span th:errors="*{s_telefonof}" style="color:red;"></span>
+			 <input type="text" id="s_telefonof" th:field="${expediente.s_telefonof}" ></h3>
+					<span th:errors="${expediente.s_telefonof}" style="color:red;"></span>
 		<br>
 		
-		<h3>Telefono Movil: <input type="text" id="s_telefonom" th:field="*{s_telefonom}" ></h3>
-					<span th:errors="*{s_telefonom}" style="color:red;"></span><br>
+		<h3>Telefono Movil: <input type="text" id="s_telefonom" th:field="${expediente.s_telefonom}" ></h3>
+					<span th:errors="${expediente.s_telefonom}" style="color:red;"></span><br>
 					
-		<h3>Nombre Institucion: <input type="text" id="institucion" th:field="*{s_institucion}" ></h3>			
-		<span th:errors="*{s_institucion}" style="color:red;"></span><br>
+		<h3>Nombre Institucion: <input type="text" id="institucion" th:field="${expediente.s_institucion}" ></h3>			
+		<span th:errors="${expediente.s_institucion}" style="color:red;"></span><br>
 		
-		<h3>Nombre padre: <input type="text" id="nombrePadre" th:field="*{s_nombrePadre}" ></h3>
-					<span th:errors="*{s_nombrePadre}" style="color:red;"></span><br>
+		<h3>Nombre padre: <input type="text" id="nombrePadre" th:field="${expediente.s_nombrePadre}" ></h3>
+					<span th:errors="${expediente.s_nombrePadre}" style="color:red;"></span><br>
 		
-		<h3>Nombre madre: <input type="text" id="nombreMadre" th:field="*{s_nombreMadre}" ></h3>
-					<span th:errors="*{s_nombreMadre}" style="color:red;"></span><br>
+		<h3>Nombre madre: <input type="text" id="nombreMadre" th:field="${expediente.s_nombreMadre}" ></h3>
+					<span th:errors="${expediente.s_nombreMadre}" style="color:red;"></span><br>
 	
 		<input type="submit" value="Guardar">
 		

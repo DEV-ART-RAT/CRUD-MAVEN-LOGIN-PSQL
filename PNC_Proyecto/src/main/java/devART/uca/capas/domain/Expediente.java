@@ -9,12 +9,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(schema="public", name="expediente")
 public class Expediente {
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "incrementExpediente")
+    @GenericGenerator(name = "incrementExpediente", strategy = "increment")
 	@Column(name="c_expediente")
 	private Integer codigo;
 	
@@ -40,7 +43,7 @@ public class Expediente {
 	@NotNull(message = "El campo Fecha no puede quedar vacio")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "d_fnacimiento")
-	private Date d_fnacimiento;
+	private String d_fnacimiento;
 	
 	@Column(name = "s_edad")
 	private String s_edad;
@@ -115,19 +118,19 @@ public class Expediente {
 		this.s_carne = s_carne;
 	}
 
-	public Date getFnacimiento() {
+	public String getD_fnacimiento() {
 		return d_fnacimiento;
 	}
 
-	public void setFnacimiento(Date fnacimiento) {
-		this.d_fnacimiento = fnacimiento;
+	public void setD_fnacimiento(String d_fnacimiento) {
+		this.d_fnacimiento = d_fnacimiento;
 	}
 
-	public String getI_edad() {
+	public String getS_edad() {
 		return s_edad;
 	}
 
-	public void setI_edad(String s_edad) {
+	public void setS_edad(String s_edad) {
 		this.s_edad = s_edad;
 	}
 
@@ -178,7 +181,14 @@ public class Expediente {
 	public void setS_nombreMadre(String s_nombreMadre) {
 		this.s_nombreMadre = s_nombreMadre;
 	}
-	
-	
+
+//	public String get_d_fnacimientoShort() {if(this.d_fnacimiento == null){return "";	}
+//	else{
+////		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//		String shortdate = sdf.format(this.d_fnacimiento.getTime());
+//		return shortdate;
+//	}
+//}
 
 }

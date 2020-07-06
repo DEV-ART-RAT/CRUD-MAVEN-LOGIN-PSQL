@@ -1,6 +1,9 @@
 package devART.uca.capas.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 import javax.validation.Valid;
 
@@ -166,6 +169,12 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		if(!result.hasErrors()) {
 			try {
+//				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//				LocalDate ahora = LocalDate.now();
+//				
+//				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
+//				Period periodo = Period.between(fechaNac, ahora);
+//				expediente.setS_edad(Integer.toString(periodo.getYears()));
 				expedienteService.insert(expediente);
 				
 			}catch (Exception e) {
@@ -174,16 +183,18 @@ public class UserController {
 			
 			expediente = new Expediente();
 			mav.addObject("expediente", expediente); 
-			
+			mav.addObject("message", "Estudiante Guardado!");
 		}
+
 		mav.setViewName("/Expediente/AgregarExpediente");
 		return mav;
 	}
 
-    @RequestMapping(value = { "/NuevoExpediente" }, method = RequestMethod.GET)
+    @RequestMapping("/NuevoExpediente")
     public ModelAndView NuevoExpediente() {
     	ModelAndView mav = new ModelAndView();
-    	mav.addObject("expediente", new Expediente());
+    	Expediente expediente=new Expediente();
+    	mav.addObject("expediente", expediente);
 		mav.setViewName("/Expediente/AgregarExpediente");
         return mav;
     }
