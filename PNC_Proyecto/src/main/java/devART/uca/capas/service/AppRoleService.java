@@ -15,5 +15,5 @@ public interface AppRoleService {
 	
 	public void delete(AppRole user) throws DataAccessException;
 	
-	public AppRole findOne(String codigo) throws DataAccessException;
+	public AppRole findOne(Long codigo) throws DataAccessException;
 }

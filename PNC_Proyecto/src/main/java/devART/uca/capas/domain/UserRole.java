@@ -33,7 +33,12 @@ public class UserRole {
     @JoinColumn(name = "Role_Id", nullable = false)
     private AppRole appRole;
  
-    public Long getId() {
+    public UserRole(AppUser findOne, AppRole findOne2) {
+		this.appRole=findOne2;
+		this.appUser=findOne;
+	}
+
+	public Long getId() {
         return id;
     }
  

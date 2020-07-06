@@ -19,6 +19,6 @@ public interface AppRoleDAO {
 	
     public List<String> getRoleNames(Long userId) ;
     
-    public AppRole findOne(String codigo) throws DataAccessException;
+    public AppRole findOne(Long roleId) throws DataAccessException;
  
 }

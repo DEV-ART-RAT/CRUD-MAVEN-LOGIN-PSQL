@@ -20,9 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import devART.uca.capas.domain.AppUser;
 import devART.uca.capas.domain.Materia;
+import devART.uca.capas.domain.UserRole;
+import devART.uca.capas.service.AppRoleService;
 import devART.uca.capas.service.AppUserService;
 import devART.uca.capas.service.MateriaService;
 import devART.uca.capas.service.UserDetailsServiceImpl;
+import devART.uca.capas.service.UserRoleService;
 import devART.uca.capas.utils.EncrytedPasswordUtils;
 import devART.uca.capas.utils.WebUtils;
  
@@ -36,6 +39,12 @@ public class UserController {
 	
 	@Autowired
 	AppUserService userServices;
+	
+	@Autowired
+	AppRoleService roleServices;
+	
+	@Autowired
+	UserRoleService userRoleServices;
  
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -112,18 +121,26 @@ public class UserController {
    	}
     
     @RequestMapping("/validarRegistarUsuario")
-   	public String ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam int role, BindingResult result) {
+   	public String ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam Long role, BindingResult result) {
     	//ModelAndView mav = new ModelAndView(); 
 		if(!result.hasErrors()) {
 			try {
-				System.out.println("role: "+role);
+				//System.out.println("role: "+role);
 				//usery.setUserId((long) 5);
-				System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
+				//System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
+				if(userServices.findOne(usery.getUserName())==null) {
+					
+				
 				usery.setEnabled(false);
 				//usery.setUserId((long) 5);
 				usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
 				userServices.insert(usery);
+				
+				
+				
+				userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
 				System.out.println("se ingreso usuario: "+usery.toString());
+				}
 				
 			}catch (Exception e) {
 				System.out.println("megaF con usuario");

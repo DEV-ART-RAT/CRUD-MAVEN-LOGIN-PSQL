@@ -35,7 +35,7 @@ public class AppRoleServiceImpl implements AppRoleService{
 
 	@Override
 	@Transactional
-	public AppRole findOne(String codigo) throws DataAccessException {
+	public AppRole findOne(Long codigo) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return roles.findOne(codigo);
 	}

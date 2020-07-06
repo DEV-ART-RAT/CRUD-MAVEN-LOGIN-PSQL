@@ -1,17 +1,16 @@
 /*
+drop table user_role;
 drop table APP_role;
 drop table APP_USER;
-drop table user_role;
 drop table persistent_logins;
 */
 
--- Create table
 create table APP_USER
 (
-  USER_ID           BIGINT not null,
+  USER_ID           BIGINT,
   USER_NAME         VARCHAR(36) not null,
   ENCRYTED_PASSWORD VARCHAR(128) not null,
-  ENABLED           Int not null 
+  ENABLED           Boolean not null 
 ) ;
 --  
 alter table APP_USER
@@ -19,6 +18,11 @@ alter table APP_USER
  
 alter table APP_USER
   add constraint APP_USER_UK unique (USER_NAME);
+ 
+ 
+ 
+ 
+ 
  
  
 -- Create table
@@ -38,7 +42,7 @@ alter table APP_ROLE
 -- Create table
 create table USER_ROLE
 (
-  ID      BIGINT not null,
+  ID      BIGINT,
   USER_ID BIGINT not null,
   ROLE_ID BIGINT not null
 );
@@ -69,17 +73,13 @@ CREATE TABLE Persistent_Logins (
      
 );
 
-CREATE TABLE public.materia(
-	cod_materia varchar(6) not null,
-	nombre_materia varchar(30) not null
-);
 
-/*
+
 insert into App_User (USER_ID, USER_NAME, ENCRYTED_PASSWORD, ENABLED)
-values (2, 'dbuser1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 1);
+values (2, 'dbuser1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', true);
  
 insert into App_User (USER_ID, USER_NAME, ENCRYTED_PASSWORD, ENABLED)
-values (1, 'dbadmin1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 1);
+values (1, 'dbadmin1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', true);
  
 ---
  
@@ -99,6 +99,11 @@ values (2, 1, 2);
  
 insert into user_role (ID, USER_ID, ROLE_ID)
 values (3, 2, 2);
+
+
+/*
+select * from app_user;
+select * from user_role;
 */
 
 /*

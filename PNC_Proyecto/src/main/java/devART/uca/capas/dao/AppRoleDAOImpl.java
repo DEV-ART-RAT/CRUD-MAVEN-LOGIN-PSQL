@@ -32,8 +32,8 @@ public class AppRoleDAOImpl implements AppRoleDAO {
     }
 
 	@Override
-	public AppRole findOne(String codigo) throws DataAccessException {
-		return  entityManager.find(AppRole.class, codigo);
+	public AppRole findOne(Long roleId) throws DataAccessException {
+		return  entityManager.find(AppRole.class, roleId);
 	}
     
     
