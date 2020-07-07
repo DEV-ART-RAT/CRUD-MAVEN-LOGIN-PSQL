@@ -38,6 +38,7 @@
 				      </div>				       
 				      <form class="col-12"  name='f' th:action="@{/validarRegistrarUsuario}" th:object="${userNew}" method='POST'>
 				      		<div class="form-group" id="user-group">
+								<p th:text="${message}" style="color:red"></p>
 	                        	<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
 									<span th:errors="${userNew.userName}" style="color:red;"></span><br>	                    	
 	                    	</div>
@@ -56,7 +57,7 @@
 		                    <br>
 		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
 				      </form>
-				      <p th:text="${message}" style="color:red"></p>
+
 				      <br> 
 	            </div>
 	        </div>
