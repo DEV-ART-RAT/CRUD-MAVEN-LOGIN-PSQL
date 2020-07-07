@@ -162,6 +162,20 @@ CREATE TABLE public.dpto(
 	s_depto int PRIMARY KEY not null,
 	s_nombre varchar(50) not null
 );
+
+insert into minicipio (s_minicipio, s_nombre)
+values (1, 'municipio Libertad ');
+
+insert into minicipio (s_minicipio, s_nombre)
+values (2, 'municipio SS ');
+
+insert into dpto (s_depto , s_nombre)
+values (1, 'Libertad ');
+
+insert into dpto (s_depto, s_nombre)
+values (2, 'SS ');
+
+
 -- drop table public.expediente
 
 -- select * from public.expediente
