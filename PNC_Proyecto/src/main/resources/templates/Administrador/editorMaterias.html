@@ -37,7 +37,13 @@
 					<td th:text="${m.nombreMateria}"/>
 					<td th:text="${m.descripcion}"/>
 					<td th:text="${m.estado}"/>
-					<td><button>editar</button></td>
+					<td>
+						<form  th:action="@{/editarMateria}" th:method="post">
+							<input type="hidden" name="id" th:value="${m.codigo}"/>
+							<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+							</button>
+						</form>
+					</td>
 				</tr>
 			</th:block>
 		</table>

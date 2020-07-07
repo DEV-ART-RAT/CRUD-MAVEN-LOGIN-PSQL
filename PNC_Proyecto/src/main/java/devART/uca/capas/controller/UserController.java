@@ -33,94 +33,94 @@ import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.service.UserRoleService;
 import devART.uca.capas.utils.EncrytedPasswordUtils;
 import devART.uca.capas.utils.WebUtils;
- 
+
 @Controller
 public class UserController {
 	@Autowired
 	UserDetailsServiceImpl userService;
-	
+
 	@Autowired
 	ExpedienteServiceImpl expedienteService;
-	
+
 	@Autowired
 	MateriaService materiaService;
-	
+
 	@Autowired
 	AppUserService userServices;
-	
+
 	@Autowired
 	AppRoleService roleServices;
-	
+
 	@Autowired
 	UserRoleService userRoleServices;
- 
+
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
         return "welcomePage";
     }
- 
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
-         
+
         return "/Administrador/administrador";
     }
- 
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
- 
+
         return "loginPage";
     }
-    
+
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Login");
         return "welcomePage";
     }
- 
+
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public ModelAndView listado() {
 		ModelAndView mav = new ModelAndView();
-		
+
 		List<Expediente> expedientes = null;
 		try {
-			
+
 			expedientes = expedienteService.findAllExpe();
-			
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		mav.addObject("expedientes", expedientes);
 		mav.setViewName("/Coordinador/coordinador");
-		
+
 		return mav;
     }
-    
+
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
- 
+
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
+
             String userInfo = WebUtils.toString(loginedUser);
- 
+
             model.addAttribute("userInfo", userInfo);
- 
+
             String message = "Ingreso No Autorizado <br>" + principal.getName() //
                     + "<br> You do not have permission to access this page!";
             model.addAttribute("message", message);
- 
+
         }
- 
+
         return "403Page";
     }
-    
+
     @RequestMapping("/registrarUsuario")
    	public ModelAndView ingresarUsuario() {
    		ModelAndView mav = new ModelAndView();
@@ -130,10 +130,10 @@ public class UserController {
    		mav.setViewName("registerPage");
    		return mav;
    	}
-    
+
     @RequestMapping("/validarRegistrarUsuario")
    	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,BindingResult result,@RequestParam Long role ) {
-    	ModelAndView mav = new ModelAndView(); 
+    	ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()) {
 			//AppUser appuser = new AppUser();
 	   		mav.addObject("userNew", usery);
@@ -145,7 +145,7 @@ public class UserController {
 				//System.out.println("role: "+role);
 				//usery.setUserId((long) 5);
 				//System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
-					if(userServices.findOne(usery.getUserName())==null) 
+					if(userServices.findOne(usery.getUserName())==null)
 					{
 						usery.setEnabled(false);
 						//usery.setUserId((long) 5);
@@ -171,50 +171,6 @@ public class UserController {
 		return mav;
 
    	}
-    
-    @RequestMapping("/ingresarMateria")
-	public ModelAndView ingresarMateria() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("materia", new Materia());
-		mav.setViewName("/Administrador/ingresarMateria");
-		return mav;
-	}
-	
-	@PostMapping("/nuevaMateria")
-	public ModelAndView newMateria(@Valid @ModelAttribute Materia materia, BindingResult result) {
-		
-		ModelAndView mav = new ModelAndView(); 
-		if(!result.hasErrors()) {
-			try {
-				materiaService.insert(materia);
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			materia = new Materia();
-			mav.addObject("materia", materia); 
-			
-		}
-		mav.setViewName("/Administrador/ingresarMateria");
-		return mav;
-	}
-
-	@RequestMapping(value = "/materiasLista", method = RequestMethod.GET)
-	public ModelAndView listadoMateria() {
-		ModelAndView mav = new ModelAndView();
-		List<Materia> materias = null;
-		try {
-			materias = materiaService.findAll();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		mav.addObject("materias", materias);
-		mav.setViewName("/Administrador/editorMaterias");
-
-		return mav;
-	}
-
 }
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import devART.uca.capas.domain.Expediente;
 import devART.uca.capas.repositories.MateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -40,7 +41,7 @@ public class MateriaServiceImpl implements MateriaService {
 
 	@Override
 	public Materia findOne(String codigo) throws DataAccessException {
-		return null;
+		return materiaRepo.getOne(codigo);
 	}
 
 

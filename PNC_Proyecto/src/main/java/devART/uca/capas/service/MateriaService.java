@@ -2,6 +2,7 @@ package devART.uca.capas.service;
 
 import java.util.List;
 
+import devART.uca.capas.domain.Expediente;
 import org.springframework.dao.DataAccessException;
 
 import devART.uca.capas.domain.Materia;
@@ -17,4 +18,5 @@ public interface MateriaService {
 	public void delete(Materia materia) throws DataAccessException;
 	
 	public Materia findOne(String codigo) throws DataAccessException;
+
 }
