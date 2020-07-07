@@ -11,15 +11,7 @@
 	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
    </head>
    <body class="tumbaNazarik">
-      <div class="barMenu">
-      	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/">Nazarick</a>
-      	</div>
-      	<div class="barMenuElements">
-      		<a class="buttonMenu" href="registrarUsuario">Registrarte</a>
-      		<a class="buttonMenu" href="login">Iniciar Sesion</a>
-      	</div>
-      </div>
+   <th:block th:include="Administrador/administrador"></th:block>
       <div class="modal-dialog text-center">
       		<div class="col-sm-8 main-section">
            		 <div class="modal-content">
@@ -92,7 +84,7 @@
 								<option th:value="1" th:text ="Administrador"></option>
 							</select>
 
-		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Crear Cuenta </button>
 
 				      </form>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
  		<title>Administrador</title>
@@ -14,13 +14,29 @@
 <body>
 	<div class="barMenu">
       	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/admin">Nazarick</a>
+      		<a class="buttonMenu" href="/admin">AdminNazarick</a>
       	</div>
-      	<div class="barMenuElements">
-      		<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
-			<a class="buttonMenu" href="/materiasLista">Materias</a>
-      		<a class="buttonMenu" href="logout">Salir</a>
-      	</div>
-      </div> 
+		<div th:if="${userInfo != null}">
+			<div th:if="${userInfo == 'registro'}" >
+				<a class="buttonMenu" href="login">Iniciar Sesion</a>
+			</div>
+			<div th:if="${userInfo != 'registro'}" >
+				<div sec:authorize="hasRole('ROLE_ADMIN')" class="barMenuElements">
+					<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
+					<a class="buttonMenu" href="/materiasLista">Materias</a>
+					<a class="buttonMenu" href="/administarUsuario">Administrar Usuarios</a>
+					<a class="buttonMenu" href="logout">Salir</a>
+				</div>
+				<div sec:authorize="hasRole('ROLE_USER')" class="barMenuElements">
+					<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
+					<a class="buttonMenu" href="/materiasLista">Materias</a>
+					<a class="buttonMenu" href="/administarUsuario">Administrar Usuarios</a>
+					<a class="buttonMenu" href="logout">Salir</a>
+				</div>
+			</div>
+		</div>
+
+
+      </div>
 </body>
 </html>

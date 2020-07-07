@@ -56,12 +56,14 @@ public class UserController {
 	@Autowired
 	UserExpedienteService userExpedienteService;
 
-    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+	/*
+    @RequestMapping(value = {  "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
         return "welcomePage";
     }
+	 */
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
@@ -73,7 +75,8 @@ public class UserController {
         return "/Administrador/administrador";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/login","/"}, method = RequestMethod.GET)
     public String loginPage(Model model) {
 
         return "loginPage";
@@ -142,6 +145,7 @@ public class UserController {
 		mav.addObject("dptos", dptos);
 		mav.addObject("municipios",municipios);
    		mav.setViewName("registerPage");
+   		mav.addObject("userInfo","registro");
    		return mav;
    	}
 
@@ -195,11 +199,11 @@ public class UserController {
 
 
 						//userExpedienteService.insert(userExp);
-						System.out.println("se ingreso usuario: "+usery.toString());
+						//System.out.println("se ingreso usuario: "+usery.toString());
 					}else {
 						mav.addObject("userNew", new AppUser());
-						mav.addObject("message", "Error Usuario ya existe");
-						System.out.println("usuario ya existe");
+						mav.addObject("message", "Nombre de Usuario ya existe");
+						//System.out.println("Nombre de usuario ya existe");
 						mav.setViewName("registerPage");
 						return mav;
 					}
@@ -221,6 +225,7 @@ public class UserController {
         //System.out.println("aqui estoy registrando :v");
         //User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//auth.getAuthorities().;
         List<Dpto> dptos = null;
         List<Municipio> municipios=null;
         List<AppUser> users = null;
