@@ -1,7 +1,10 @@
 package devART.uca.capas.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import devART.uca.capas.domain.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
  
@@ -28,6 +31,25 @@ public class WebUtils {
             sb.append(")");
         }
         return sb.toString();
+    }
+
+    public static List<UsuarioManager> getListUsers(List<AppUser> user, List<UserExpediente> userExp, List<Dpto>dptos, List<Municipio>municipios,String a){
+        List<UsuarioManager> list = new ArrayList<>();
+        UserExpediente ex=null;
+
+        int i=0;
+        //AppUser u = user.get(i);
+        for (AppUser u:user) {
+        //if(true){
+            System.out.println("user: "+u.getUserName());
+            if(!u.getUserName().equals(a)){
+                ex=userExp.get(i);
+                System.out.println("nombre: "+ex.getNombre());
+                list.add(new UsuarioManager(u,userExp.get(i),dptos.get(ex.getDptoId()-1).getNombre(), municipios.get(ex.getMunicipioId()-1).getNombre()));
+            }
+           i++;
+        }
+        return list;
     }
      
 }

@@ -151,6 +151,7 @@ public class UserController {
 			//AppUser appuser = new AppUser();
 //	   		mav.addObject("userNew", usery);
 //			mav.addObject("message", "No se pudo ingresar");
+
 			List<Dpto> dptos = null;
 			List<Municipio> municipios=null;
 			try {
@@ -212,6 +213,35 @@ public class UserController {
 		return mav;
 
    	}
+
+    @RequestMapping("/administarUsuario")
+    public ModelAndView administarUsuario(Principal principal) {
+        ModelAndView mav = new ModelAndView();
+        //System.out.println("aqui estoy registrando :v");
+        //User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        List<Dpto> dptos = null;
+        List<Municipio> municipios=null;
+        List<AppUser> users = null;
+        List<UserExpediente> expes=null;
+        try {
+            dptos = dptoService.findAll();
+            municipios = municipioService.findAll();
+            users = userServices.findAll();
+            expes= userExpedienteService.findAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        List<UsuarioManager> usuarioManagers = WebUtils.getListUsers(users,expes,dptos,municipios,"loginedUser.getUsername()");
+        //System.out.println(dptos);
+        //System.out.println(municipios);
+        mav.addObject("userList", usuarioManagers);
+        //mav.addObject("userNewExp", new UserExpediente());
+        //mav.addObject("dptos", dptos);
+        //mav.addObject("municipios",municipios);
+        mav.setViewName("/administrador/userManager");
+        return mav;
+    }
+
 }
 
 

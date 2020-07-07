@@ -19,7 +19,7 @@ public class AppUserServiceImpl implements AppUserService{
 	@Override
 	public List<AppUser> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return userDAO.findAllexpediente();
 	}
 
 	@Override

@@ -5,6 +5,49 @@
     <title>Title</title>
 </head>
 <body>
+<div class="wrap-contact100">
+    <table class="table table-sm table-dark">
+        <thead>
+        <th scope="col">Accion</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Departamento</th>
+        <th scope="col">Municipio</th>
+        </thead>
 
+        <th:block th:each="e, row: ${userList}">
+            <tr>
+                <td>
+
+                    <form  th:if="${e.user.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
+                        <input type="hidden" name="id" th:value="${e.user.userId}"/>
+                        <button type="submit" class="btn btn-danger">Desabilitar <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                    <form  th:if="${!e.user.enabled}"  th:action="@{/usuarioActive}" th:method="post">
+                        <input type="hidden" name="id" th:value="${e.user.userId}"/>
+                        <button type="submit" class="btn btn-danger">Habilitar <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                <td th:text="${e.user.userId}" name="codigo" th:value="${e.user.userId}"  />
+                <td th:text="${e.user.userName}"/>
+                <td th:text="${e.userExp.nombre}"/>
+                <td th:text="${e.userExp.apellido}"/>
+                <td th:text="${e.userExp.direccion}"/>
+                <td th:text="${e.userExp.edad}"/>
+                <td th:text="${e.dpto}"/>
+                <td th:text="${e.muny}"/>
+
+            </tr>
+        </th:block>
+
+
+    </table>
+</div>
 </body>
 </html>
