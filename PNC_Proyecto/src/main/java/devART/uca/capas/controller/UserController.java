@@ -244,6 +244,21 @@ public class UserController {
         return mav;
     }
 
+
+	@RequestMapping("/usuarioDesactive")
+	public String disableUser(@RequestParam("disable") String name) {
+    	AppUser userUpdate= userServices.findOne(name);
+		userUpdate.setEnabled(false);
+    	userServices.insert(userUpdate);
+		return "redirect:/administarUsuario";
+	}
+	@RequestMapping("/usuarioActive")
+	public String enableUser(@RequestParam("enabled") String name) {
+		AppUser userUpdate= userServices.findOne(name);
+		userUpdate.setEnabled(true);
+		userServices.insert(userUpdate);
+		return "redirect:/administarUsuario";
+	}
 }
 
 

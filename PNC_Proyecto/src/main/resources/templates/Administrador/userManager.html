@@ -31,12 +31,12 @@
                 <td>
 
                     <form  th:if="${e.user.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
-                        <input type="hidden" name="id" th:value="${e.user.userId}"/>
+                        <input type="hidden" name="disable" th:value="${e.user.userName}"/>
                         <button type="submit" class="btn btn-danger">Desabilitar <i class="fa fa-trash"></i>
                         </button>
                     </form>
                     <form  th:if="${!e.user.enabled}"  th:action="@{/usuarioActive}" th:method="post">
-                        <input type="hidden" name="id" th:value="${e.user.userId}"/>
+                        <input type="hidden" name="enabled" th:value="${e.user.userName}"/>
                         <button type="submit" class="btn btn-danger">Habilitar <i class="fa fa-trash"></i>
                         </button>
                     </form>
