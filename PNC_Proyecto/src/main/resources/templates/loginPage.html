@@ -11,15 +11,7 @@
 	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
    </head>
    <body class="tumbaNazarik">
-      <div class="barMenu">
-      	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/">Nazarick</a>
-      	</div>
-      	<div class="barMenuElements">
-      		<a class="buttonMenu" href="registrarUsuario">Registrarte</a>
-      		<a class="buttonMenu" href="login">Iniciar Sesion</a>
-      	</div>
-      </div>
+   <th:block th:include="menu"></th:block>
       <h1 th:text="${message}"></h1>
       <div class="modal-dialog text-center">
       		<div class="col-sm-8 main-section">

@@ -10,17 +10,32 @@
 	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
 	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
    </head>
-   <body>    
-      <div class="barMenu">
-      	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/">Nazarick</a>
-      	</div>
-      	<div class="barMenuElements">
-      		<a class="buttonMenu" href="registrarUsuario">Registrarte</a>
-      		<a class="buttonMenu" href="userInfo">Coordinador</a>
-      		<a class="buttonMenu" href="admin">Administrador</a>
-      	</div>
-      </div>
-       
+   <body>
+
+   <div class="barMenu">
+	   <div class="barMenuHead">
+		   <a class="buttonMenu" href="/admin">Nazarick</a>
+	   </div>
+	   <div  class="barMenuElements">
+		   <a class="buttonMenu" href="registrarUsuario">Registrarte</a>
+	   </div>
+	   <div th:if="${userInfo != null}" th:utext="${userInfo}">
+		   <div sec:authorize="hasRole('ROLE_ADMIN')" class="barMenuElements">
+			   <a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
+			   <a class="buttonMenu" href="/materiasLista">Materias</a>
+			   <a class="buttonMenu" href="/administarUsuario">Administrar Usuarios</a>
+			   <a class="buttonMenu" href="logout">Salir</a>
+		   </div>
+		   <div sec:authorize="hasRole('ROLE_USER')" class="barMenuElements">
+			   <a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
+			   <a class="buttonMenu" href="/materiasLista">Materias</a>
+			   <a class="buttonMenu" href="/administarUsuario">Administrar Usuarios</a>
+			   <a class="buttonMenu" href="logout">Salir</a>
+		   </div>
+	   </div>
+   </div>
+
+   </div>
+
    </body>
 </html>

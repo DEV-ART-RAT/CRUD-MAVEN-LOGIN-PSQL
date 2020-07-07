@@ -35,6 +35,7 @@ public class UserExpediente {
 
     @NotNull(message = "El campo Fecha no puede quedar vacio")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotEmpty(message = "Este campo no puede estar vacio")
     @Column(name = "d_fnacimiento")
     private String fnacimiento;
 

@@ -2,6 +2,7 @@ package devART.uca.capas.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -84,6 +85,8 @@ public class Expediente {
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_nombreMadre;
+
+
 
 	public Expediente() {}
 

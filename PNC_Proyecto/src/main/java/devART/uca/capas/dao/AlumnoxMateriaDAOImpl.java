@@ -31,7 +31,7 @@ public class AlumnoxMateriaDAOImpl implements AlumnoxMateriaDAO{
     @Override
     public void insert(AlumnoxMateria alumnoxMateria) throws DataAccessException {
         try {
-            if(alumnoxMateria.getCodigo()==null)
+            if(alumnoxMateria.getC_alumnoxmateria()==null)
                 entityManager.persist(alumnoxMateria);
             else {
                 entityManager.merge(alumnoxMateria);

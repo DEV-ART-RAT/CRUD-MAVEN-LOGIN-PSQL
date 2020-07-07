@@ -56,8 +56,32 @@
                     </tr>
                 </th:block>
             </table>
+        <div class="barMenuElements">
+            <a class="buttonMenu" href="nuevaMateria">Crear Materia</a>
+            <a class="buttonMenu" href="logout">Salir</a>
         </div>
+        <form  th:action="@{/nuevaMateriaexpediente}" th:method="post">
+            <input type="hidden" name="codigo" th:value="${expediente.codigo}"/>
+            <button type="submit" class="btn btn-danger">Materias <i class="fa fa-edit"></i>
+            </button>
+        </form>
     </div>
 
+    <table class="table table-sm table-dark">
+        <thead>
+            <th scope="col">Codigo</th>
+            <th scope="col">Materia</th>
+            <th scope="col">Nota</th>
+            <th scope="col">Estado</th>
+        </thead>
+        <th:block th:each="e, row: ${alumnoxmaterias}">
+<!--            <tr>-->
+<!--                <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />-->
+<!--                <td th:text="${e.nombreMateria}"/>-->
+<!--                <td th:text="${e.nota}"/>-->
+<!--                <td th:text="${e.estado}"/>-->
+<!--            </tr>-->
+        </th:block>
+    </table>
 </body>
 </html>
