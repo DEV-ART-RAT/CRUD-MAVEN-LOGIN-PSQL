@@ -230,14 +230,14 @@ public class CoordinadorController {
 		return mav;
 	}
 
-	@RequestMapping(value="/Cursadas")
-	public ModelAndView mostrarMaterias(@RequestParam(value="id") String codigo)
+	@RequestMapping(value="/Cursadas", method=RequestMethod.POST)
+	public ModelAndView mostrarMaterias(@RequestParam(value="id") Integer codigo)
 	{
 		ModelAndView mav = new ModelAndView();
 		List<AlumnoxMateria> alumnoxMaterias = null;
 		try {
-			int codigoint = Integer.parseInt(codigo);
-			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigoint);
+			//int codigoint = Integer.parseInt(codigo);
+			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
 			mav.addObject("alumnoxmaterias", alumnoxMaterias);
 			mav.setViewName("/Coordinador/materiasCursadas");
 
