@@ -23,7 +23,7 @@ public class AppUserDAOImpl  implements AppUserDAO{
     public AppUser findUserAccount(String userName) {
         try {
             String sql = "Select e from " + AppUser.class.getName() + " e " //
-                    + " Where e.userName = :userName ";
+                    + " Where e.userName = :userName order by e.codigo ASC";
  
             Query query = entityManager.createQuery(sql, AppUser.class);
             query.setParameter("userName", userName);
