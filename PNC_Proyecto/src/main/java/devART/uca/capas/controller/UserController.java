@@ -151,12 +151,13 @@ public class UserController {
    	}
     
     @RequestMapping("/validarRegistrarUsuario")
-   	public ModelAndView ingresarUsuarioVerificar(@Valid @ModelAttribute AppUser usery,@RequestParam Long role,BindingResult result ) {
+   	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role, @Valid @ModelAttribute("userNew") AppUser usery,BindingResult result ) {
     	ModelAndView mav = new ModelAndView(); 
 		if(result.hasErrors()) {
 			//AppUser appuser = new AppUser();
 //	   		mav.addObject("userNew", usery);
 //			mav.addObject("message", "No se pudo ingresar");
+			System.out.println("campos faltan");
 			//mav.addObject("userNew", usery);
 			mav.setViewName("registerPage");
 		}
