@@ -27,18 +27,29 @@
 			<form  th:action="@{/nuevaMateria}" th:object="${materia}" method="post">
 				<span > Nueva materia </span>
 					
-				<div class="wrap-input100 rs1-wrap-input100 validate-input fullsize"
-					data-validate="Name is required">
+				<div data-validate="Name is required">
 					<span  th:errors="*{codigo}"></span> 
 					<input  th:field="*{codigo}" type="text" name="codigo"
 						placeholder="Codigo de materia">
 				</div>
-				<div class="wrap-input100 rs1-wrap-input100 validate-input fullsize"
-					data-validate="Name is required">
-					<span  th:errors="*{materia}"></span> 
-					<input  th:field="*{materia}" type="text" name="materia"
-						placeholder="Nombre de la Materia">
+				<div data-validate="Name is required">
+					<span  th:errors="*{nombreMateria}"></span>
+					<input th:field="*{nombreMateria}" type="text" name="materia"
+						   placeholder="Nombre de la Materia">
 				</div>
+				<div data-validate="Name is required">
+					<span  th:errors="*{descripcion}"></span>
+					<input  th:field="*{descripcion}" type="text" name="descripcion"
+							placeholder="Descripcion de la Materia">
+				</div>
+				<select class="form-control" name="estado">
+					<option th:value="Activa"
+							th:text ="Activa">
+					</option>
+					<option th:value="Inactiva"
+							th:text ="Inactiva">
+					</option>
+				</select>
 				
 				<input type="submit" value="Guardar materia">
 			</form>

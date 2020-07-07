@@ -24,8 +24,6 @@ public class ExpedienteServiceImpl implements ExpedienteService{
 	@Override
 	@Transactional
 	public void insert(Expediente expediente) throws DataAccessException {
-			
-		// TODO Auto-generated method stub
 		expedienteRepo.save(expediente);
 	}
 	@Override

@@ -16,5 +16,5 @@ public interface MateriaService {
 	
 	public void delete(Materia materia) throws DataAccessException;
 	
-	public Materia findOne(Integer codigo) throws DataAccessException;
+	public Materia findOne(String codigo) throws DataAccessException;
 }

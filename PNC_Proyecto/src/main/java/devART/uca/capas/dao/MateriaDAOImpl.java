@@ -31,14 +31,12 @@ public class MateriaDAOImpl implements MateriaDAO{
 	@Override
 	@Transactional
 	public Materia findOne(String codigo) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return  entityManager.find(Materia.class, codigo);
 	}
 
 	@Override
 	@Transactional
 	public void insert(Materia materia) throws DataAccessException {
-		// TODO Auto-generated method stub
 		try {
 			if(materia.getCodigo()==null)
 				entityManager.persist(materia);
@@ -48,14 +46,12 @@ public class MateriaDAOImpl implements MateriaDAO{
 			}
 		}catch(Throwable e) {
 			e.printStackTrace();
-		}	
-		
+		}
 	}
 
 	@Override
 	@Transactional
 	public void delete(Materia materia) throws DataAccessException {
-		// TODO Auto-generated method stub
 		entityManager.remove(materia);
 	}
 

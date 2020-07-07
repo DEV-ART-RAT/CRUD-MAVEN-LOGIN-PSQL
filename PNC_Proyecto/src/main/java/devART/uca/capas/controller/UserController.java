@@ -63,9 +63,8 @@ public class UserController {
  
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
-         
+
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
          
@@ -102,24 +101,6 @@ public class UserController {
 		
 		return mav;
     }
-     
-    /*
-     
-		
-		public String userInfo(Model model, Principal principal) {
- 
-        String userName = principal.getName(); 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
- 
-        return "/Coordinador/coordinador";
-        
-    }
-	} 
-      
-     
-     */
     
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
@@ -215,7 +196,22 @@ public class UserController {
 			mav.addObject("materia", materia); 
 			
 		}
-		mav.setViewName("ingresarMateria");
+		mav.setViewName("/Administrador/ingresarMateria");
+		return mav;
+	}
+
+	@RequestMapping(value = "/materiasLista", method = RequestMethod.GET)
+	public ModelAndView listadoMateria() {
+		ModelAndView mav = new ModelAndView();
+		List<Materia> materias = null;
+		try {
+			materias = materiaService.findAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("materias", materias);
+		mav.setViewName("/Administrador/editorMaterias");
+
 		return mav;
 	}
 
