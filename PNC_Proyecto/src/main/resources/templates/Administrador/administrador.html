@@ -2,41 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
- 		<title>Administrador</title>
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<meta charset="UTF-8">
+	<title>Administrador</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
 <body>
-	<div class="barMenu">
-      	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/admin">AdminNazarick</a>
-      	</div>
-		<div th:if="${userInfo != null}">
-			<div th:if="${userInfo == 'registro'}" >
-				<a class="buttonMenu" href="login">Iniciar Sesion</a>
-			</div>
-			<div th:if="${userInfo != 'registro'}" >
-				<div sec:authorize="hasRole('ROLE_ADMIN')" class="barMenuElements">
-					<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
-					<a class="buttonMenu" href="/materiasLista">Materias</a>
-					<a class="buttonMenu" href="/administarUsuario">Administrar Usuarios</a>
-					<a class="buttonMenu" href="logout">Salir</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/userInfo">Tempest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/admin">Inicio <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/ingresarMateria">Nueva materia</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/admin">Autorizar cuentas</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Salir</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row container">
+			<div class="card text-white bg-primary mb-3 col">
+				<div class="card-header">Header</div>
+				<div class="card-body">
+					<h5 class="card-title">Primary card title</h5>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				</div>
-				<div sec:authorize="hasRole('ROLE_USER')" class="barMenuElements">
-					<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
-					<a class="buttonMenu" href="/materiasLista">Materias</a>
-					<a class="buttonMenu" href="/administarUsuario">Administrar Usuarios</a>
-					<a class="buttonMenu" href="logout">Salir</a>
+			</div>
+			<div class="card text-white bg-secondary mb-3 col">
+				<div class="card-header">Header</div>
+				<div class="card-body">
+					<h5 class="card-title">Secondary card title</h5>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				</div>
+			</div>
+			<div class="w-100"></div>
+			<div class="card text-white bg-success mb-3 col">
+				<div class="card-header">Header</div>
+				<div class="card-body">
+					<h5 class="card-title">Success card title</h5>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				</div>
+			</div>
+			<div class="card text-white bg-danger mb-3 col">
+				<div class="card-header">Header</div>
+				<div class="card-body">
+					<h5 class="card-title">Danger card title</h5>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 				</div>
 			</div>
 		</div>
-
-
-      </div>
+	</div>
 </body>
 </html>

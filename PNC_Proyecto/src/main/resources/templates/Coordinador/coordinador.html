@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlms:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Coordinador</title>
@@ -8,77 +8,85 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-	<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
 <body>
-<div class="barMenu">
-	<div class="barMenuHead">
-		<a class="buttonMenu" href="/userInfo">Nazarick</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="/userInfo">Tempest</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/userInfo">Inicio <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/NuevoExpediente">Crear expediente</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/logout">Salir</a>
+			</li>
+		</ul>
 	</div>
-	<div class="barMenuElements">
-		<a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
-		<a class="buttonMenu" href="logout">Salir</a>
+</nav>
+<div class="container-fluid">
+	<div class="container p-3">
+		<form class="form-horizontal"  th:action="@{/buscarexpediente}" th:method="post">
+			<div class="form-group">
+				<label class="lead white" for="tipo"> Buscar por </label>
+				<select class="form-control input-lg" name="tipo" id="tipo">
+					<option th:value="1" th:text ="Nombre"></option>
+					<option th:value="2"th:text ="Apellido"></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input class="form-control"	type="text" id="busqueda" name="busqueda" placeholder="Palabra a buscar">
+			</div>
+			<input class="btn btn-success" type="submit" value="Buscar" />
+			<input class="btn btn-success" type="button" value="ver todo" onclick="location.href='./userInfo'" />
+		</form>
 	</div>
-</div>
-<h1>Buscar Expediente</h1>
-<h3>Buscar alumno</h3>
-<select >
-	<option><th></th></option>
-</select>
-<h3>Valor de busqueda</h3>
-<form  th:action="@{/buscarexpediente}" th:method="post">
-	<select name="tipo">
-		<option th:value="1" th:text ="Nombre"></option>
-		<option th:value="2"th:text ="Apellido"></option>
-	</select>
-	<input	type="text" name="busqueda">
-	<input type="submit" value="Buscar" />
-	<input type="button" value="ver todo" onclick="location.href='./userInfo'" />
-</form>
+
+	<div class="container p-3">
+		<table class="table table-sm table-dark  table-hover table-condensed">
+			<thead>
+				<th scope="col">Codigo</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Carnet</th>
+				<th scope="col">Institucion</th>
+				<th scope="col">Edad</th>
+				<th scope="col">Telefono</th>
+				<th scope="col">Opciones</th>
+			</thead>
+
+			<tbody:block  th:each="e, row: ${expedientes}">
+				<tr>
+					<td th:text="${e.codigo}" name="codigo" th:value="${e.codigo}"  />
+					<td th:text="${e.s_nombre}"/>
+					<td th:text="${e.s_apellido}"/>
+					<td th:text="${e.s_carne}"/>
+					<td th:text="${e.s_institucion}"/>
+					<td th:text="${e.s_edad}"/>
+					<td th:text="${e.s_telefonom}"/>
+					<td>
+						<form class="form-inline center"  th:action="@{/expediente}" th:method="post">
+							<input type="hidden" name="id" th:value="${e.codigo}"/>
+							<button type="submit" class="btn btn-primary">Detalles </button>
+						</form>
+						<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
+							<input type="hidden" name="id" th:value="${e.codigo}"/>
+							<button type="submit" class="btn btn-danger">Materias </button>
+						</form>
+					</td>
+				</tr>
+			</tbody:block>
 
 
-<div class="wrap-contact100">
-	<table class="table table-sm table-dark">
-		<thead>
-		<th scope="col">Accion</th>
-		<th scope="col">Accion</th>
-		<th scope="col">Codigo</th>
-		<th scope="col">Nombre</th>
-		<th scope="col">Apellido</th>
-		<th scope="col">Carnet</th>
-		<th scope="col">Institucion</th>
-		<th scope="col">Edad</th>
-		<th scope="col">Telefono</th>
-		</thead>
-
-		<th:block th:each="e, row: ${expedientes}">
-			<tr>
-				<td>
-					<form  th:action="@{/expediente}" th:method="post">
-						<input type="hidden" name="id" th:value="${e.codigo}"/>
-						<button type="submit" class="btn btn-danger">Detalles <i class="fa fa-trash"></i>
-						</button>
-					</form></td>
-				<td>
-					<form  th:action="@{/cursadas}" th:method="post">
-						<input type="hidden" name="id" th:value="${e.codigo}"/>
-						<button type="submit" class="btn btn-danger">Materias <i class="fa fa-edit"></i>
-						</button>
-					</form></td>
-				<td th:text="${e.codigo}" name="codigo" th:value="${e.codigo}"  />
-				<td th:text="${e.s_nombre}"/>
-				<td th:text="${e.s_apellido}"/>
-				<td th:text="${e.s_carne}"/>
-				<td th:text="${e.s_institucion}"/>
-				<td th:text="${e.s_edad}"/>
-				<td th:text="${e.s_telefonom}"/>
-
-			</tr>
-		</th:block>
-
-
-	</table>
+		</table>
+	</div>
 </div>
 
 </body>
