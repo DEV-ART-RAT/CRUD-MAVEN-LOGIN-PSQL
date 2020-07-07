@@ -39,36 +39,6 @@ public class CoordinadorController {
 	@Autowired
 	ExpedienteServiceImpl expedienteService;
     //cordinador
-    @RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
-    public String coordinadorpage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/coordinador";
-    }
-    @RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
-    public String expediente(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/buscarExpediente";
-    }
-    @RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
-    public String editarexpediente(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/editarExpediente";
-    }
-    @RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
-    public String resultadoExpediente(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/resultadobusquedaExpediente";
-    }
-    @RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
-    public String materiascursadas(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "MateriasCursadas";
-    }
     
     @RequestMapping("/guardarExpediente")
 	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
