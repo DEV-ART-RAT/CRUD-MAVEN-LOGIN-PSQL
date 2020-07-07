@@ -12,6 +12,7 @@ import devART.uca.capas.domain.*;
 import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -219,6 +220,7 @@ public class UserController {
         ModelAndView mav = new ModelAndView();
         //System.out.println("aqui estoy registrando :v");
         //User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<Dpto> dptos = null;
         List<Municipio> municipios=null;
         List<AppUser> users = null;
@@ -231,7 +233,7 @@ public class UserController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        List<UsuarioManager> usuarioManagers = WebUtils.getListUsers(users,expes,dptos,municipios,"loginedUser.getUsername()");
+        List<UsuarioManager> usuarioManagers = WebUtils.getListUsers(users,expes,dptos,municipios,auth.getName());
         //System.out.println(dptos);
         //System.out.println(municipios);
         mav.addObject("userList", usuarioManagers);

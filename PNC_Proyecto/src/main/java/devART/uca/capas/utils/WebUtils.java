@@ -38,13 +38,13 @@ public class WebUtils {
         UserExpediente ex=null;
 
         int i=0;
-        //AppUser u = user.get(i);
+        System.out.println(a + " :user");
         for (AppUser u:user) {
         //if(true){
             System.out.println("user: "+u.getUserName());
             if(!u.getUserName().equals(a)){
                 ex=userExp.get(i);
-                System.out.println("nombre: "+ex.getNombre());
+                //System.out.println("nombre: "+ex.getNombre());
                 list.add(new UsuarioManager(u,userExp.get(i),dptos.get(ex.getDptoId()-1).getNombre(), municipios.get(ex.getMunicipioId()-1).getNombre()));
             }
            i++;
