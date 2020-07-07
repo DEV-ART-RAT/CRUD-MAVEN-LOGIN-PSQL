@@ -195,7 +195,7 @@ public class CoordinadorController {
 			}
 
 			expediente = new Expediente();
-			mav.addObject("expediente", expediente);
+			mav.addObject("expedientes", expedientes);
 			mav.addObject("message", "Estudiante Modificado!");
 		}
 
