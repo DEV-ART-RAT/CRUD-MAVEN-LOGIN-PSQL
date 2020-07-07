@@ -14,11 +14,11 @@ import devART.uca.capas.repositories.ExpedienteRepository;
 public class ExpedienteServiceImpl implements ExpedienteService{
 	@Autowired
 	private ExpedienteRepository expedienteRepo;
-	
-	
+
+
 	@Override
 	public List<Expediente> findAllExpe() throws DataAccessException {
-			return expedienteRepo.mostrarTodo();	
+		return expedienteRepo.mostrarTodo();
 	}
 
 	@Override

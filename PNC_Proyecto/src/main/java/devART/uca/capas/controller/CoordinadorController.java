@@ -33,46 +33,46 @@ import devART.uca.capas.service.UserDetailsServiceImpl;
 import devART.uca.capas.service.UserRoleService;
 import devART.uca.capas.utils.EncrytedPasswordUtils;
 import devART.uca.capas.utils.WebUtils;
- 
+
 @Controller
 public class CoordinadorController {
 	@Autowired
 	ExpedienteServiceImpl expedienteService;
-    //cordinador
-    @RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
-    public String coordinadorpage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/coordinador";
-    }
-    @RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
-    public String expediente(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/buscarExpediente";
-    }
-    @RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
-    public String editarexpediente(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/editarExpediente";
-    }
-    @RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
-    public String resultadoExpediente(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "/Coordinador/resultadobusquedaExpediente";
-    }
-    @RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
-    public String materiascursadas(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "MateriasCursadas";
-    }
-    
-    @RequestMapping("/guardarExpediente")
+	//cordinador
+	@RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
+	public String coordinadorpage(Model model) {
+		model.addAttribute("title", "Welcome");
+		model.addAttribute("message", "This is welcome page!");
+		return "/Coordinador/coordinador";
+	}
+	@RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
+	public String expediente(Model model) {
+		model.addAttribute("title", "Welcome");
+		model.addAttribute("message", "This is welcome page!");
+		return "/Coordinador/buscarExpediente";
+	}
+	@RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
+	public String editarexpediente(Model model) {
+		model.addAttribute("title", "Welcome");
+		model.addAttribute("message", "This is welcome page!");
+		return "/Coordinador/editarExpediente";
+	}
+	@RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
+	public String resultadoExpediente(Model model) {
+		model.addAttribute("title", "Welcome");
+		model.addAttribute("message", "This is welcome page!");
+		return "/Coordinador/resultadobusquedaExpediente";
+	}
+	@RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
+	public String materiascursadas(Model model) {
+		model.addAttribute("title", "Welcome");
+		model.addAttribute("message", "This is welcome page!");
+		return "MateriasCursadas";
+	}
+
+	@RequestMapping("/guardarExpediente")
 	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		if(!result.hasErrors()) {
 			try {
@@ -84,13 +84,13 @@ public class CoordinadorController {
 				Period periodo = Period.between(fechaNac, ahora);
 				expediente.setS_edad(Integer.toString(periodo.getYears()));
 				expedienteService.insert(expediente);
-				
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			expediente = new Expediente();
-			mav.addObject("expediente", expediente); 
+			mav.addObject("expediente", expediente);
 			mav.addObject("message", "Estudiante Guardado!");
 		}
 
@@ -98,42 +98,42 @@ public class CoordinadorController {
 		return mav;
 	}
 
-    @RequestMapping("/NuevoExpediente")
-    public ModelAndView NuevoExpediente() {
-    	ModelAndView mav = new ModelAndView();
-    	Expediente expediente=new Expediente();
-    	mav.addObject("expediente", expediente);
+	@RequestMapping("/NuevoExpediente")
+	public ModelAndView NuevoExpediente() {
+		ModelAndView mav = new ModelAndView();
+		Expediente expediente=new Expediente();
+		mav.addObject("expediente", expediente);
 		mav.setViewName("/Coordinador/AgregarExpediente");
-        return mav;
-    }
-    
-    @RequestMapping(value="/buscarexpediente", method=RequestMethod.POST)
-	public ModelAndView filtrar(@RequestParam(value="busqueda") String cadena,@RequestParam Long tipo) 
-	{	
+		return mav;
+	}
+
+	@RequestMapping(value="/buscarexpediente", method=RequestMethod.POST)
+	public ModelAndView filtrar(@RequestParam(value="busqueda") String cadena,@RequestParam Long tipo)
+	{
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		try {
 			if (cadena==""){
 				expedientes = expedienteService.findAllExpe();
 			}else {
-			if (tipo ==1) {
-				System.out.println("Nombre = "+cadena);
-				expedientes = expedienteService.filtrarPorNombre(cadena);
+				if (tipo ==1) {
+					System.out.println("Nombre = "+cadena);
+					expedientes = expedienteService.filtrarPorNombre(cadena);
 
-			}
-			if (tipo ==2) {
-				System.out.println("Apellido = "+cadena);
-				expedientes = expedienteService.filtrarPorApellido(cadena);
+				}
+				if (tipo ==2) {
+					System.out.println("Apellido = "+cadena);
+					expedientes = expedienteService.filtrarPorApellido(cadena);
 
-			}}
-			
+				}}
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		mav.addObject("expedientes", expedientes);
 		mav.setViewName("/Coordinador/coordinador");
-		
+
 		return mav;
 	}
 	@RequestMapping(value="/editarexpedienteborrar")
@@ -202,7 +202,7 @@ public class CoordinadorController {
 		mav.setViewName("/Coordinador/coordinador");
 		return mav;
 	}
- 
+
 }
 //https://parzibyte.me/blog/2019/09/02/th-each-thymeleaf-recorrer-listas/
 

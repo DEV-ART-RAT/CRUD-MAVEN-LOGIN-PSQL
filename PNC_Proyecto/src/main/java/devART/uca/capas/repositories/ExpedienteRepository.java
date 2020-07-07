@@ -18,8 +18,8 @@ public interface ExpedienteRepository extends JpaRepository<Expediente, Integer>
 
 	@Query(nativeQuery=true, value="SELECT * FROM public.expediente WHERE s_nombre like %?1%")
 	public List<Expediente> mostrarPorNombre(String cadena) throws DataAccessException;
-	
+
 	@Query(nativeQuery=true, value="SELECT * FROM public.expediente WHERE s_apellido like %?1%")
 	public List<Expediente> mostrarPorApellido(String cadena) throws DataAccessException;
-	
+
 }
