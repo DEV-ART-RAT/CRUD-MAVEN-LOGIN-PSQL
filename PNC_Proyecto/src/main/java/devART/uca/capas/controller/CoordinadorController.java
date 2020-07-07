@@ -117,12 +117,12 @@ public class CoordinadorController {
 				expedientes = expedienteService.findAllExpe();
 			}else {
 			if (tipo ==1) {
-				System.out.println(cadena);
+				System.out.println("Nombre = "+cadena);
 				expedientes = expedienteService.filtrarPorNombre(cadena);
 
 			}
 			if (tipo ==2) {
-				System.out.println(cadena);
+				System.out.println("Apellido = "+cadena);
 				expedientes = expedienteService.filtrarPorApellido(cadena);
 
 			}}
@@ -136,9 +136,74 @@ public class CoordinadorController {
 		
 		return mav;
 	}
+	@RequestMapping(value="/editarexpedienteborrar")
+	public ModelAndView editarBorrar(@RequestParam(value="id") String codigo)
+	{
+		ModelAndView mav = new ModelAndView();
+		List<Expediente> expedientes = null;
+		try {
+			int codigoint = Integer.parseInt(codigo);
+			expedienteService.delete(codigoint);
 
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("expedientes", expedientes);
+		mav.setViewName("/Coordinador/coordinador");
+
+		return mav;
+	}
+	@RequestMapping(value="/editarexpedienteeditar")
+	public ModelAndView editareditar(@RequestParam(value="id") String codigo)
+	{
+		ModelAndView mav = new ModelAndView();
+		Expediente expediente=null;
+		try {
+			int codigoint = Integer.parseInt(codigo);
+			expediente = expedienteService.filtrarUNO(codigoint);
+			mav.addObject("expediente", expediente);
+			mav.setViewName("/Coordinador/modificarExpediente");
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		return mav;
+	}
+
+	@RequestMapping("/guardarExpedientemodificado")
+	public ModelAndView guardarExpedientemodificado(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
+
+		ModelAndView mav = new ModelAndView();
+		List<Expediente> expedientes = null;
+		if(!result.hasErrors()) {
+			try {
+				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate ahora = LocalDate.now();
+				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
+				System.out.println("Fecha NAch es  "+fechaNac);
+				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
+				Period periodo = Period.between(fechaNac, ahora);
+				expediente.setS_edad(Integer.toString(periodo.getYears()));
+				expedienteService.insert(expediente);
+				expedientes = expedienteService.findAllExpe();
+
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			expediente = new Expediente();
+			mav.addObject("expediente", expediente);
+			mav.addObject("message", "Estudiante Modificado!");
+		}
+
+		mav.setViewName("/Coordinador/coordinador");
+		return mav;
+	}
  
 }
-
+//https://parzibyte.me/blog/2019/09/02/th-each-thymeleaf-recorrer-listas/
 
 //https://stackoverflow.com/questions/24802681/org-springframework-validation-beanpropertybindingresult-exception

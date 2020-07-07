@@ -36,4 +36,19 @@ public class ExpedienteServiceImpl implements ExpedienteService{
 	public List<Expediente> filtrarPorApellido(String cadena)throws DataAccessException {
 		return expedienteRepo.mostrarPorApellido(cadena);
 	}
+	@Override
+	public List<Expediente> filtrarPorID(Integer cadena)  throws DataAccessException {
+		return expedienteRepo.mostrarPorID(cadena);
+	}
+	@Override
+	public Expediente filtrarUNO(Integer cadena)  throws DataAccessException {
+		return expedienteRepo.getOne(cadena);
+	}
+	@Override
+	@Transactional
+	public void delete(Integer codigo) throws DataAccessException {
+
+		expedienteRepo.deleteById(codigo);
+
+	}
 }
