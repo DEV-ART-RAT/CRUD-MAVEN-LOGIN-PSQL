@@ -74,6 +74,8 @@ public class CoordinadorController {
 	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 
 		ModelAndView mav = new ModelAndView();
+		List<Expediente> expedientes = null;
+
 		if(!result.hasErrors()) {
 			try {
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -82,14 +84,10 @@ public class CoordinadorController {
 				System.out.println("Fecha NAch es  "+fechaNac);
 				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
-				if(periodo.getYears()>999){
+				expediente.setS_edad(Integer.toString(periodo.getYears()));
+				expedienteService.insert(expediente);
+				expedientes = expedienteService.findAllExpe();
 
-					expediente.setS_edad(Integer.toString(999));
-					expedienteService.insert(expediente);
-				}else {
-					expediente.setS_edad(Integer.toString(periodo.getYears()));
-					expedienteService.insert(expediente);
-				}
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -149,7 +147,6 @@ public class CoordinadorController {
 		try {
 			int codigoint = Integer.parseInt(codigo);
 			expedienteService.delete(codigoint);
-			expedientes = expedienteService.findAllExpe();
 
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -164,18 +161,18 @@ public class CoordinadorController {
 	public ModelAndView editareditar(@RequestParam(value="id") String codigo)
 	{
 		ModelAndView mav = new ModelAndView();
-		List<Expediente> expedientes = null;
 		Expediente expediente=null;
 		try {
 			int codigoint = Integer.parseInt(codigo);
 			expediente = expedienteService.filtrarUNO(codigoint);
 			mav.addObject("expediente", expediente);
-			expedientes = expedienteService.findAllExpe();
+			mav.setViewName("/Coordinador/modificarExpediente");
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("expedientes", expedientes);
-		mav.setViewName("/Coordinador/modificarExpediente");
+
+
 		return mav;
 	}
 
@@ -192,21 +189,15 @@ public class CoordinadorController {
 				System.out.println("Fecha NAch es  "+fechaNac);
 				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
-				if(periodo.getYears()>999){
-
-					expediente.setS_edad(Integer.toString(999));
-					expedienteService.insert(expediente);
-					expedientes = expedienteService.findAllExpe();
-				}else {
-					expediente.setS_edad(Integer.toString(periodo.getYears()));
-					expedienteService.insert(expediente);
-					expedientes = expedienteService.findAllExpe();
-				}
+				expediente.setS_edad(Integer.toString(periodo.getYears()));
+				expedienteService.insert(expediente);
+				expedientes = expedienteService.findAllExpe();
 
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 
+			expediente = new Expediente();
 			mav.addObject("expedientes", expedientes);
 			mav.addObject("message", "Estudiante Modificado!");
 		}
