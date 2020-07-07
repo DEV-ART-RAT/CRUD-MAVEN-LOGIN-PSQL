@@ -141,7 +141,7 @@ CREATE TABLE public.expediente(
 
 
 CREATE TABLE public.usuarioPersona(
-	c_id int PRIMARY KEY not null,
+	c_id BIGINT PRIMARY KEY not null,
 	s_nombre varchar(50) not null,
 	s_apellido varchar(50) not null,
 	--s_carne varchar(9) not null,

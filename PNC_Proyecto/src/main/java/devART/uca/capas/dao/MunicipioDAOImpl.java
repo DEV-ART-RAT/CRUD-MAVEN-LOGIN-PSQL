@@ -20,7 +20,7 @@ public class MunicipioDAOImpl implements MunicipioDAO {
     public List<Municipio> findAllexpediente() throws DataAccessException {
 //
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT * FROM public.dpto");
+        sb.append("SELECT * FROM public.minicipio " );
         Query query = entityManager.createNativeQuery(sb.toString(), Municipio.class);
         List<Municipio> resultset = query.getResultList();
 
