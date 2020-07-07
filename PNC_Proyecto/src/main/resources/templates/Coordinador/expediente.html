@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlms:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo expediente</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+</head>
+<body th:object="${expediente}">
+    <div class="barMenu">
+        <div class="barMenuHead">
+            <a class="buttonMenu" href="/userInfo">Nazarick</a>
+        </div>
+        <div class="barMenuElements">
+            <a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
+            <a class="buttonMenu" href="logout">Salir</a>
+        </div>
+    </div>
+    <h1 th:text="${expediente.s_nombre}"></h1>
+    <p th:text="${expediente.s_apellido}"></p>
+    <p th:text="${expediente.s_carne}"></p>
+    <p th:text="${expediente.d_fnacimiento}"></p>
+    <p th:text="${expediente.s_edad}"></p>
+    <p th:text="${expediente.s_direccion}"></p>
+    <p th:text="${expediente.s_telefonof}"></p>
+    <p th:text="${expediente.s_telefonom}"></p>
+    <p th:text="${expediente.s_institucion}"></p>
+    <p th:text="${expediente.s_nombrePadre}"></p>
+    <p th:text="${expediente.s_nombreMadre}"></p>
+    <table class="table table-sm table-dark">
+        <thead>
+        <th scope="col">Codigo</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Nota</th>
+        <th scope="col">Estado</th>
+        </thead>
+    </table>
+</body>
+</html>
