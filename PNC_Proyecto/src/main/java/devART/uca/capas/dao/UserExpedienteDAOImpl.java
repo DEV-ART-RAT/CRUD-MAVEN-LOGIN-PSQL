@@ -20,8 +20,8 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
     public List<UserExpediente> findAllexpediente() throws DataAccessException {
 //
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT * FROM "+ UserExpediente.class.getName() + " e " //
-                + " order by e.codigo ASC");
+        sb.append("SELECT * FROM "+ "usuarioPersona" + "  " //
+                + " order by c_id ASC");
         System.out.println(sb.toString());
         Query query = entityManager.createNativeQuery(sb.toString(), UserExpediente.class);
         List<UserExpediente> resultset = query.getResultList();

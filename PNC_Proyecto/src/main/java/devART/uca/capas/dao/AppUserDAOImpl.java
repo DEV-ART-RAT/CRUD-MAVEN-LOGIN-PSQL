@@ -5,12 +5,15 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import devART.uca.capas.domain.Dpto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import devART.uca.capas.domain.AppUser;
+
+import java.util.List;
 
 @Repository
 public class AppUserDAOImpl  implements AppUserDAO{
@@ -50,7 +53,16 @@ public class AppUserDAOImpl  implements AppUserDAO{
 			e.printStackTrace();
 		}		
 	}
-    
-    
- 
+
+    @Override
+    public List<AppUser> findAllexpediente() throws DataAccessException {
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT * FROM   app_user");
+        Query query = entityManager.createNativeQuery(sb.toString(), AppUser.class);
+        List<AppUser> resultset = query.getResultList();
+
+        return resultset;
+    }
+
+
 }
