@@ -32,6 +32,15 @@
     <p th:text="${expediente.s_institucion}"></p>
     <p th:text="${expediente.s_nombrePadre}"></p>
     <p th:text="${expediente.s_nombreMadre}"></p>
-
+    <form  th:action="@{/editarexpedienteborrar}" th:method="post">
+        <input type="hidden" name="id" th:value="${expediente.codigo}"/>
+        <button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+        </button>
+    </form>
+    <form  th:action="@{/editarexpedienteeditar}" th:method="post">
+        <input type="hidden" name="id" th:value="${expediente.codigo}"/>
+        <button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+        </button>
+    </form></td>
 </body>
 </html>

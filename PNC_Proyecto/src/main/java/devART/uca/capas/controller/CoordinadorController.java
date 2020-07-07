@@ -213,7 +213,7 @@ public class CoordinadorController {
 		return mav;
 	}
 
-	@RequestMapping(value="/expediente")
+	@RequestMapping(value="/expediente", method=RequestMethod.POST)
 	public ModelAndView mostrarExpediente(@RequestParam(value="id") String codigo)
 	{
 		ModelAndView mav = new ModelAndView();
@@ -222,7 +222,7 @@ public class CoordinadorController {
 			int codigoint = Integer.parseInt(codigo);
 			expediente = expedienteService.filtrarUNO(codigoint);
 			mav.addObject("expediente", expediente);
-			mav.setViewName("/Coordinador/Expediente");
+			mav.setViewName("/Coordinador/expediente");
 
 		}catch (Exception e) {
 			e.printStackTrace();
