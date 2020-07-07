@@ -163,14 +163,22 @@ CREATE TABLE public.dpto(
 	s_nombre varchar(50) not null
 );
 
-insert into minicipio (s_minicipio, s_nombre)
-values (1, 'municipio Libertad ');
+CREATE TABLE public.alumnoxmateria(
+	cod_materia varchar(6) not null,
+	nombre_materia varchar(50) not null,
+	c_expediente integer not null,
+	s_nota varchar(3) not null,
+	s_estado varchar(10) not null
+)
 
 insert into minicipio (s_minicipio, s_nombre)
-values (2, 'municipio SS ');
+values (1, 'municipio Libertad Prro');
+
+insert into minicipio (s_minicipio, s_nombre)
+values (2, 'municipio SS Prro');
 
 insert into dpto (s_depto , s_nombre)
-values (1, 'Libertad ');
+values (1, 'Libertad Prro');
 
 insert into dpto (s_depto, s_nombre)
 values (2, 'SS ');

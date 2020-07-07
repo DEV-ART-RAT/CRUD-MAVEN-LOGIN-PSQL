@@ -55,13 +55,13 @@
 		<th:block th:each="e, row: ${expedientes}">
 			<tr>
 				<td>
-					<form  th:action="@{/editarexpedienteborrar}" th:method="post">
+					<form  th:action="@{/expediente}" th:method="post">
 						<input type="hidden" name="id" th:value="${e.codigo}"/>
 						<button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
 						</button>
 					</form></td>
 				<td>
-					<form  th:action="@{/editarexpedienteeditar}" th:method="post">
+					<form  th:action="@{/Cursadas}" th:method="post">
 						<input type="hidden" name="id" th:value="${e.codigo}"/>
 						<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
 						</button>

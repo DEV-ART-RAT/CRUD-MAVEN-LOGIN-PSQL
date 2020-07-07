@@ -63,7 +63,6 @@ public class ExpedienteDaoImpl implements ExpedienteDao{
 
 	@Override
 	public Expediente findOne(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

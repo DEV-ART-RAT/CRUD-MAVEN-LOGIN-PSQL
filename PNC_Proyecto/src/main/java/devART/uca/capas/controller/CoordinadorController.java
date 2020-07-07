@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import devART.uca.capas.domain.*;
+import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -21,16 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import devART.uca.capas.domain.AppUser;
-import devART.uca.capas.domain.Expediente;
-import devART.uca.capas.domain.Materia;
-import devART.uca.capas.domain.UserRole;
-import devART.uca.capas.service.AppRoleService;
-import devART.uca.capas.service.AppUserService;
-import devART.uca.capas.service.ExpedienteServiceImpl;
-import devART.uca.capas.service.MateriaService;
-import devART.uca.capas.service.UserDetailsServiceImpl;
-import devART.uca.capas.service.UserRoleService;
 import devART.uca.capas.utils.EncrytedPasswordUtils;
 import devART.uca.capas.utils.WebUtils;
 
@@ -38,6 +30,9 @@ import devART.uca.capas.utils.WebUtils;
 public class CoordinadorController {
 	@Autowired
 	ExpedienteServiceImpl expedienteService;
+
+	@Autowired
+	AlumnoxMateriaServiceImpl alumnoxMateriaService;
 	//cordinador
 	@RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
 	public String coordinadorpage(Model model) {
@@ -215,6 +210,40 @@ public class CoordinadorController {
 			mav.setViewName("/Coordinador/coordinador");
 		}
 
+		return mav;
+	}
+
+	@RequestMapping(value="/expediente")
+	public ModelAndView mostrarExpediente(@RequestParam(value="id") String codigo)
+	{
+		ModelAndView mav = new ModelAndView();
+		Expediente expediente=null;
+		try {
+			int codigoint = Integer.parseInt(codigo);
+			expediente = expedienteService.filtrarUNO(codigoint);
+			mav.addObject("expediente", expediente);
+			mav.setViewName("/Coordinador/Expediente");
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+
+	@RequestMapping(value="/Cursadas", method=RequestMethod.POST)
+	public ModelAndView mostrarMaterias(@RequestParam(value="id") Integer codigo)
+	{
+		ModelAndView mav = new ModelAndView();
+		List<AlumnoxMateria> alumnoxMaterias = null;
+		try {
+			//int codigoint = Integer.parseInt(codigo);
+			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
+			mav.addObject("alumnoxmaterias", alumnoxMaterias);
+			mav.setViewName("/Coordinador/materiasCursadas");
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 
