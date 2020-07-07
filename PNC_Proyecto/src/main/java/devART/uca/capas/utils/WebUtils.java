@@ -9,6 +9,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
  
 public class WebUtils {
+
+    public static String getRole(User user){
+        Collection<GrantedAuthority> authorities = user.getAuthorities();
+        if (authorities != null && !authorities.isEmpty()) {
+            //sb.append(" (");
+            boolean first = true;
+            for (GrantedAuthority a : authorities) {
+                return  a.getAuthority();
+            }
+        }
+        return "";
+    }
  
     public static String toString(User user) {
         StringBuilder sb = new StringBuilder();

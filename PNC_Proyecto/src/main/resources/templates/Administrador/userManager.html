@@ -1,36 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlms:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Coordinador</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<meta charset="UTF-8">
+	<title>Administrar Usuario</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/userInfo">Tempest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-<div class="wrap-contact100">
-    <table class="table table-sm table-dark">
-        <thead>
-        <th scope="col">Accion</th>
-        <th scope="col">Codigo</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Direccion</th>
-        <th scope="col">Edad</th>
-        <th scope="col">Departamento</th>
-        <th scope="col">Municipio</th>
-        </thead>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/admin">Inicio <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/ingresarMateria">Nueva materia</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Salir</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+    <div class="container p-3">
+		<table class="table table-sm table-dark  table-hover table-condensed">
+			<thead>
+                
+                <th scope="col">Codigo</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Municipio</th>
+                <th scope="col">Accion</th>
+            </thead>
 
         <th:block th:each="e, row: ${userList}">
             <tr>
+                <td th:text="${e.user.userId}" name="codigo" th:value="${e.user.userId}"  />
+                <td th:text="${e.user.userName}"/>
+                <td th:text="${e.userExp.nombre}"/>
+                <td th:text="${e.userExp.apellido}"/>
+                <td th:text="${e.userExp.direccion}"/>
+                <td th:text="${e.userExp.edad}"/>
+                <td th:text="${e.dpto}"/>
+                <td th:text="${e.muny}"/>
                 <td>
-
                     <form  th:if="${e.user.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
                         <input type="hidden" name="disable" th:value="${e.user.userName}"/>
                         <button type="submit" class="btn btn-danger">Desabilitar <i class="fa fa-trash"></i>
@@ -42,15 +69,6 @@
                         </button>
                     </form>
                 </td>
-                <td th:text="${e.user.userId}" name="codigo" th:value="${e.user.userId}"  />
-                <td th:text="${e.user.userName}"/>
-                <td th:text="${e.userExp.nombre}"/>
-                <td th:text="${e.userExp.apellido}"/>
-                <td th:text="${e.userExp.direccion}"/>
-                <td th:text="${e.userExp.edad}"/>
-                <td th:text="${e.dpto}"/>
-                <td th:text="${e.muny}"/>
-
             </tr>
         </th:block>
 

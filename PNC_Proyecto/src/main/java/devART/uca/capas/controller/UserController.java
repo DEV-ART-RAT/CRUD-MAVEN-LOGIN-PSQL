@@ -88,23 +88,58 @@ public class UserController {
         return "welcomePage";
     }
 
+    @RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
+    public ModelAndView listadoCoordinador(Principal principal) {
+        ModelAndView mav = new ModelAndView();
+        List<Expediente> expedientes = null;
+        try {
+
+            expedientes = expedienteService.findAllExpe();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mav.addObject("expedientes", expedientes);
+        mav.setViewName("/Coordinador/coordinador");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/userAdministardor", method = RequestMethod.GET)
+    public ModelAndView listadoAdministrador(Principal principal) {
+        ModelAndView mav = new ModelAndView();
+        List<Expediente> expedientes = null;
+        try {
+
+            expedientes = expedienteService.findAllExpe();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mav.addObject("expedientes", expedientes);
+        mav.setViewName("/Coordinador/coordinador");
+
+        return mav;
+    }
+
+
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public ModelAndView listado() {
-		ModelAndView mav = new ModelAndView();
+    public String listado(Principal principal) {
 
-		List<Expediente> expedientes = null;
-		try {
+        User auth = (User) ((Authentication) principal).getPrincipal();
+        String rol = WebUtils.getRole(auth);
+        System.out.println(rol);
 
-			expedientes = expedienteService.findAllExpe();
+        if(rol.equals("ROLE_USER")){
+            return "redirect:/userCoordinador";
+        }
 
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		mav.addObject("expedientes", expedientes);
-		mav.setViewName("/Coordinador/coordinador");
-
-		return mav;
+        if(rol.equals("ROLE_ADMIN")){
+            return "redirect:/403";
+        }
+		return "redirect:/";
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -238,6 +273,7 @@ public class UserController {
         }catch (Exception e){
             e.printStackTrace();
         }
+
         List<UsuarioManager> usuarioManagers = WebUtils.getListUsers(users,expes,dptos,municipios,auth.getName());
         //System.out.println(dptos);
         //System.out.println(municipios);
