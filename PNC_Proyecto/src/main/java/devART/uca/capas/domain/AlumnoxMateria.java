@@ -11,22 +11,27 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(schema="public", name="alumnoxmateria")
 public class AlumnoxMateria {
-
     @Id
-    @Column(name="cod_materia")
-    @Size(message = "La materia no debe superar los 6 caracteres", max = 6)
-    @NotEmpty(message = "Este campo no puede estar vacio")
-    private String codigoMateria;
-
-    @Column(name="nombre_materia")
-    @Size(message = "La materia no debe superar los 50 caracteres", max = 50)
-    @NotEmpty(message = "Este campo no puede estar vacio")
-    private String nombreMateria;
-
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "incrementExpediente")
     @GenericGenerator(name = "incrementExpediente", strategy = "increment")
-    @Column(name="c_expediente")
+    @Column(name="c_alumnoxmateria")
     private Integer codigo;
+
+    @Transient
+    private Integer c_materia;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "c_materia", nullable = false)
+    private Materia materia;
+
+
+    @Transient
+    private Integer c_expediente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "c_expediente", nullable = false)
+    private Expediente expediente;
+
 
     @NotNull(message = "Este campo no puede estar vacio")
     @Column(name="s_nota")
@@ -37,21 +42,13 @@ public class AlumnoxMateria {
     @Column(name = "s_estado")
     private String estado;
 
-    public String getCodigoMateria() {
-        return codigoMateria;
+    public AlumnoxMateria(){}
+    public Integer getC_materia() { return c_materia; }
+    public void setC_materia(Integer c_materia) {
+        this.c_materia = c_materia;
     }
 
-    public void setCodigoMateria(String codigoMateria) {
-        this.codigoMateria = codigoMateria;
-    }
 
-    public String getNombreMateria() {
-        return nombreMateria;
-    }
-
-    public void setNombreMateria(String nombreMateria) {
-        this.nombreMateria = nombreMateria;
-    }
 
     public Integer getCodigo() {
         return codigo;
@@ -59,6 +56,30 @@ public class AlumnoxMateria {
 
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
+    public Integer getC_expediente() {
+        return c_expediente;
+    }
+
+    public void setC_expediente(Integer c_expediente) {
+        this.c_expediente = c_expediente;
+    }
+
+    public Expediente getExpediente() {
+        return expediente;
+    }
+
+    public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
     }
 
     public String getNota() {

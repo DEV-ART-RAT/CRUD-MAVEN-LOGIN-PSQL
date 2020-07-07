@@ -1,11 +1,9 @@
 package devART.uca.capas.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(schema="public", name="materia")
@@ -30,6 +28,17 @@ public class Materia {
 	@Column(name="estado_materia")
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String estado;
+
+//	@OneToMany(mappedBy = "alumnoxmateria", fetch = FetchType.LAZY)
+//	private List<AlumnoxMateria> alumnoxMateriaList;
+//
+//	public List<AlumnoxMateria> getAlumnoxMateriaList() {
+//		return alumnoxMateriaList;
+//	}
+//
+//	public void setAlumnoxMateriaList(List<AlumnoxMateria> alumnoxMateriaList) {
+//		this.alumnoxMateriaList = alumnoxMateriaList;
+//	}
 
 
 	public Materia() {

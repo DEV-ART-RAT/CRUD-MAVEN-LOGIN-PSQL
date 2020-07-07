@@ -112,13 +112,22 @@ select * from app_role;
 select * from user_role;
 select * from persistent_logins;
 */
+CREATE TABLE public.alumnoxmateria(
+	c_alumnoxmateria integer not null primary key
+	cod_materia varchar(6) not null  ,
+	c_expediente integer not null  ,
+	s_nota varchar(3) not null,
+	s_estado varchar(10) not null
+)
+--drop TABLE public.alumnoxmateria
+
 CREATE TABLE public.materia(
-	cod_materia varchar(6) not null,
+	cod_materia varchar(6) not null  PRIMARY KEY,
 	nombre_materia varchar(50) not null,
 	descripcion_materia varchar(100) not null,
 	estado_materia varchar(10) not null
 );
-
+--drop TABLE public.materia
 
 CREATE TABLE public.expediente(
 	c_expediente int PRIMARY KEY,
@@ -134,6 +143,8 @@ CREATE TABLE public.expediente(
 	s_nombrePadre varchar(50) not null,
 	s_nombreMadre varchar(50) not null
 );
+ALTER TABLE public.alumnoxmateria ADD CONSTRAINT fk_cod_materia FOREIGN KEY(cod_materia) REFERENCES public.materia(cod_materia);
+ALTER TABLE public.alumnoxmateria ADD CONSTRAINT fk_c_expediente FOREIGN KEY(c_expediente) REFERENCES public.expediente(c_expediente);
 
 
 
@@ -163,13 +174,7 @@ CREATE TABLE public.dpto(
 	s_nombre varchar(50) not null
 );
 
-CREATE TABLE public.alumnoxmateria(
-	cod_materia varchar(6) not null,
-	nombre_materia varchar(50) not null,
-	c_expediente integer not null,
-	s_nota varchar(3) not null,
-	s_estado varchar(10) not null
-)
+
 
 insert into minicipio (s_minicipio, s_nombre)
 values (1, 'municipio Libertad Prro');
