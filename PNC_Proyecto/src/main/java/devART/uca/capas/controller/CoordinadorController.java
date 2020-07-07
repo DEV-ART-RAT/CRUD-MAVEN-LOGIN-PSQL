@@ -82,8 +82,14 @@ public class CoordinadorController {
 				System.out.println("Fecha NAch es  "+fechaNac);
 				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
-				expediente.setS_edad(Integer.toString(periodo.getYears()));
-				expedienteService.insert(expediente);
+				if(periodo.getYears()>999){
+
+					expediente.setS_edad(Integer.toString(999));
+					expedienteService.insert(expediente);
+				}else {
+					expediente.setS_edad(Integer.toString(periodo.getYears()));
+					expedienteService.insert(expediente);
+				}
 				
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -186,10 +192,16 @@ public class CoordinadorController {
 				System.out.println("Fecha NAch es  "+fechaNac);
 				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
-				expediente.setS_edad(Integer.toString(periodo.getYears()));
-				expedienteService.insert(expediente);
-				expedientes = expedienteService.findAllExpe();
+				if(periodo.getYears()>999){
 
+					expediente.setS_edad(Integer.toString(999));
+					expedienteService.insert(expediente);
+					expedientes = expedienteService.findAllExpe();
+				}else {
+					expediente.setS_edad(Integer.toString(periodo.getYears()));
+					expedienteService.insert(expediente);
+					expedientes = expedienteService.findAllExpe();
+				}
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
