@@ -57,13 +57,13 @@
 				<td>
 					<form  th:action="@{/expediente}" th:method="post">
 						<input type="hidden" name="id" th:value="${e.codigo}"/>
-						<button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+						<button type="submit" class="btn btn-danger">Detalles <i class="fa fa-trash"></i>
 						</button>
 					</form></td>
 				<td>
 					<form  th:action="@{/Cursadas}" th:method="post">
 						<input type="hidden" name="id" th:value="${e.codigo}"/>
-						<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+						<button type="submit" class="btn btn-danger">Materias <i class="fa fa-edit"></i>
 						</button>
 					</form></td>
 				<td th:text="${e.codigo}" name="codigo" th:value="${e.codigo}"  />
