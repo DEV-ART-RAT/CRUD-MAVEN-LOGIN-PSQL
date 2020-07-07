@@ -86,16 +86,7 @@ public class Expediente {
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_nombreMadre;
 
-//	@OneToMany(mappedBy = "alumnoxmateria", fetch = FetchType.LAZY)
-//	private List<AlumnoxMateria> alumnoxMateriaList;
-//
-//	public List<AlumnoxMateria> getAlumnoxMateriaList() {
-//		return alumnoxMateriaList;
-//	}
-//
-//	public void setAlumnoxMateriaList(List<AlumnoxMateria> alumnoxMateriaList) {
-//		this.alumnoxMateriaList = alumnoxMateriaList;
-//	}
+
 
 	public Expediente() {}
 

@@ -105,28 +105,28 @@ public class CoordinadorController {
 
 	@RequestMapping(value="/nuevaMateriaexpediente", method=RequestMethod.POST)
 	public ModelAndView NuevoMateria(@RequestParam(value="codigo") Integer codigo) {
-		System.out.println("Codigo es :"+codigo);
+		System.out.println("Codigo final  es :"+codigo);
+		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
 		materias = materiaService.findAll();
-		Expediente expediente=null;
-		expediente = expedienteService.filtrarUNO(codigo);
-		mav.addObject("alumnoxmateria", new AlumnoxMateria());
-		mav.addObject("expedientes", expediente);
+		List<Expediente> expedientes = null;
+		expedientes = expedienteService.findAllExpe();
+		mav.addObject("expedientes", expedientes);
+		mav.addObject("alumnoxmateria", alumnoxmateria);
 		mav.addObject("materias", materias);
 		mav.setViewName("/Coordinador/AgregarMateria");
 		return mav;
 	}
-	@RequestMapping("/guardarExpedientemateria")
+	@RequestMapping(value="/guardarExpedientemateria", method=RequestMethod.POST)
 	public ModelAndView guardarExpedientemateria(@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
-
 		ModelAndView mav = new ModelAndView();
-
 		if(result.hasErrors()) {
 			mav.setViewName("/Coordinador/AgregarMateria");
 		}else{
 			try {
-				System.out.println(alumnoxMateria.getCodigo());
+
+				System.out.println(alumnoxMateria.getC_alumnoxmateria());
 				System.out.println(alumnoxMateria.getC_materia());
 				System.out.println(alumnoxMateria.getC_expediente());
 				System.out.println(alumnoxMateria.getNota());
@@ -138,7 +138,7 @@ public class CoordinadorController {
 					alumnoxMateria.setEstado("No Aprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}
-//				alumnoxMateriaService.insert(alumnoxMateria);
+				alumnoxMateriaService.insert(alumnoxMateria);
 //
 			}catch (Exception e) {
 				e.printStackTrace();

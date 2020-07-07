@@ -11,26 +11,27 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(schema="public", name="alumnoxmateria")
 public class AlumnoxMateria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "incrementExpediente")
     @GenericGenerator(name = "incrementExpediente", strategy = "increment")
     @Column(name="c_alumnoxmateria")
-    private Integer codigo;
+    private Integer c_alumnoxmateria;
 
     @Transient
     private Integer c_materia;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "c_materia", nullable = false)
-    private Materia materia;
+    private Materia materia_alumnoxmateria;
 
 
     @Transient
     private Integer c_expediente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "c_expediente", nullable = false)
-    private Expediente expediente;
+    private Expediente expediente_alumnoxmateria;
 
 
     @NotNull(message = "Este campo no puede estar vacio")
@@ -43,6 +44,15 @@ public class AlumnoxMateria {
     private String estado;
 
     public AlumnoxMateria(){}
+
+    public Integer getC_alumnoxmateria() {
+        return c_alumnoxmateria;
+    }
+
+    public void setC_alumnoxmateria(Integer c_alumnoxmateria) {
+        this.c_alumnoxmateria = c_alumnoxmateria;
+    }
+
     public Integer getC_materia() { return c_materia; }
     public void setC_materia(Integer c_materia) {
         this.c_materia = c_materia;
@@ -50,21 +60,9 @@ public class AlumnoxMateria {
 
 
 
-    public Integer getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
 
-    public Materia getMateria() {
-        return materia;
-    }
 
-    public void setMateria(Materia materia) {
-        this.materia = materia;
-    }
 
     public Integer getC_expediente() {
         return c_expediente;
@@ -74,12 +72,20 @@ public class AlumnoxMateria {
         this.c_expediente = c_expediente;
     }
 
-    public Expediente getExpediente() {
-        return expediente;
+    public Materia getMateria_alumnoxmateria() {
+        return materia_alumnoxmateria;
     }
 
-    public void setExpediente(Expediente expediente) {
-        this.expediente = expediente;
+    public void setMateria_alumnoxmateria(Materia materia_alumnoxmateria) {
+        this.materia_alumnoxmateria = materia_alumnoxmateria;
+    }
+
+    public Expediente getExpediente_alumnoxmateria() {
+        return expediente_alumnoxmateria;
+    }
+
+    public void setExpediente_alumnoxmateria(Expediente expediente_alumnoxmateria) {
+        this.expediente_alumnoxmateria = expediente_alumnoxmateria;
     }
 
     public String getNota() {
