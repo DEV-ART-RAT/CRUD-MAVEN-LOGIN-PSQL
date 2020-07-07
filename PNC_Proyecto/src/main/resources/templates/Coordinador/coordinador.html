@@ -41,6 +41,8 @@
 	<div class="wrap-contact100">
 		<table class="table table-sm table-dark">
 			<thead>
+				<th scope="col">Accion</th>
+				<th scope="col">Accion</th>
 				<th scope="col">Codigo</th>
 				<th scope="col">Nombre</th>
 				<th scope="col">Apellido</th>
@@ -49,17 +51,33 @@
 				<th scope="col">Edad</th>
 				<th scope="col">Telefono</th>
 			</thead>
-			<th:block th:each="e, row: ${expedientes}">
-				<tr>
-					<td th:text="${e.codigo}"/>
-					<td th:text="${e.s_nombre}"/>
-					<td th:text="${e.s_apellido}"/>
-					<td th:text="${e.s_carne}"/>
-					<td th:text="${e.s_institucion}"/>
-					<td th:text="${e.s_edad}"/>
-					<td th:text="${e.s_telefonom}"/>
-				</tr>
-			</th:block>
+
+				<th:block th:each="e, row: ${expedientes}">
+					<tr>
+						<td>
+							<form  th:action="@{/editarexpedienteborrar}" th:method="post">
+								<input type="hidden" name="id" th:value="${e.codigo}"/>
+								<button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+								</button>
+							</form></td>
+						<td>
+							<form  th:action="@{/editarexpedienteeditar}" th:method="post">
+								<input type="hidden" name="id" th:value="${e.codigo}"/>
+								<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+								</button>
+							</form></td>
+						<td th:text="${e.codigo}" name="codigo" th:value="${e.codigo}"  />
+						<td th:text="${e.s_nombre}"/>
+						<td th:text="${e.s_apellido}"/>
+						<td th:text="${e.s_carne}"/>
+						<td th:text="${e.s_institucion}"/>
+						<td th:text="${e.s_edad}"/>
+						<td th:text="${e.s_telefonom}"/>
+
+					</tr>
+				</th:block>
+
+
 		</table>
 	</div>
 			

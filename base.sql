@@ -133,7 +133,35 @@ CREATE TABLE public.expediente(
 	s_institucion varchar(50) not null,
 	s_nombrePadre varchar(50) not null,
 	s_nombreMadre varchar(50) not null
-)
+);
+
+
+
+
+
+
+CREATE TABLE public.usuarioPersona(
+	c_id int PRIMARY KEY not null,
+	s_nombre varchar(50) not null,
+	s_apellido varchar(50) not null,
+	--s_carne varchar(9) not null,
+	d_fnacimiento varchar(15) not null,
+	s_edad varchar(3) not null,
+	s_direccion varchar(100) not null,
+	
+	s_depto int not null,
+	s_minicipio int not null
+);
+
+CREATE TABLE public.minicipio(
+	s_minicipio int PRIMARY KEY not null,
+	s_nombre varchar(50) not null
+);
+
+CREATE TABLE public.dpto(
+	s_depto int PRIMARY KEY not null,
+	s_nombre varchar(50) not null
+);
 -- drop table public.expediente
 
 -- select * from public.expediente
