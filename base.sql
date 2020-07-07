@@ -163,6 +163,14 @@ CREATE TABLE public.dpto(
 	s_nombre varchar(50) not null
 );
 
+CREATE TABLE public.alumnoxmateria(
+	cod_materia varchar(6) not null,
+	nombre_materia varchar(50) not null,
+	c_expediente integer not null,
+	s_nota varchar(3) not null,
+	s_estado varchar(10) not null
+)
+
 insert into minicipio (s_minicipio, s_nombre)
 values (1, 'municipio Libertad Prro');
 
@@ -173,7 +181,28 @@ insert into dpto (s_depto , s_nombre)
 values (1, 'Libertad Prro');
 
 insert into dpto (s_depto, s_nombre)
-values (2, 'SS Prro');
+values (2, 'SS ');
+
+
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (2, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (3, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (5, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (6, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (7, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (8, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (9, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (10, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )
+values (11, 'dbuser1', '$2aCrFu', '$2aCrFu','2Fu','$2aCrFu',1,1);
+
 -- drop table public.expediente
 
 -- select * from public.expediente
