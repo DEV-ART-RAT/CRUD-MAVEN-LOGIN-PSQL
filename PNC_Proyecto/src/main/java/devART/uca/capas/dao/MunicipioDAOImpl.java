@@ -1,6 +1,7 @@
 package devART.uca.capas.dao;
 
-import devART.uca.capas.domain.UserExpediente;
+import devART.uca.capas.domain.Dpto;
+import devART.uca.capas.domain.Municipio;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -11,17 +12,17 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class UserExpedienteDAOImpl implements UserExpedienteDAO {
+public class MunicipioDAOImpl implements MunicipioDAO {
     @PersistenceContext(unitName="capas")
     private EntityManager entityManager;
 
     //	@Override
-    public List<UserExpediente> findAllexpediente() throws DataAccessException {
+    public List<Municipio> findAllexpediente() throws DataAccessException {
 //
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT * FROM public.usuarioPersona");
-        Query query = entityManager.createNativeQuery(sb.toString(), UserExpediente.class);
-        List<UserExpediente> resultset = query.getResultList();
+        sb.append("SELECT * FROM public.dpto");
+        Query query = entityManager.createNativeQuery(sb.toString(), Municipio.class);
+        List<Municipio> resultset = query.getResultList();
 
         return resultset;
     }
@@ -29,14 +30,14 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
 
     @Override
     @Transactional
-    public void insert(UserExpediente expediente) throws DataAccessException {
+    public void insert(Municipio dpto) throws DataAccessException {
 
         // TODO Auto-generated method stub
         try {
-            if(expediente.getCodigo()==null)
-                entityManager.persist(expediente);
+            if(dpto.getCodigo()==null)
+                entityManager.persist(dpto);
             else {
-                entityManager.merge(expediente);
+                entityManager.merge(dpto);
                 entityManager.flush();
             }
         }catch(Throwable e) {
@@ -62,7 +63,7 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
 
 
     @Override
-    public UserExpediente findOne(Integer id) throws DataAccessException {
-        return entityManager.find(UserExpediente.class, id);
+    public Municipio findOne(Integer id) throws DataAccessException {
+        return entityManager.find(Municipio.class, id);
     }
 }

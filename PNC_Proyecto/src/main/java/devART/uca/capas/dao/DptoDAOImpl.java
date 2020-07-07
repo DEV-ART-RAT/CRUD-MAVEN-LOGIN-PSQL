@@ -1,5 +1,6 @@
 package devART.uca.capas.dao;
 
+import devART.uca.capas.domain.Dpto;
 import devART.uca.capas.domain.UserExpediente;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -11,17 +12,17 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class UserExpedienteDAOImpl implements UserExpedienteDAO {
+public class DptoDAOImpl implements DptoDAO {
     @PersistenceContext(unitName="capas")
     private EntityManager entityManager;
 
     //	@Override
-    public List<UserExpediente> findAllexpediente() throws DataAccessException {
+    public List<Dpto> findAllexpediente() throws DataAccessException {
 //
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT * FROM public.usuarioPersona");
-        Query query = entityManager.createNativeQuery(sb.toString(), UserExpediente.class);
-        List<UserExpediente> resultset = query.getResultList();
+        sb.append("SELECT * FROM public.dpto");
+        Query query = entityManager.createNativeQuery(sb.toString(), Dpto.class);
+        List<Dpto> resultset = query.getResultList();
 
         return resultset;
     }
@@ -29,14 +30,14 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
 
     @Override
     @Transactional
-    public void insert(UserExpediente expediente) throws DataAccessException {
+    public void insert(Dpto dpto) throws DataAccessException {
 
         // TODO Auto-generated method stub
         try {
-            if(expediente.getCodigo()==null)
-                entityManager.persist(expediente);
+            if(dpto.getCodigo()==null)
+                entityManager.persist(dpto);
             else {
-                entityManager.merge(expediente);
+                entityManager.merge(dpto);
                 entityManager.flush();
             }
         }catch(Throwable e) {
@@ -62,7 +63,8 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
 
 
     @Override
-    public UserExpediente findOne(Integer id) throws DataAccessException {
-        return entityManager.find(UserExpediente.class, id);
+    public Dpto findOne(Integer id) throws DataAccessException {
+        return entityManager.find(Dpto.class, id);
     }
 }
+
