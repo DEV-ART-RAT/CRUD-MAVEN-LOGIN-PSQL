@@ -75,16 +75,17 @@ public class CoordinadorController {
 
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
-		if(!result.hasErrors()) {
+		if(result.hasErrors()) {
+			mav.setViewName("/Coordinador/AgregarExpediente");
+		}else{
 			try {
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate ahora = LocalDate.now();
 				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
-				System.out.println("Fecha NAch es  "+fechaNac);
+				System.out.println("Fecha Nacimiento es  "+fechaNac);
 				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
 				if(periodo.getYears()>999){
-
 					expediente.setS_edad(Integer.toString(999));
 					expedienteService.insert(expediente);
 				}else {
@@ -95,13 +96,12 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			expediente = new Expediente();
-			mav.addObject("expediente", expediente);
+			expedientes = expedienteService.findAllExpe();
+			mav.addObject("expedientes", expedientes);
 			mav.addObject("message", "Estudiante Guardado!");
-		}
+			mav.setViewName("/Coordinador/coordinador");
 
-		mav.setViewName("/Coordinador/AgregarExpediente");
+		}
 		return mav;
 	}
 
