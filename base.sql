@@ -114,7 +114,9 @@ select * from persistent_logins;
 */
 CREATE TABLE public.materia(
 	cod_materia varchar(6) not null,
-	nombre_materia varchar(30) not null
+	nombre_materia varchar(50) not null,
+	descripcion_materia varchar(100) not null,
+	estado_materia varchar(10) not null
 );
 
 
