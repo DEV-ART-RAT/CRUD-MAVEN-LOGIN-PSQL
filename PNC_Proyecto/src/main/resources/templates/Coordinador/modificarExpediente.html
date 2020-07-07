@@ -1,74 +1,176 @@
+
+
 <!DOCTYPE html>
-<html xmlms:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-	<title>Nuevo expediente</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+	<title>Bootstrap Simple Registration Form</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+	<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<style>
+body {
+	color: #fff;
+	background: #63738a;
+	font-family: 'Roboto', sans-serif;
+}
+.form-control {
+	height: 40px;
+	box-shadow: none;
+	color: #969fa4;
+}
+.form-control:focus {
+	border-color: #5cb85c;
+}
+.form-control, .btn {
+	border-radius: 3px;
+}
+.signup-form {
+	width: 450px;
+	margin: 0 auto;
+	padding: 30px 0;
+  	font-size: 15px;
+}
+.signup-form h2 {
+	color: #636363;
+	margin: 0 0 15px;
+	position: relative;
+	text-align: center;
+}
+.signup-form h2:before, .signup-form h2:after {
+	content: "";
+	height: 2px;
+	width: 30%;
+	background: #d4d4d4;
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+}
+.signup-form h2:before {
+	left: 0;
+}
+.signup-form h2:after {
+	right: 0;
+}
+.signup-form .hint-text {
+	color: #999;
+	margin-bottom: 30px;
+	text-align: center;
+}
+.signup-form form {
+	color: #999;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #f2f3f7;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+.signup-form .form-group {
+	margin-bottom: 20px;
+}
+.signup-form input[type="checkbox"] {
+	margin-top: 3px;
+}
+.signup-form .btn {
+	font-size: 16px;
+	font-weight: bold;
+	min-width: 140px;
+	outline: none !important;
+}
+.signup-form .row div:first-child {
+	padding-right: 10px;
+}
+.signup-form .row div:last-child {
+	padding-left: 10px;
+}
+.signup-form a {
+	color: #fff;
+	text-decoration: underline;
+}
+.signup-form a:hover {
+	text-decoration: none;
+}
+.signup-form form a {
+	color: #5cb85c;
+	text-decoration: none;
+}
+.signup-form form a:hover {
+	text-decoration: underline;
+}
+</style>
 </head>
 <body>
-	<div class="barMenu">
-     	<div class="barMenuHead">
-     		<a class="buttonMenu" href="/userInfo">Nazarick</a>
-     	</div>
-     	<div class="barMenuElements">
-     		<a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
-     		<a class="buttonMenu" href="logout">Salir</a>
-     	</div>
-     </div> 
-<h1 th:text="${message}"></h1>
-<form method="post" th:action="@{/guardarExpedientemodificado}" th:object="${expediente}">
-		<h1>Nuevo Expediente</h1>
-	<input type="hidden" th:field="${expediente.codigo}" th:value="${expediente.codigo}">
-		<h3>Nombre: 
-			<input type="text" id="s_nombre" th:field="${expediente.s_nombre}" ></h3>
-		<span th:errors="${expediente.s_nombre}" style="color:red;"></span>
+<div class="barMenu">
+	<div class="barMenuHead">
+		<a class="buttonMenu" href="/userInfo">Nazarick</a>
+	</div>
+	<div class="barMenuElements">
+		<a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
+		<a class="buttonMenu" href="logout">Salir</a>
+	</div>
+</div>
+<div class="signup-form">
+
+	<form method="post" th:action="@{/guardarExpedientemodificado}" th:object="${expediente}">
+		<h2>Nuevo Expediente</h2>
 		<br>
-					
-		<h3>Apellido: 
-			<input type="text" id="s_apellido" th:field="${expediente.s_apellido}" ></h3>
+		<input type="hidden" th:field="${expediente.codigo}" th:value="${expediente.codigo}">
+
+		<div class="form-group">
+			<div class="row">
+				<div class="col">	<input type="text" class="form-control" name="first_name" placeholder="First Name"  id="s_nombre" th:field="${expediente.s_nombre}" ></h3></div>
+				<div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" id="s_apellido" th:field="${expediente.s_apellido}" ></h3></div>
+			</div>
+			<span th:errors="${expediente.s_nombre}" style="color:red;"></span>
 			<span th:errors="${expediente.s_apellido}" style="color:red;"></span>
-		<br>
-			
-		<h3>Carnet de Minoridad: <input type="text" id="s_carne" th:field="${expediente.s_carne}" ></h3>
-					<span th:errors="${expediente.s_carne}" style="color:red;"></span>
-		<br>
-		
-		<h3>Fecha nacimiento:<input id="d_fnacimiento" type="date" th:field="${expediente.d_fnacimiento}" > </h3>
-					<span th:errors="${expediente.d_fnacimiento}" style="color:red;"></span>
-		<br>
-		
-		<h3>Edad: </h3>
-		
-		<h3>Direccion de vivienda: 
-			<input type="text" id="s_direccion" th:field="${expediente.s_direccion}" ></h3>
-					<span th:errors="${expediente.s_direccion}" style="color:red;"></span>
-		<br>
-		
-		<h3>Telefono fijo:
-			 <input type="text" id="s_telefonof" th:field="${expediente.s_telefonof}" ></h3>
-					<span th:errors="${expediente.s_telefonof}" style="color:red;"></span>
-		<br>
-		
-		<h3>Telefono Movil: <input type="text" id="s_telefonom" th:field="${expediente.s_telefonom}" ></h3>
-					<span th:errors="${expediente.s_telefonom}" style="color:red;"></span><br>
-					
-		<h3>Nombre Institucion: <input type="text" id="institucion" th:field="${expediente.s_institucion}" ></h3>			
-		<span th:errors="${expediente.s_institucion}" style="color:red;"></span><br>
-		
-		<h3>Nombre padre: <input type="text" id="nombrePadre" th:field="${expediente.s_nombrePadre}" ></h3>
-					<span th:errors="${expediente.s_nombrePadre}" style="color:red;"></span><br>
-		
-		<h3>Nombre madre: <input type="text" id="nombreMadre" th:field="${expediente.s_nombreMadre}" ></h3>
-					<span th:errors="${expediente.s_nombreMadre}" style="color:red;"></span><br>
-	
+		</div>
+		<div class="form-group">
+			<input placeholder="Carne de Minoridad" class="form-control" type="text" id="s_carne" th:field="${expediente.s_carne}" ></h3>
+			<span th:errors="${expediente.s_carne}" style="color:red;"></span><br>
+		</div>
+		<div class="form-group">
+			<input  class="form-control" id="d_fnacimiento" type="date" th:field="${expediente.d_fnacimiento}"value="2000-01-01" > </h3>
+			<span th:errors="${expediente.d_fnacimiento}" style="color:red;"></span>
+		</div>
+		<div class="form-group">
+			<input placeholder="Direccion" class="form-control" type="text" id="s_direccion" th:field="${expediente.s_direccion}" ></h3>
+			<span th:errors="${expediente.s_direccion}" style="color:red;"></span>
+		</div>
+		<div class="form-group">
+			<input class="form-control" placeholder="Telefono Fijo" type="text" id="s_telefonof" th:field="${expediente.s_telefonof}" ></h3>
+			<span th:errors="${expediente.s_telefonof}" style="color:red;"></span>
+		</div>
+		<div class="form-group">
+			<input class="form-control" placeholder="Telefono Movil" type="text" id="s_telefonom" th:field="${expediente.s_telefonom}" ></h3>
+			<span th:errors="${expediente.s_telefonom}" style="color:red;"></span>
+		</div>
+		<div class="form-group">
+			<input class="form-control" placeholder="Institucion" type="text" id="institucion" th:field="${expediente.s_institucion}" ></h3>
+			<span th:errors="${expediente.s_institucion}" style="color:red;"></span>
+		</div>
+		<div class="form-group">
+			<input class="form-control" placeholder="Nombre Padre" type="text" id="nombrePadre" th:field="${expediente.s_nombrePadre}" ></h3>
+			<span th:errors="${expediente.s_nombrePadre}" style="color:red;"></span>
+		</div>
+		<div class="form-group">
+			<input class="form-control" placeholder="Nombre Madre" type="text" id="nombreMadre" th:field="${expediente.s_nombreMadre}" ></h3>
+			<span th:errors="${expediente.s_nombreMadre}" style="color:red;"></span>
+		</div>
+		<!--		class="form-control" placeholder=""-->
 		<input type="submit" value="Guardar">
-		
-	</form>	
+
+	</form>
+</div>
 </body>
 </html>
