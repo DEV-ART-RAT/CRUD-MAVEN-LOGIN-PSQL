@@ -230,7 +230,7 @@ public class CoordinadorController {
 		return mav;
 	}
 
-	@RequestMapping(value="/Cursadas", method=RequestMethod.POST)
+	@RequestMapping(value="/cursadas", method=RequestMethod.POST)
 	public ModelAndView mostrarMaterias(@RequestParam(value="id") Integer codigo)
 	{
 		ModelAndView mav = new ModelAndView();
