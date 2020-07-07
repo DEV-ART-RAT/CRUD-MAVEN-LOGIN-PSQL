@@ -22,7 +22,7 @@ public class UserRoleDAOImpl implements UserRoleDAO{
 	public UserRole findOne(Integer userID) {
 		try {
             String sql = "Select e from " + UserRole.class.getName() + " e " //
-                    + " Where e.appUser = :userID ";
+                    + " Where e.appUser = :userID order by e.codigo ASC";
  
             Query query = entityManager.createQuery(sql, UserRole.class);
             query.setParameter("userID", userID);
