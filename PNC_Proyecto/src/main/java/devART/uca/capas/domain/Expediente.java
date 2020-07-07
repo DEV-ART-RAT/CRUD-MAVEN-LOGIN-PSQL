@@ -39,7 +39,8 @@ public class Expediente {
 	@Pattern(regexp = "^[a-zA-Z0-9]{9}$", message = "El carne debe tener exactamente 9 digitos")
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_carne;
-	
+
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@NotNull(message = "El campo Fecha no puede quedar vacio")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "d_fnacimiento")
