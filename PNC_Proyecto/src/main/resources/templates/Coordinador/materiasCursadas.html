@@ -2,40 +2,62 @@
 <html xmlms:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo expediente</title>
+    <title>Coordinador</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
     <link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
 <body>
-    <div class="barMenu">
-        <div class="barMenuHead">
-            <a class="buttonMenu" href="/userInfo">Nazarick</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/userInfo">Tempest</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/userInfo">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/NuevoExpediente">Crear expediente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Salir</a>
+                </li>
+            </ul>
         </div>
-        <div class="barMenuElements">
-            <a class="buttonMenu" href="NuevoExpediente">Crear expediente</a>
-            <a class="buttonMenu" href="logout">Salir</a>
+    </nav>
+    <div class="container-fluid">
+        <div class="container p-3">
+            <div class="container flex">
+                    <form class="form-inline center"  th:action="@{/expediente}" th:method="post">
+                        <a class="btn btn-primary form-control col-3 m-2" href="/userInfo"> Regresar </a>
+                        <button type="submit" class="btn btn-success form-control col m-2">Agregar materia </button>
+                    </form>
+            </div>
+
+            <table class="table table-sm table-dark  table-hover table-condensed">
+                <thead>
+                <th scope="col">Codigo</th>
+                <th scope="col">Materia</th>
+                <th scope="col">Nota</th>
+                <th scope="col">Estado</th>
+                </thead>
+                <th:block th:each="e, row: ${alumnoxmaterias}">
+                    <tr>
+                        <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />
+                        <td th:text="${e.nombreMateria}"/>
+                        <td th:text="${e.nota}"/>
+                        <td th:text="${e.estado}"/>
+                    </tr>
+                </th:block>
+            </table>
         </div>
     </div>
-    <table class="table table-sm table-dark">
-        <thead>
-            <th scope="col">Codigo</th>
-            <th scope="col">Materia</th>
-            <th scope="col">Nota</th>
-            <th scope="col">Estado</th>
-        </thead>
-        <th:block th:each="e, row: ${alumnoxmaterias}">
-            <tr>
-                <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />
-                <td th:text="${e.nombreMateria}"/>
-                <td th:text="${e.nota}"/>
-                <td th:text="${e.estado}"/>
-            </tr>
-        </th:block>
-    </table>
+
 </body>
 </html>
