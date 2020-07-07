@@ -1,5 +1,6 @@
 package devART.uca.capas.dao;
 
+import devART.uca.capas.domain.AppUser;
 import devART.uca.capas.domain.UserExpediente;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,9 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
     public List<UserExpediente> findAllexpediente() throws DataAccessException {
 //
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT * FROM public.usuarioPersona");
+        sb.append("SELECT * FROM "+ UserExpediente.class.getName() + " e " //
+                + " order by e.codigo ASC");
+        System.out.println(sb.toString());
         Query query = entityManager.createNativeQuery(sb.toString(), UserExpediente.class);
         List<UserExpediente> resultset = query.getResultList();
 

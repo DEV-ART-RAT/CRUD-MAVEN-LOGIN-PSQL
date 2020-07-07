@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import devART.uca.capas.domain.*;
+import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -21,16 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import devART.uca.capas.domain.AppUser;
-import devART.uca.capas.domain.Expediente;
-import devART.uca.capas.domain.Materia;
-import devART.uca.capas.domain.UserRole;
-import devART.uca.capas.service.AppRoleService;
-import devART.uca.capas.service.AppUserService;
-import devART.uca.capas.service.ExpedienteServiceImpl;
-import devART.uca.capas.service.MateriaService;
-import devART.uca.capas.service.UserDetailsServiceImpl;
-import devART.uca.capas.service.UserRoleService;
 import devART.uca.capas.utils.EncrytedPasswordUtils;
 import devART.uca.capas.utils.WebUtils;
 
@@ -53,6 +45,15 @@ public class UserController {
 
 	@Autowired
 	UserRoleService userRoleServices;
+
+	@Autowired
+	DptoService dptoService;
+
+	@Autowired
+	MunicipioService municipioService;
+
+	@Autowired
+	UserExpedienteService userExpedienteService;
 
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -125,18 +126,41 @@ public class UserController {
    	public ModelAndView ingresarUsuario() {
    		ModelAndView mav = new ModelAndView();
    		System.out.println("aqui estoy registrando :v");
-   		AppUser appuser = new AppUser();
-   		mav.addObject("userNew", appuser);
+   		List<Dpto> dptos = null;
+   		List<Municipio> municipios=null;
+   		try {
+			dptos = dptoService.findAll();
+			municipios = municipioService.findAll();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(dptos);
+		System.out.println(municipios);
+   		mav.addObject("userNew", new AppUser());
+		mav.addObject("userNewExp", new UserExpediente());
+		mav.addObject("dptos", dptos);
+		mav.addObject("municipios",municipios);
    		mav.setViewName("registerPage");
    		return mav;
    	}
 
     @RequestMapping("/validarRegistrarUsuario")
-	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role, @Valid @ModelAttribute("userNew") AppUser usery,BindingResult result ) {    	ModelAndView mav = new ModelAndView();
-		if(result.hasErrors()) {
+	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role,
+												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {    	ModelAndView mav = new ModelAndView();
+		if(result.hasErrors() || result1.hasErrors()) {
 			//AppUser appuser = new AppUser();
 //	   		mav.addObject("userNew", usery);
 //			mav.addObject("message", "No se pudo ingresar");
+			List<Dpto> dptos = null;
+			List<Municipio> municipios=null;
+			try {
+				dptos = dptoService.findAll();
+				municipios = municipioService.findAll();
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			mav.addObject("dptos",dptos);
+			mav.addObject("municipios",municipios);
 			mav.setViewName("registerPage");
 		}
 		else {
@@ -151,6 +175,24 @@ public class UserController {
 						usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
 						userServices.insert(usery);
 						userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
+						userExp.setCodigo(usery.getUserId());
+
+						DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						LocalDate ahora = LocalDate.now();
+						LocalDate fechaNac = LocalDate.parse(userExp.getFnacimiento(), fmt);
+						//System.out.println("Fecha Nacimiento es  "+fechaNac);
+						//System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
+						Period periodo = Period.between(fechaNac, ahora);
+						if(periodo.getYears()>999){
+							userExp.setEdad(Integer.toString(999));
+							userExpedienteService.insert(userExp);
+						}else {
+							userExp.setEdad(Integer.toString(periodo.getYears()));
+							userExpedienteService.insert(userExp);
+						}
+
+
+						//userExpedienteService.insert(userExp);
 						System.out.println("se ingreso usuario: "+usery.toString());
 					}else {
 						mav.addObject("userNew", new AppUser());

@@ -34,26 +34,66 @@
 				         </span>
 				            
 				      </div>				       
-				      <form class="col-12"  name='f' th:action="@{/validarRegistrarUsuario}" th:object="${userNew}" method='POST'>
+				      <form class="col-12"  name='f' th:action="@{/validarRegistrarUsuario}" th:object="${userNewExp}"   method='POST'>
+						  <!--span th:object="${userNewExp}"-->
 				      		<div class="form-group" id="user-group">
 								<p th:text="${message}" style="color:red"></p>
 	                        	<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
-									<span th:errors="${userNew.userName}" style="color:red;"></span><br>	                    	
+								<span th:errors="${userNew.userName}" style="color:red;"></span><br>
 	                    	</div>
 	                    	<div class="form-group" id="contrasena-group">
 		                        <input type='password' class="form-control" th:field="${userNew.encrytedPassword}" placeholder="Contrasenia" name='password' />
-									<span  th:errors="${userNew.encrytedPassword}" style="color:red;"></span><br>		                   
+								<span  th:errors="${userNew.encrytedPassword}" style="color:red;"></span><br>
 		                    </div>
+
+						  	<!-- Expediente -->
+
+							<div class="form-group">
+								<input type='text' class="form-control"  th:field="${userNewExp.apellido}" placeholder="Apellido"  name='apellido' value=''>
+								<span th:errors="${userNewExp.apellido}" style="color:red;"></span><br>
+							</div>
+						    <div class="form-group">
+							  <input type='text' class="form-control"  th:field="${userNewExp.direccion}" placeholder="direccion"  name='direccion' value=''>
+							  <span th:errors="${userNewExp.direccion}" style="color:red;"></span><br>
+						    </div>
+
+							  <div class="form-group">
+								<input type='text' class="form-control"  th:field="${userNewExp.nombre}" placeholder="Nombre"  name='NombrePropio' value=''>
+								<span th:errors="${userNewExp.nombre}" style="color:red;"></span><br>
+							</div>
+
+
+						  <div class="form-group">
+							  <h3>Fecha nacimiento:<input id="fnacimiento" type="date" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > </h3>
+							  <span th:errors="${userNewExp.fnacimiento}" style="color:red;"></span><br>
+							</div>
+
+
+						  <div class="form-group">
+						  <label for="categoriaBox">Departamento</label>
+						  <select th:field="${userNewExp.dptoId}" id="categoriaBox">
+							  <option th:each ="dpto: ${dptos}" th:value="${dpto.codigo}"
+									  th:text ="${dpto.nombre}">
+							  </option>
+						  </select>
+						  </div>
+
+						  <div class="form-group">
+							  <label for="categoriaBox2">Municipio</label>
+							  <select th:field="${userNewExp.municipioId}" id="categoriaBox2">
+								  <option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
+										  th:text ="${dpto.nombre}">
+								  </option>
+							  </select>
+						  </div>
+
 		                    <select class="form-control" name="role">
-		                    	<option th:value="2"
-										th:text ="Coordinador">
-								</option>
-								<option th:value="1"
-										th:text ="Administrador">
-								</option>
+		                    	<option th:value="2" th:text ="Coordinador"></option>
+								<option th:value="1" th:text ="Administrador"></option>
 							</select>
-		                    <br>
+
 		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+
 				      </form>
 
 				      <br> 
