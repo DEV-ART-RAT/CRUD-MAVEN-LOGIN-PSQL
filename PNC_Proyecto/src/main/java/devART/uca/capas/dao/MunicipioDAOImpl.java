@@ -1,6 +1,5 @@
 package devART.uca.capas.dao;
 
-import devART.uca.capas.domain.Dpto;
 import devART.uca.capas.domain.Municipio;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,6 @@
 package devART.uca.capas.service;
 
 import devART.uca.capas.domain.Dpto;
-import devART.uca.capas.domain.Municipio;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

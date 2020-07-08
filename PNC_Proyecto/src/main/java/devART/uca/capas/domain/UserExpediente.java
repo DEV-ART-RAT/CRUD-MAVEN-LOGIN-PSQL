@@ -1,5 +1,6 @@
 package devART.uca.capas.domain;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Size;
 public class UserExpediente {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "incrementDomain")
+    @GenericGenerator(name = "incrementDomain", strategy = "increment")
     @Column(name="c_id")
     private Long codigo;
 
@@ -42,11 +45,14 @@ public class UserExpediente {
     @Column(name = "s_edad")
     private String edad;
 
-    @Column(name = "s_depto")
-    private Integer dptoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "s_depto", nullable = false)
+    private Dpto dpto;
 
-    @Column(name = "s_minicipio")
-    private Integer municipioId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "s_minicipio", nullable = false)
+    private Municipio municipio;
+
 
 
 
@@ -101,19 +107,19 @@ public class UserExpediente {
         this.edad = edad;
     }
 
-    public Integer getDptoId() {
-        return dptoId;
+    public Dpto getDpto() {
+        return dpto;
     }
 
-    public void setDptoId(Integer dptoId) {
-        this.dptoId = dptoId;
+    public void setDpto(Dpto dpto) {
+        this.dpto = dpto;
     }
 
-    public Integer getMunicipioId() {
-        return municipioId;
+    public Municipio getMunicipio() {
+        return municipio;
     }
 
-    public void setMunicipioId(Integer municipioId) {
-        this.municipioId = municipioId;
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
     }
 }

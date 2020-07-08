@@ -68,7 +68,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
         // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
         // If no login, it will redirect to /login page.
-        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+
+        http.authorizeRequests().antMatchers("/userCoordinador").access("hasAnyRole('ROLE_USER')");
         http.authorizeRequests().antMatchers("/NuevoExpediente").access("hasAnyRole('ROLE_USER')");
         http.authorizeRequests().antMatchers("/Cursadas").access("hasAnyRole('ROLE_USER')");
  
@@ -76,6 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/ingresarMateria").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/materiasLista").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/administarUsuario").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/usuarioDesactive").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/usuarioActive").access("hasRole('ROLE_ADMIN')");
 
  
         // When the user has logged in as XX.

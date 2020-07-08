@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PNC_Proyecto</name>
 	<description>Proyecto N-Capas</description>
-
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

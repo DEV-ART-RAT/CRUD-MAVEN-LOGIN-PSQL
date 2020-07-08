@@ -121,8 +121,11 @@ body {
 <div class="signup-form">
 
 	<form method="post" th:action="@{/guardarExpedientemateria}" th:object="${alumnoxmateria}">
-		<select th:field="*{materia_alumnoxmateria.codigo}">
+		<select th:field="*{materia.codigo}">
 			<option th:each="c: ${materias}" th:value="${c.codigo}"><th th:text="${c.nombreMateria}"></th></option>
+		</select>
+		<select th:field="*{expediente.codigo}">
+			<option th:each="c: ${expedientes}" th:value="${c.codigo}"><th th:text="${c.codigo}"></th></option>
 		</select>
 		<div data-validate="Name is required">
 			<input th:field="${alumnoxmateria.nota}" type="text" name="materia" placeholder="Nota">

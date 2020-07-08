@@ -1,6 +1,7 @@
 package devART.uca.capas.domain;
 
-
+import devART.uca.capas.domain.Expediente;
+import devART.uca.capas.domain.Materia;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,26 +14,24 @@ import javax.validation.constraints.Size;
 public class AlumnoxMateria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "incrementExpediente")
-    @GenericGenerator(name = "incrementExpediente", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "incrementalumnoxmateria")
+    @GenericGenerator(name = "incrementalumnoxmateria", strategy = "increment")
     @Column(name="c_alumnoxmateria")
     private Integer c_alumnoxmateria;
 
-    @Transient
-    private Integer c_materia;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "c_materia", nullable = false)
-    private Materia materia_alumnoxmateria;
-
+    @ManyToOne
+    @JoinColumn(name = "c_expediente", nullable = false)
+    private Expediente expediente;
 
     @Transient
     private Integer c_expediente;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "c_expediente", nullable = false)
-    private Expediente expediente_alumnoxmateria;
+    @ManyToOne
+    @JoinColumn(name = "cod_materia", nullable = false)
+    private Materia materia ;
 
+    @Transient
+    private String cod_materia;
 
     @NotNull(message = "Este campo no puede estar vacio")
     @Column(name="s_nota")
@@ -43,7 +42,10 @@ public class AlumnoxMateria {
     @Column(name = "s_estado")
     private String estado;
 
-    public AlumnoxMateria(){}
+    public AlumnoxMateria(Materia materiafind, Expediente expedientefind) {
+        this.materia=materiafind;
+        this.expediente=expedientefind;
+    }
 
     public Integer getC_alumnoxmateria() {
         return c_alumnoxmateria;
@@ -53,39 +55,38 @@ public class AlumnoxMateria {
         this.c_alumnoxmateria = c_alumnoxmateria;
     }
 
-    public Integer getC_materia() { return c_materia; }
-    public void setC_materia(Integer c_materia) {
-        this.c_materia = c_materia;
-    }
-
-
-
-
-
-
-
     public Integer getC_expediente() {
         return c_expediente;
     }
 
-    public void setC_expediente(Integer c_expediente) {
+    public Integer setC_expediente(Integer c_expediente) {
         this.c_expediente = c_expediente;
+        return c_expediente;
     }
 
-    public Materia getMateria_alumnoxmateria() {
-        return materia_alumnoxmateria;
+    public String getCod_materia() {
+        return cod_materia;
     }
 
-    public void setMateria_alumnoxmateria(Materia materia_alumnoxmateria) {
-        this.materia_alumnoxmateria = materia_alumnoxmateria;
+    public String setCod_materia(String cod_materia) {
+        this.cod_materia = cod_materia;
+        return cod_materia;
     }
 
-    public Expediente getExpediente_alumnoxmateria() {
-        return expediente_alumnoxmateria;
+    public Expediente getExpediente() {
+        return expediente;
     }
 
-    public void setExpediente_alumnoxmateria(Expediente expediente_alumnoxmateria) {
-        this.expediente_alumnoxmateria = expediente_alumnoxmateria;
+    public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
     public String getNota() {

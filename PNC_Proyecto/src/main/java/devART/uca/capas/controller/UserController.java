@@ -9,6 +9,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import devART.uca.capas.domain.*;
+import devART.uca.capas.domain.Dpto;
+import devART.uca.capas.domain.Municipio;
 import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,9 +30,6 @@ import devART.uca.capas.utils.WebUtils;
 
 @Controller
 public class UserController {
-	@Autowired
-	UserDetailsServiceImpl userService;
-
 	@Autowired
 	ExpedienteServiceImpl expedienteService;
 
@@ -56,14 +54,6 @@ public class UserController {
 	@Autowired
 	UserExpedienteService userExpedienteService;
 
-	/*
-    @RequestMapping(value = {  "/welcome" }, method = RequestMethod.GET)
-    public String welcomePage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "welcomePage";
-    }
-	 */
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
@@ -77,33 +67,53 @@ public class UserController {
 
     @RequestMapping(value = {"/login","/"}, method = RequestMethod.GET)
     public String loginPage(Model model) {
-
         return "loginPage";
     }
 
+    /*
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Login");
         return "welcomePage";
     }
+     */
+
+    @RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
+    public ModelAndView listadoCoordinador(Principal principal) {
+        ModelAndView mav = new ModelAndView();
+        List<Expediente> expedientes = null;
+        try {
+
+            expedientes = expedienteService.findAllExpe();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mav.addObject("expedientes", expedientes);
+        mav.setViewName("/Coordinador/coordinador");
+
+        return mav;
+    }
+
+
+
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public ModelAndView listado() {
-		ModelAndView mav = new ModelAndView();
+    public String listado(Principal principal) {
 
-		List<Expediente> expedientes = null;
-		try {
+        User auth = (User) ((Authentication) principal).getPrincipal();
+        String rol = WebUtils.getRole(auth);
+        System.out.println(rol);
 
-			expedientes = expedienteService.findAllExpe();
+        if(rol.equals("ROLE_USER")){
+            return "redirect:/userCoordinador";
+        }
 
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		mav.addObject("expedientes", expedientes);
-		mav.setViewName("/Coordinador/coordinador");
-
-		return mav;
+        if(rol.equals("ROLE_ADMIN")){
+            return "redirect:/admin";
+        }
+		return "redirect:/";
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -152,10 +162,6 @@ public class UserController {
 	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role,
 												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {    	ModelAndView mav = new ModelAndView();
 		if(result.hasErrors() || result1.hasErrors()) {
-			//AppUser appuser = new AppUser();
-//	   		mav.addObject("userNew", usery);
-//			mav.addObject("message", "No se pudo ingresar");
-
 			List<Dpto> dptos = null;
 			List<Municipio> municipios=null;
 			try {
@@ -221,29 +227,15 @@ public class UserController {
     @RequestMapping("/administarUsuario")
     public ModelAndView administarUsuario(Principal principal) {
         ModelAndView mav = new ModelAndView();
-        //System.out.println("aqui estoy registrando :v");
-        //User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		//auth.getAuthorities().;
-        List<Dpto> dptos = null;
-        List<Municipio> municipios=null;
         List<AppUser> users = null;
-        List<UserExpediente> expes=null;
         try {
-            dptos = dptoService.findAll();
-            municipios = municipioService.findAll();
             users = userServices.findAll();
-            expes= userExpedienteService.findAll();
         }catch (Exception e){
             e.printStackTrace();
         }
-        List<UsuarioManager> usuarioManagers = WebUtils.getListUsers(users,expes,dptos,municipios,auth.getName());
-        //System.out.println(dptos);
-        //System.out.println(municipios);
-        mav.addObject("userList", usuarioManagers);
-        //mav.addObject("userNewExp", new UserExpediente());
-        //mav.addObject("dptos", dptos);
-        //mav.addObject("municipios",municipios);
+        WebUtils.removeMeUser(users,auth.getName());
+        mav.addObject("userList", users);
         mav.setViewName("/administrador/userManager");
         return mav;
     }

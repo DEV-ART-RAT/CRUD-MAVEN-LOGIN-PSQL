@@ -1,13 +1,6 @@
 package devART.uca.capas.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -42,7 +35,20 @@ public class AppUser {
 	@NotNull(message = "Este campo no puede estar vacio")
     @Column(name = "Enabled", length = 1, nullable = false)
     private boolean enabled;
- 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_EXP_ID", nullable = false)
+    private UserExpediente user;
+
+
+    public UserExpediente getUser() {
+        return user;
+    }
+
+    public void setUser(UserExpediente user) {
+        this.user = user;
+    }
+
     public Long getUserId() {
         return userId;
     }

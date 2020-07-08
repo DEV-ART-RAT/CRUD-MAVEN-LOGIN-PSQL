@@ -1,7 +1,6 @@
 package devART.uca.capas.dao;
 
 import devART.uca.capas.domain.Dpto;
-import devART.uca.capas.domain.UserExpediente;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
