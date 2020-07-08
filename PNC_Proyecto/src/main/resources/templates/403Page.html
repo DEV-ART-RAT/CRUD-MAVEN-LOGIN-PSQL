@@ -12,15 +12,7 @@
 </head>
  
 <body>
-    <div class="barMenu">
-      	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/">Nazarick</a>
-      	</div>
-      	<div class="barMenuElements">
-      		<a class="buttonMenu" href="userInfo">Coordinador</a>
-      		<a class="buttonMenu" href="admin">Administrador</a>
-      	</div>
-     </div>
+    <th:block th:include="/menu"></th:block>
     <h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
     <img alt="" src="img/fail/overlord.jpg">
     <h4 style=" font-style: italic; text-align: center;">"Nadie entra sin permiso en la Gran Tumba de Nazarick"</h4>

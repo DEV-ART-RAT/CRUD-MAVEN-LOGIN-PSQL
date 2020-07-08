@@ -10,47 +10,26 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/admin">Tempest</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="/admin">Inicio <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/ingresarMateria">Nueva materia</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/administarUsuario">Autorizar cuentas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/logout">Salir</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<th:block th:include="/menuadmin"></th:block>
 	<div class="container">
 		<div class="row">
 
 
-			<div class="card text-white bg-primary  col m-2" style="height: 44vh;" onclick="location.href='/administarUsuario'">
+			<div class="card2 bg-1 col m-2" style="height: 44vh; width: 44vw;" onclick="location.href='/administarUsuario'">
 				<h3 class="card-header">Administrar cuentas</h3>
-				<div class="container-fluid flex-center">
-					<img class="imgMenu"  src="static/img/newMateria.png" th:src="@{/img/newMateria.png}" alt="Profile picture" style="height: 30 vh;">
+				<div class="container-fluid flex-center full">
+					<i class="fas fa-users imgStyle"></i>
 				</div>
 			</div>
 
 
-			<div class="card text-white bg-secondary col mt-2 mr-2 mb-2" style="height: 44vh;" onclick="location.href='/ingresarMateria'">
+			<div class="card2 bg-2 col mt-2 mr-2 mb-2" style="height: 44vh; width: 44vw;" onclick="location.href='/ingresarMateria'">
 				<h3 class="card-header">Ingresar una nueva materia</h3>
-					<div class="container-fluid flex-center">
-						<img class="imgMenu"  src="static/img/newMateria.png" th:src="@{/img/newMateria.png}" alt="Profile picture" style="height: 30 vh;">
+					<div class="container-fluid flex-center full">
+						<i class="fas fa-edit imgStyle"></i>
 					</div>
 			</div>
 
@@ -58,18 +37,18 @@
 			<div class="w-100"></div>
 
 
-			<div class="card text-white bg-success mb-3 col mb-2 ml-2 mr-2" style="height: 44vh;" onclick="location.href='/materiasLista'">
+			<div class="card2 bg-3 mb-3 col mb-2 ml-2 mr-2" style="height: 44vh; width: 44vw;" onclick="location.href='/materiasLista'">
 				<h3 class="card-header">Lista de materias</h3>
-				<div class="container-fluid flex-center">
-					<img class="imgMenu"  src="static/img/newMateria.png" th:src="@{/img/newMateria.png}" alt="Profile picture" style="height: 30 vh;">
+				<div class="container-fluid flex-center full">
+					<i class="fas fa-th-list imgStyle"></i>
 				</div>
 			</div>
 
 
-			<div class="card text-white bg-danger mb-3 col mb-2 mr-2" style="height: 44vh;" onclick="location.href='/logout'">
+			<div class="card2 bg-4 mb-3 col mb-2 mr-2" style="height: 44vh; width: 44vw;" onclick="location.href='/logout'">
 				<h3 class="card-header">Cerrar sesion</h3>
-				<div class="container-fluid flex-center">
-					<img class="imgMenu"  src="static/img/newMateria.png" th:src="@{/img/newMateria.png}" alt="Profile picture" style="height: 30 vh;">
+				<div class="container-fluid flex-center full">
+					<i class="fas fa-sign-out-alt imgStyle"></i>
 				</div>
 			</div>
 

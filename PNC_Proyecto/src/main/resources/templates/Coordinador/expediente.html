@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlms:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Expediente</title>
@@ -10,27 +11,9 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
-<body th:object="${expediente}">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/userInfo">Tempest</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/userInfo">Inicio <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/NuevoExpediente">Crear expediente</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Salir</a>
-            </li>
-        </ul>
-    </div>
-    </nav>
+<body th:object="${expediente}">
+    <th:block th:include="/menucoordinador"></th:block>
     <div class="container">
         <div class="container row m-4 p-3">
             <div class="col"></div>
@@ -44,29 +27,30 @@
                                     <div class="input-group-prepend w-35">
                                         <div class="input-group-text">Carnet</div>
                                     </div>
-                                    <p class="form-control"  th:text="${expediente.s_carne}"></p>
+                                    <p class="form-control" th:text="${expediente.s_carne}"></p>
                                 </div>
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend w-35">
                                         <div class="input-group-text">Edad</div>
                                     </div>
-                                    <p class="form-control"  th:text="${expediente.s_edad}"></p>
+                                    <p class="form-control" th:text="${expediente.s_edad}"></p>
                                 </div>
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend w-35">
                                         <div class="input-group-text">Telefono</div>
                                     </div>
-                                    <p class="form-control"  th:text="${expediente.s_telefonom}"></p>
+                                    <p class="form-control" th:text="${expediente.s_telefonom}"></p>
                                 </div>
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend w-35">
                                         <div class="input-group-text">Institucion</div>
                                     </div>
-                                    <p class="form-control"  th:text="${expediente.s_institucion}"></p>
+                                    <p class="form-control" th:text="${expediente.s_institucion}"></p>
                                 </div>
                             </div>
                             <div class="col card centerPic">
-                                <img class="card-img-top w-50" src="static/img/user.png" th:src="@{/img/user.png}" alt="Profile picture">
+                                <img class="card-img-top w-50" src="static/img/user.png" th:src="@{/img/user.png}"
+                                    alt="Profile picture">
                             </div>
                         </div>
                         <div class="m-2 p-3">
@@ -74,42 +58,44 @@
                                 <div class="input-group-prepend w-35">
                                     <div class="input-group-text">Fecha de nacimiento</div>
                                 </div>
-                                <p class="form-control"  th:text="${expediente.d_fnacimiento}"></p>
+                                <p class="form-control" th:text="${expediente.d_fnacimiento}"></p>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend w-35">
                                     <div class="input-group-text">Direccion</div>
                                 </div>
-                                <p class="form-control"  th:text="${expediente.s_direccion}"></p>
+                                <p class="form-control" th:text="${expediente.s_direccion}"></p>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend w-35">
                                     <div class="input-group-text">Telefono fijo</div>
                                 </div>
-                                <p class="form-control"  th:text="${expediente.s_telefonof}"></p>
+                                <p class="form-control" th:text="${expediente.s_telefonof}"></p>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend w-35">
                                     <div class="input-group-text">Nombre del padre</div>
                                 </div>
-                                <p class="form-control"  th:text="${expediente.s_nombrePadre}"></p>
+                                <p class="form-control" th:text="${expediente.s_nombrePadre}"></p>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend w-35">
                                     <div class="input-group-text">Nombre de la madre</div>
                                 </div>
-                                <p class="form-control"  th:text="${expediente.s_nombreMadre}"></p>
+                                <p class="form-control" th:text="${expediente.s_nombreMadre}"></p>
                             </div>
                         </div>
                         <div class="container flex">
-                            <form class="col"  th:action="@{/editarexpedienteborrar}" th:method="post">
-                                <input type="hidden" name="id" th:value="${expediente.codigo}"/>
-                                <button type="submit" class="btn btn-danger form-control">Eliminar <i class="fa fa-trash"></i>
+                            <form class="col" th:action="@{/editarexpedienteborrar}" th:method="post">
+                                <input type="hidden" name="id" th:value="${expediente.codigo}" />
+                                <button type="submit" class="btn btn-danger form-control">Eliminar <i
+                                        class="fa fa-trash"></i>
                                 </button>
                             </form>
                             <form class="col" th:action="@{/editarexpedienteeditar}" th:method="post">
-                                <input type="hidden" name="id" th:value="${expediente.codigo}"/>
-                                <button type="submit" class="btn btn-success form-control">Editar <i class="fa fa-edit"></i>
+                                <input type="hidden" name="id" th:value="${expediente.codigo}" />
+                                <button type="submit" class="btn btn-success form-control">Editar <i
+                                        class="fa fa-edit"></i>
                                 </button>
                             </form>
                         </div>
@@ -120,4 +106,5 @@
         </div>
     </div>
 </body>
+
 </html>

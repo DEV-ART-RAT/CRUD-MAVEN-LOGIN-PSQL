@@ -68,11 +68,6 @@ td, th{
 	padding: 0.5em 3.2em;
 }
 
-.imgMenu{
-	height: 15em;
-	width: 15em;
-}
-
 .flex-center{
 	display: flex;
 	justify-content: center;
@@ -98,3 +93,50 @@ td, th{
 	visibility: hidden;
 	display: none;
   }
+
+.full{
+	width: 90%;
+	height: 90%;
+}
+
+.imgStyle{
+	font-size: 10em;
+}
+
+.card2{
+	border-radius: 0.50rem;
+	color: rgb(247, 247, 247);
+	transition: all 1;
+}
+
+.card2.bg-1{
+	background-color: rgb(17, 148, 180);
+}
+.card2.bg-2{
+	background-color: rgb(170, 27, 115);
+}
+.card2.bg-3{
+	background-color: rgb(17, 180, 44);
+}
+.card2.bg-4{
+	background-color: rgb(179, 28, 28);
+}
+
+.card2:hover{
+	background-color: white;
+	transition: all 1s;
+}
+
+.card2.bg-1:hover{
+	color:  rgb(17, 148, 180);
+}
+.card2.bg-2:hover{
+	color:  rgb(170, 27, 115);
+}
+.card2.bg-3:hover{
+	color:  rgb(17, 180, 44);
+}
+.card2.bg-4:hover{
+	color:  rgb(179, 28, 28);
+}
+

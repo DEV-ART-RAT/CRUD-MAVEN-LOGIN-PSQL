@@ -254,7 +254,7 @@ public class CoordinadorController {
 		try {
 			//int codigoint = Integer.parseInt(codigo);
 			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
-			mav.addObject("promedio","Promedio es : "+df.format(promedio(alumnoxMaterias)));
+			mav.addObject("promedio","Su promedio es: "+df.format(promedio(alumnoxMaterias)));
 
 //			alumnoxMaterias = alumnoxMateriaService.findAll();
 			System.out.println("Codigo es :"+codigo);
