@@ -163,10 +163,6 @@ public class UserController {
 	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role,
 												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {    	ModelAndView mav = new ModelAndView();
 		if(result.hasErrors() || result1.hasErrors()) {
-			//AppUser appuser = new AppUser();
-//	   		mav.addObject("userNew", usery);
-//			mav.addObject("message", "No se pudo ingresar");
-
 			List<Dpto> dptos = null;
 			List<Municipio> municipios=null;
 			try {
@@ -232,20 +228,15 @@ public class UserController {
     @RequestMapping("/administarUsuario")
     public ModelAndView administarUsuario(Principal principal) {
         ModelAndView mav = new ModelAndView();
-        
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         List<AppUser> users = null;
         try {
             users = userServices.findAll();
         }catch (Exception e){
             e.printStackTrace();
         }
-
         WebUtils.removeMeUser(users,auth.getName());
-
         mav.addObject("userList", users);
-
         mav.setViewName("/administrador/userManager");
         return mav;
     }
