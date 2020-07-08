@@ -110,6 +110,8 @@ public class CoordinadorController {
 			}
 			List<Expediente> expedientes = null;
 			expedientes = expedienteService.findAllExpe();
+			promediotodo(expedientes);
+			aprobadasreprobadas(expedientes);
 			mav.addObject("expedientes", expedientes);
 			mav.setViewName("/Coordinador/coordinador");
 		}
