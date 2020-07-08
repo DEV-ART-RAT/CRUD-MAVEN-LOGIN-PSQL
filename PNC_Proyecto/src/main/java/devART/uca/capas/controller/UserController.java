@@ -239,7 +239,7 @@ public class UserController {
         }
         WebUtils.removeMeUser(users,auth.getName());
         mav.addObject("userList", users);
-        mav.setViewName("/administrador/userManager");
+        mav.setViewName("/Administrador/userManager");
         return mav;
     }
 
