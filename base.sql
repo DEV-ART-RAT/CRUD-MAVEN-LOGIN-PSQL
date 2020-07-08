@@ -157,7 +157,7 @@ values (3, 2, 2);
 
 
 CREATE TABLE public.alumnoxmateria(
-	c_alumnoxmateria integer not null primary key
+	c_alumnoxmateria integer primary key,
 	cod_materia varchar(6) not null  ,
 	c_expediente integer not null  ,
 	s_nota varchar(3) not null,

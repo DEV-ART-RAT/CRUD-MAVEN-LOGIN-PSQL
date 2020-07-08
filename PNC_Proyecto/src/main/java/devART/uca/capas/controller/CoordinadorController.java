@@ -309,13 +309,14 @@ public class CoordinadorController {
 			expediente = expedienteService.filtrarUNO(codigo);
 			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
 			mav.addObject("expediente", expediente);
-			mav.addObject("alumnoxmaterias", alumnoxMaterias);
-			mav.setViewName("/Coordinador/materiasCursadas");
+
 			System.out.println("Codigo es :"+codigo);
 
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		mav.addObject("alumnoxmaterias", alumnoxMaterias);
+		mav.setViewName("/Coordinador/materiasCursadas");
 		return mav;
 	}
 
