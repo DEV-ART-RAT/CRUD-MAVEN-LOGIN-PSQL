@@ -42,19 +42,17 @@
 
             <table class="table table-sm table-dark  table-hover table-condensed">
                 <thead>
-                <th scope="col">Codigo</th>
                 <th scope="col">Materia</th>
                 <th scope="col">Nota</th>
                 <th scope="col">Estado</th>
                 </thead>
-<!--                <th:block th:each="e, row: ${alumnoxmaterias}">-->
-<!--                    <tr>-->
-<!--                        <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />-->
-<!--                        <td th:text="${e.nombreMateria}"/>-->
-<!--                        <td th:text="${e.nota}"/>-->
-<!--                        <td th:text="${e.estado}"/>-->
-<!--                    </tr>-->
-<!--                </th:block>-->
+                <th:block th:each="e, row: ${alumnoxmaterias}">
+                    <tr>
+                        <td th:text="${e.cod_materia}"/>
+                        <td th:text="${e.nota}"/>
+                        <td th:text="${e.estado}"/>
+                    </tr>
+                </th:block>
             </table>
         <div class="barMenuElements">
             <a class="buttonMenu" href="nuevaMateria">Crear Materia</a>
@@ -67,21 +65,21 @@
         </form>
     </div>
 
-    <table class="table table-sm table-dark">
-        <thead>
-            <th scope="col">Codigo</th>
-            <th scope="col">Materia</th>
-            <th scope="col">Nota</th>
-            <th scope="col">Estado</th>
-        </thead>
-        <th:block th:each="e, row: ${alumnoxmaterias}">
+<!--    <table class="table table-sm table-dark">-->
+<!--        <thead>-->
+<!--            <th scope="col">Codigo</th>-->
+<!--            <th scope="col">Materia</th>-->
+<!--            <th scope="col">Nota</th>-->
+<!--            <th scope="col">Estado</th>-->
+<!--        </thead>-->
+<!--        <th:block th:each="e, row: ${alumnoxmaterias}">-->
 <!--            <tr>-->
-<!--                <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />-->
-<!--                <td th:text="${e.nombreMateria}"/>-->
+<!--                <td th:text="${e.cod_materia}" />-->
+<!--                <td th:text="${e.c_expediente}"/>-->
 <!--                <td th:text="${e.nota}"/>-->
 <!--                <td th:text="${e.estado}"/>-->
 <!--            </tr>-->
-        </th:block>
-    </table>
+<!--        </th:block>-->
+        <!--    </table>--></div>
 </body>
 </html>

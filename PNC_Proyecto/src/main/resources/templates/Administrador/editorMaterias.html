@@ -2,52 +2,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
- 		<title>Coordinador</title>
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+<meta charset="UTF-8">
+	<title>Materias</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
 <body>
-	<div class="barMenu">
-		<div class="barMenuHead">
-			<a class="buttonMenu" href="/admin">Nazarick</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/userInfo">Tempest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/admin">Inicio <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/ingresarMateria">Nueva materia</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/admin">Autorizar cuentas</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Salir</a>
+				</li>
+			</ul>
 		</div>
-		<div class="barMenuElements">
-			<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
-			<a class="buttonMenu" href="logout">Salir</a>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="container p-3">
+			<table class="table table-sm table-dark  table-hover table-condensed">
+				<thead>
+					<th scope="col">Codigo</th>
+					<th scope="col">Materia</th>
+					<th scope="col">descripcion</th>
+					<th scope="col">Estado</th>
+					<th scope="col">Opciones</th>
+				</thead>
+				<th:block th:each="m, row: ${materias}">
+					<tr>
+						<td th:text="${m.codigo}"/>
+						<td th:text="${m.nombreMateria}"/>
+						<td th:text="${m.descripcion}"/>
+						<td th:text="${m.estado}"/>
+						<td>
+							<form class="form-inline center" th:action="@{/editarMateria}" th:method="post">
+								<input type="hidden" name="id" th:value="${m.codigo}"/>
+								<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+				</th:block>
+			</table>
+
 		</div>
 	</div>
 
-	<div class="wrap-contact100">
-		<table class="table table-sm table-dark">
-			<thead>
-				<th scope="col">Codigo</th>
-				<th scope="col">Materia</th>
-				<th scope="col">descripcion</th>
-				<th scope="col">Estado</th>
-				<th scope="col">Opciones</th>
-			</thead>
-			<th:block th:each="m, row: ${materias}">
-				<tr>
-					<td th:text="${m.codigo}"/>
-					<td th:text="${m.nombreMateria}"/>
-					<td th:text="${m.descripcion}"/>
-					<td th:text="${m.estado}"/>
-					<td>
-						<form  th:action="@{/editarMateria}" th:method="post">
-							<input type="hidden" name="id" th:value="${m.codigo}"/>
-							<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
-							</button>
-						</form>
-					</td>
-				</tr>
-			</th:block>
-		</table>
-	</div>
 			
 </body>
 </html>

@@ -42,10 +42,7 @@ public class AlumnoxMateria {
     @Column(name = "s_estado")
     private String estado;
 
-    public AlumnoxMateria(Materia materiafind, Expediente expedientefind) {
-        this.materia=materiafind;
-        this.expediente=expedientefind;
-    }
+    public AlumnoxMateria(){}
 
     public Integer getC_alumnoxmateria() {
         return c_alumnoxmateria;

@@ -106,7 +106,7 @@ public class CoordinadorController {
 	@RequestMapping(value="/nuevaMateriaexpediente", method=RequestMethod.POST)
 	public ModelAndView NuevoMateria(@RequestParam(value="codigo") Integer codigo) {
 		System.out.println("Codigo final  es :"+codigo);
-		AlumnoxMateria alumnoxmateria = new AlumnoxMateria(new Materia(),new Expediente());
+		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
 		materias = materiaService.findAll();
@@ -303,19 +303,22 @@ public class CoordinadorController {
 	{
 		ModelAndView mav = new ModelAndView();
 		List<AlumnoxMateria> alumnoxMaterias = null;
+		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		Expediente expediente=null;
 		try {
 			//int codigoint = Integer.parseInt(codigo);
-			expediente = expedienteService.filtrarUNO(codigo);
-			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
-			mav.addObject("expediente", expediente);
-			mav.addObject("alumnoxmaterias", alumnoxMaterias);
-			mav.setViewName("/Coordinador/materiasCursadas");
+//			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
+			alumnoxMaterias = alumnoxMateriaService.findAll();
 			System.out.println("Codigo es :"+codigo);
 
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		mav.addObject("alumnoxmateria", alumnoxmateria);
+		expediente = expedienteService.filtrarUNO(codigo);
+		mav.addObject("expediente", expediente);
+		mav.addObject("alumnoxmaterias", alumnoxMaterias);
+		mav.setViewName("/Coordinador/materiasCursadas");
 		return mav;
 	}
 
