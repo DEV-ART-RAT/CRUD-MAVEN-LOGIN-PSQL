@@ -1,13 +1,3 @@
-/*
-drop table user_role;
-drop table APP_role;
-drop table usuarioPersona;
-drop table APP_USER;
-drop table persistent_logins;
-drop table dpto;
-drop table minicipio;
-*/
-
 create table APP_USER
 (
   USER_ID           BIGINT,
@@ -17,7 +7,7 @@ create table APP_USER
   USER_EXP_ID			BIGINT not null
 	 
 ) ;
---  
+ 
 alter table APP_USER
   add constraint APP_USER_PK primary key (USER_ID);
  
@@ -156,7 +146,7 @@ CREATE TABLE public.alumnoxmateria(
 	c_expediente integer not null  ,
 	s_nota varchar(3) not null,
 	s_estado varchar(10) not null
-)
+);
 --drop TABLE public.alumnoxmateria
 
 CREATE TABLE public.materia(
@@ -185,9 +175,3 @@ ALTER TABLE public.alumnoxmateria ADD CONSTRAINT fk_cod_materia FOREIGN KEY(cod_
 ALTER TABLE public.alumnoxmateria ADD CONSTRAINT fk_c_expediente FOREIGN KEY(c_expediente) REFERENCES public.expediente(c_expediente);
 
 
-
-
-
--- drop table public.expediente
-
--- select * from public.expediente
