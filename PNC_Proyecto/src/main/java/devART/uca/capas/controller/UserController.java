@@ -109,7 +109,7 @@ public class UserController {
 
         User auth = (User) ((Authentication) principal).getPrincipal();
         String rol = WebUtils.getRole(auth);
-        System.out.println(rol);
+        //System.out.println(rol);
 
         if(rol.equals("ROLE_USER")){
             return "redirect:/userCoordinador";
@@ -143,7 +143,7 @@ public class UserController {
     @RequestMapping("/registrarUsuario")
    	public ModelAndView ingresarUsuario() {
    		ModelAndView mav = new ModelAndView();
-   		System.out.println("aqui estoy registrando :v");
+   		//System.out.println("aqui estoy registrando :v");
    		List<Dpto> dptos = null;
    		List<Municipio> municipios=null;
    		try {
@@ -152,8 +152,8 @@ public class UserController {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		System.out.println(dptos);
-		System.out.println(municipios);
+		//System.out.println(dptos);
+		//System.out.println(municipios);
    		mav.addObject("userNew", new AppUser());
 		mav.addObject("userNewExp", new UserExpediente());
 		mav.addObject("dptos", dptos);
@@ -167,7 +167,7 @@ public class UserController {
 	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role,
 												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {
     	ModelAndView mav = new ModelAndView();
-		System.out.println(usery.getUserName() + userExp.getDpto().getNombre());
+		//System.out.println(usery.getUserName() + userExp.getDpto().getNombre());
 
     	if(result.hasErrors() || result1.hasErrors()) {
 			List<Dpto> dptos = null;
@@ -194,12 +194,12 @@ public class UserController {
 						if(periodo.getYears()>999){
 							userExp.setEdad(Integer.toString(999));
 							userExpRet=userRepo.save(userExp);
-							System.out.println(userExpRet.getCodigo());
+							//System.out.println(userExpRet.getCodigo());
 							userExp.setCodigo(userExpRet.getCodigo());
 						}else {
 							userExp.setEdad(Integer.toString(periodo.getYears()));
 							userExpRet = userRepo.save(userExp);
-							System.out.println(userExpRet.getCodigo());
+							//System.out.println(userExpRet.getCodigo());
 							userExp.setCodigo(userExpRet.getCodigo());
 						}
 						userRepo.flush();

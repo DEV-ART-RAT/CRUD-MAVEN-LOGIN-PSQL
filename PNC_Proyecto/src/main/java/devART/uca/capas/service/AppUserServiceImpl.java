@@ -32,7 +32,7 @@ public class AppUserServiceImpl implements AppUserService{
 	@Override
 	@Transactional
 	public void delete(AppUser user) throws DataAccessException {
-		System.out.println("stoy en service");
+		//System.out.println("stoy en service");
 		userDAO.insert(user);
 		
 	}
