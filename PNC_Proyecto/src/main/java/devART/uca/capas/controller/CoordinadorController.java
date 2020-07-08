@@ -111,7 +111,7 @@ public class CoordinadorController {
 		List<Materia> materias = null;
 		materias = materiaService.findAll();
 		List<Expediente> expedientes = null;
-		expedientes = expedienteService.findAllExpe();
+		expedientes = expedienteService.filtrarPorID(codigo);
 		mav.addObject("expedientes", expedientes);
 		mav.addObject("alumnoxmateria", alumnoxmateria);
 		mav.addObject("materias", materias);
@@ -126,8 +126,8 @@ public class CoordinadorController {
 			mav.setViewName("/Coordinador/AgregarMateria");
 		}else{
 			try {
-				Integer nota = Integer.parseInt(alumnoxMateria.getNota());
-				if(nota>6){
+				Float nota = Float.parseFloat(alumnoxMateria.getNota());
+				if(nota>=6){
 					alumnoxMateria.setEstado("Aprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}else{
