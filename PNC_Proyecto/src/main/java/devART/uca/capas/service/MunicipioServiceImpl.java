@@ -1,8 +1,6 @@
 package devART.uca.capas.service;
 
-import devART.uca.capas.dao.MateriaDAO;
 import devART.uca.capas.dao.MunicipioDAO;
-import devART.uca.capas.domain.Materia;
 import devART.uca.capas.domain.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 import devART.uca.capas.domain.*;
+import devART.uca.capas.domain.Dpto;
+import devART.uca.capas.domain.Municipio;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
  
@@ -45,23 +47,14 @@ public class WebUtils {
         return sb.toString();
     }
 
-    public static List<UsuarioManager> getListUsers(List<AppUser> user, List<UserExpediente> userExp, List<Dpto>dptos, List<Municipio>municipios,String a){
-        List<UsuarioManager> list = new ArrayList<>();
-        UserExpediente ex=null;
-
-        int i=0;
-        System.out.println(a + " :user");
-        for (AppUser u:user) {
-        //if(true){
-            System.out.println("user: "+u.getUserName());
-            if(!u.getUserName().equals(a)){
-                ex=userExp.get(i);
-                //System.out.println("nombre: "+ex.getNombre());
-                list.add(new UsuarioManager(u,userExp.get(i),dptos.get(ex.getDptoId()-1).getNombre(), municipios.get(ex.getMunicipioId()-1).getNombre()));
+    public static void removeMeUser(List<AppUser> user, String sho){
+        for (AppUser u :user  ) {
+            if(u.getUserName().equals(sho)){
+                user.remove(u);
+                break;
             }
-           i++;
         }
-        return list;
+
     }
      
 }

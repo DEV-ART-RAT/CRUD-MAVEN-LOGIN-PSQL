@@ -9,6 +9,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import devART.uca.capas.domain.*;
+import devART.uca.capas.domain.Dpto;
+import devART.uca.capas.domain.Municipio;
 import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,6 +96,7 @@ public class UserController {
 
         return mav;
     }
+
 
 
 
@@ -230,30 +232,20 @@ public class UserController {
     @RequestMapping("/administarUsuario")
     public ModelAndView administarUsuario(Principal principal) {
         ModelAndView mav = new ModelAndView();
-        //System.out.println("aqui estoy registrando :v");
-        //User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		//auth.getAuthorities().;
-        List<Dpto> dptos = null;
-        List<Municipio> municipios=null;
+
         List<AppUser> users = null;
-        List<UserExpediente> expes=null;
         try {
-            dptos = dptoService.findAll();
-            municipios = municipioService.findAll();
             users = userServices.findAll();
-            expes= userExpedienteService.findAll();
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        List<UsuarioManager> usuarioManagers = WebUtils.getListUsers(users,expes,dptos,municipios,auth.getName());
-        //System.out.println(dptos);
-        //System.out.println(municipios);
-        mav.addObject("userList", usuarioManagers);
-        //mav.addObject("userNewExp", new UserExpediente());
-        //mav.addObject("dptos", dptos);
-        //mav.addObject("municipios",municipios);
+        WebUtils.removeMeUser(users,auth.getName());
+
+        mav.addObject("userList", users);
+
         mav.setViewName("/administrador/userManager");
         return mav;
     }

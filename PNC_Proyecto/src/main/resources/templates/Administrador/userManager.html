@@ -49,22 +49,22 @@
 
         <th:block th:each="e, row: ${userList}">
             <tr>
-                <td th:text="${e.user.userId}" name="codigo" th:value="${e.user.userId}"  />
-                <td th:text="${e.user.userName}"/>
-                <td th:text="${e.userExp.nombre}"/>
-                <td th:text="${e.userExp.apellido}"/>
-                <td th:text="${e.userExp.direccion}"/>
-                <td th:text="${e.userExp.edad}"/>
-                <td th:text="${e.dpto}"/>
-                <td th:text="${e.muny}"/>
+                <td th:text="${e.userId}" name="codigo" th:value="${e.userId}"  />
+                <td th:text="${e.userName}"/>
+                <td th:text="${e.user.nombre}"/>
+                <td th:text="${e.user.apellido}"/>
+                <td th:text="${e.user.direccion}"/>
+                <td th:text="${e.user.edad}"/>
+                <td th:text="${e.user.dpto.nombre}"/>
+                <td th:text="${e.user.municipio.nombre}"/>
                 <td>
-                    <form  th:if="${e.user.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
-                        <input type="hidden" name="disable" th:value="${e.user.userName}"/>
+                    <form  th:if="${e.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
+                        <input type="hidden" name="disable" th:value="${e.userName}"/>
                         <button type="submit" class="btn btn-danger">Desabilitar <i class="fa fa-trash"></i>
                         </button>
                     </form>
-                    <form  th:if="${!e.user.enabled}"  th:action="@{/usuarioActive}" th:method="post">
-                        <input type="hidden" name="enabled" th:value="${e.user.userName}"/>
+                    <form  th:if="${!e.enabled}"  th:action="@{/usuarioActive}" th:method="post">
+                        <input type="hidden" name="enabled" th:value="${e.userName}"/>
                         <button type="submit" class="btn btn-danger">Habilitar <i class="fa fa-trash"></i>
                         </button>
                     </form>
