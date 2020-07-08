@@ -47,14 +47,14 @@
                 <th scope="col">Nota</th>
                 <th scope="col">Estado</th>
                 </thead>
-                <th:block th:each="e, row: ${alumnoxmaterias}">
-                    <tr>
-                        <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />
-                        <td th:text="${e.nombreMateria}"/>
-                        <td th:text="${e.nota}"/>
-                        <td th:text="${e.estado}"/>
-                    </tr>
-                </th:block>
+<!--                <th:block th:each="e, row: ${alumnoxmaterias}">-->
+<!--                    <tr>-->
+<!--                        <td th:text="${e.codigoMateria}" name="codigo" th:value="${e.codigoMateria}"  />-->
+<!--                        <td th:text="${e.nombreMateria}"/>-->
+<!--                        <td th:text="${e.nota}"/>-->
+<!--                        <td th:text="${e.estado}"/>-->
+<!--                    </tr>-->
+<!--                </th:block>-->
             </table>
         <div class="barMenuElements">
             <a class="buttonMenu" href="nuevaMateria">Crear Materia</a>

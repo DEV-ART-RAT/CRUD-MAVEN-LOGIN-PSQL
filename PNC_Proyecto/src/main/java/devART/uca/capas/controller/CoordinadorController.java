@@ -106,7 +106,7 @@ public class CoordinadorController {
 	@RequestMapping(value="/nuevaMateriaexpediente", method=RequestMethod.POST)
 	public ModelAndView NuevoMateria(@RequestParam(value="codigo") Integer codigo) {
 		System.out.println("Codigo final  es :"+codigo);
-		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
+		AlumnoxMateria alumnoxmateria = new AlumnoxMateria(new Materia(),new Expediente());
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
 		materias = materiaService.findAll();
@@ -122,20 +122,37 @@ public class CoordinadorController {
 	public ModelAndView guardarExpedientemateria(@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()) {
+			System.out.println(alumnoxMateria.getC_alumnoxmateria());
+			System.out.println(alumnoxMateria.getCod_materia());
+			System.out.println(alumnoxMateria.getC_expediente());
+			System.out.println(alumnoxMateria.getNota());
 			mav.setViewName("/Coordinador/AgregarMateria");
 		}else{
 			try {
-
 				System.out.println(alumnoxMateria.getC_alumnoxmateria());
-				System.out.println(alumnoxMateria.getC_materia());
+				System.out.println(alumnoxMateria.getCod_materia());
 				System.out.println(alumnoxMateria.getC_expediente());
+				System.out.println(alumnoxMateria.getNota());
+//				alumnoxMateria.setC_expediente();
+//				alumnoxMateria.setCod_materia();
+				alumnoxMateria.getMateria().getCodigo();
+				System.out.println(alumnoxMateria.getC_alumnoxmateria());
+				Materia materia = alumnoxMateria.getMateria();
+				String codigomateria = alumnoxMateria.setCod_materia(materia.getCodigo());
+				System.out.println(codigomateria);
+				alumnoxMateria.setCod_materia(codigomateria);
+				Expediente expediente =alumnoxMateria.getExpediente();
+				Integer codigoexpediente = alumnoxMateria.setC_expediente(expediente.getCodigo());
+				alumnoxMateria.setC_expediente(codigoexpediente);
+				System.out.println(codigoexpediente);
+
 				System.out.println(alumnoxMateria.getNota());
 				Integer nota = Integer.parseInt(alumnoxMateria.getNota());
 				if(nota>6){
 					alumnoxMateria.setEstado("Aprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}else{
-					alumnoxMateria.setEstado("No Aprobado");
+					alumnoxMateria.setEstado("Reprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}
 				alumnoxMateriaService.insert(alumnoxMateria);
@@ -143,8 +160,9 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			mav.setViewName("/Coordinador/AgregarMateria");
+			List<Expediente> expedientes = null;
+			mav.addObject("expedientes", expedientes);
+			mav.setViewName("/Coordinador/coordinador");
 		}
 		return mav;
 	}
