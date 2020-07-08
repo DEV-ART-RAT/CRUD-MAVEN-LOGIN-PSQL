@@ -312,8 +312,8 @@ public class UserController {
 			AtomicInteger reprobadas= new AtomicInteger();
 			e.getAlumnoxMaterias().forEach(a-> {
 				float nota = Float.parseFloat(a.getNota());
-				if(6 >= nota){
-					aprobadas.set(aprobadas.get() + 1);
+				if(nota>=6){
+					aprobadas.addAndGet( 1);
 
 				}
 				else

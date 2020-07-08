@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.validation.Valid;
 
@@ -132,16 +134,20 @@ public class CoordinadorController {
 		try {
 			if (cadena==""){
 				expedientes = expedienteService.findAllExpe();
+				promediotodo(expedientes);
+				aprobadasreprobadas(expedientes);
 			}else {
 				if (tipo ==1) {
 					System.out.println("Nombre = "+cadena);
 					expedientes = expedienteService.filtrarPorNombre(cadena);
-
+					promediotodo(expedientes);
+					aprobadasreprobadas(expedientes);
 				}
 				if (tipo ==2) {
 					System.out.println("Apellido = "+cadena);
 					expedientes = expedienteService.filtrarPorApellido(cadena);
-
+					promediotodo(expedientes);
+					aprobadasreprobadas(expedientes);
 				}}
 
 		}catch (Exception e) {
@@ -281,9 +287,62 @@ public class CoordinadorController {
 			suma = suma + nota;
 		}
 		suma = suma/alumnoxMaterias.size();
-		return suma;
+		if(alumnoxMaterias.size()==0){
+			return 0.0;
+		}
+		else{
+			return suma;
+		}
+	};
+	public void promediotodo(List<Expediente> expedientes){
+		expedientes.forEach(e->{
+			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
+			e.getAlumnoxMaterias().forEach(a-> {
+				if(a.getNota()!=""||a.getNota()!=null){
+					float nota = Float.parseFloat(a.getNota());
+					sumanotas.set(sumanotas.get() + nota);
+				}
+				else{
+					float sumatotal;
+					sumatotal = (float) 0.0;
+				}
+			});
+			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
+				double promedio;
+				promedio = sumanotas.get() / e.getAlumnoxMaterias().size();
+				if(promedio==Double.NaN){
+//					System.out.println("No tienen promedio");
+					e.setPromedio(0);
+				}else{
+//					System.out.println(promedio);
+					double roundedDouble = Math.round(promedio * 100.0) / 100.0;
+					e.setPromedio(roundedDouble);
+				}
+			}
+		});
 	};
 
+	public void aprobadasreprobadas(List<Expediente> expedientes){
+		expedientes.forEach(e->{
+			AtomicInteger aprobadas= new AtomicInteger();
+			AtomicInteger reprobadas= new AtomicInteger();
+			e.getAlumnoxMaterias().forEach(a-> {
+				float nota = Float.parseFloat(a.getNota());
+				if(nota>=6){
+					aprobadas.addAndGet( 1);
+
+				}
+				else
+				{
+					reprobadas.addAndGet(1);
+				}
+			});
+//			System.out.println("Aprobadas: "+aprobadas);
+//			System.out.println("Reprobadas: "+reprobadas);
+			e.setAprobadas(aprobadas.get());
+			e.setReprobadas(reprobadas.get());
+		});
+	}
 }
 //https://parzibyte.me/blog/2019/09/02/th-each-thymeleaf-recorrer-listas/
 
