@@ -1,6 +1,6 @@
 package devART.uca.capas.controller;
 
-import java.security.Principal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -11,20 +11,16 @@ import javax.validation.Valid;
 import devART.uca.capas.domain.*;
 import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import devART.uca.capas.utils.EncrytedPasswordUtils;
-import devART.uca.capas.utils.WebUtils;
+
 
 @Controller
 public class CoordinadorController {
@@ -35,38 +31,7 @@ public class CoordinadorController {
 	MateriaService materiaService;
 	@Autowired
 	AlumnoxMateriaServiceImpl alumnoxMateriaService;
-
-	//cordinador
-	@RequestMapping(value = { "/coordi" }, method = RequestMethod.GET)
-	public String coordinadorpage(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "/Coordinador/coordinador";
-	}
-	@RequestMapping(value = { "/expediente" }, method = RequestMethod.GET)
-	public String expediente(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "/Coordinador/buscarExpediente";
-	}
-	@RequestMapping(value = { "/editarexpediente" }, method = RequestMethod.GET)
-	public String editarexpediente(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "/Coordinador/editarExpediente";
-	}
-	@RequestMapping(value = { "/resultadoExpediente" }, method = RequestMethod.GET)
-	public String resultadoExpediente(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "/Coordinador/resultadobusquedaExpediente";
-	}
-	@RequestMapping(value = { "/macursa" }, method = RequestMethod.GET)
-	public String materiascursadas(Model model) {
-		model.addAttribute("title", "Welcome");
-		model.addAttribute("message", "This is welcome page!");
-		return "MateriasCursadas";
-	}
+	private static DecimalFormat df = new DecimalFormat("0.00");
 
 	@RequestMapping("/guardarExpediente")
 	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
@@ -140,6 +105,7 @@ public class CoordinadorController {
 				e.printStackTrace();
 			}
 			List<Expediente> expedientes = null;
+			expedientes = expedienteService.findAllExpe();
 			mav.addObject("expedientes", expedientes);
 			mav.setViewName("/Coordinador/coordinador");
 		}
@@ -288,6 +254,8 @@ public class CoordinadorController {
 		try {
 			//int codigoint = Integer.parseInt(codigo);
 			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
+			mav.addObject("promedio","Promedio es : "+df.format(promedio(alumnoxMaterias)));
+
 //			alumnoxMaterias = alumnoxMateriaService.findAll();
 			System.out.println("Codigo es :"+codigo);
 
@@ -303,6 +271,16 @@ public class CoordinadorController {
 		mav.setViewName("/Coordinador/materiasCursadas");
 		return mav;
 	}
+
+	public double promedio(List<AlumnoxMateria> alumnoxMaterias){
+		double suma = 0;
+		for (int i = 0; i < alumnoxMaterias.size(); i++) {
+			double nota = Float.parseFloat(alumnoxMaterias.get(i).getNota());
+			suma = suma + nota;
+		}
+		suma = suma/alumnoxMaterias.size();
+		return suma;
+	};
 
 }
 //https://parzibyte.me/blog/2019/09/02/th-each-thymeleaf-recorrer-listas/

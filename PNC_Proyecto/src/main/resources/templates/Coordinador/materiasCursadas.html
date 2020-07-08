@@ -52,6 +52,8 @@
                     <th scope="col">Nota</th>
                     <th scope="col">Estado</th>
                 </thead>
+                <h1 style="color: #FFFFFF" th:text = "'Alumno : '+${expediente.getS_nombre()}+'  '+${expediente.getS_apellido()}"></h1>
+                <h1 style="color: #FFFFFF" th:text="${promedio}"></h1>
                 <th:block th:each="e, row: ${alumnoxmaterias}">
                     <tr>
                         <td th:text="${e.materia.nombreMateria}" />
