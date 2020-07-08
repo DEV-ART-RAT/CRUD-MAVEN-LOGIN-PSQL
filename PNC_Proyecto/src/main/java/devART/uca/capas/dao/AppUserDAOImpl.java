@@ -39,7 +39,7 @@ public class AppUserDAOImpl  implements AppUserDAO{
     @Override
     @Transactional
     public void insert(AppUser user) throws DataAccessException {
-    	System.out.println("aqui stoy en DAO" + user.getUserName()+ user.getUserId());
+    	//System.out.println("aqui stoy en DAO" + user.getUserName()+ user.getUserId());
     	try {
 			if(user.getUserId()==null)
 				entityManager.persist(user);

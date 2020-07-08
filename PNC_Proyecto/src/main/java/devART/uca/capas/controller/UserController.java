@@ -109,7 +109,7 @@ public class UserController {
 
         User auth = (User) ((Authentication) principal).getPrincipal();
         String rol = WebUtils.getRole(auth);
-        System.out.println(rol);
+        //System.out.println(rol);
 
         if(rol.equals("ROLE_USER")){
             return "redirect:/userCoordinador";
@@ -143,7 +143,7 @@ public class UserController {
     @RequestMapping("/registrarUsuario")
    	public ModelAndView ingresarUsuario() {
    		ModelAndView mav = new ModelAndView();
-   		System.out.println("aqui estoy registrando :v");
+   		//System.out.println("aqui estoy registrando :v");
    		List<Dpto> dptos = null;
    		List<Municipio> municipios=null;
    		try {
@@ -152,8 +152,17 @@ public class UserController {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		System.out.println(dptos);
-		System.out.println(municipios);
+
+   		/*
+   		dptos.forEach(e->{
+			System.out.println("depta: "+e.getNombre());
+			e.getMunicipios().forEach(a->{
+				System.out.println("municipio :"+a.getNombre());
+			});
+				}
+		);*/
+		//System.out.println(dptos);
+		//System.out.println(municipios);
    		mav.addObject("userNew", new AppUser());
 		mav.addObject("userNewExp", new UserExpediente());
 		mav.addObject("dptos", dptos);
@@ -167,8 +176,7 @@ public class UserController {
 	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role,
 												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {
     	ModelAndView mav = new ModelAndView();
-
-		System.out.println(usery.getUserName() + userExp.getDpto().getNombre());
+		//System.out.println(usery.getUserName() + userExp.getDpto().getNombre());
 
     	if(result.hasErrors() || result1.hasErrors()) {
 			List<Dpto> dptos = null;
@@ -186,7 +194,6 @@ public class UserController {
 		else {
 			try {
 				UserExpediente userExpRet;
-
 					if(userServices.findOne(usery.getUserName())==null)
 					{
 						DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -196,43 +203,24 @@ public class UserController {
 						if(periodo.getYears()>999){
 							userExp.setEdad(Integer.toString(999));
 							userExpRet=userRepo.save(userExp);
-							System.out.println(userExpRet.getCodigo());
+							//System.out.println(userExpRet.getCodigo());
 							userExp.setCodigo(userExpRet.getCodigo());
-
-							//userExpedienteService.insert(userExp);
 						}else {
 							userExp.setEdad(Integer.toString(periodo.getYears()));
-							//userExpedienteService.insert(userExp);
 							userExpRet = userRepo.save(userExp);
-							System.out.println(userExpRet.getCodigo());
+							//System.out.println(userExpRet.getCodigo());
 							userExp.setCodigo(userExpRet.getCodigo());
-							//userExp.setCodigo(userRepo.saveAndFlush(userExp).getCodigo());
 						}
-						//userExpedienteService
 						userRepo.flush();
-
-
-
-
-
 						usery.setEnabled(false);
 						usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
 						usery.setUser(userExp);
-
 						userServices.insert(usery);
-
 						userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
 						userExp.setCodigo(usery.getUserId());
-
-
-
-
-						//userExpedienteService.insert(userExp);
-						//System.out.println("se ingreso usuario: "+usery.toString());
 					}else {
 						mav.addObject("userNew", new AppUser());
 						mav.addObject("message", "Nombre de Usuario ya existe");
-						//System.out.println("Nombre de usuario ya existe");
 						mav.setViewName("registerPage");
 						return mav;
 					}
@@ -260,7 +248,7 @@ public class UserController {
         }
         WebUtils.removeMeUser(users,auth.getName());
         mav.addObject("userList", users);
-        mav.setViewName("/administrador/userManager");
+        mav.setViewName("/Administrador/userManager");
         return mav;
     }
 

@@ -22,7 +22,7 @@ public class UserExpedienteDAOImpl implements UserExpedienteDAO {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT * FROM "+ "usuarioPersona" + "  " //
                 + " order by c_id ASC");
-        System.out.println(sb.toString());
+        //System.out.println(sb.toString());
         Query query = entityManager.createNativeQuery(sb.toString(), UserExpediente.class);
         List<UserExpediente> resultset = query.getResultList();
 

@@ -15,7 +15,7 @@ public class EncrytedPasswordUtils {
         String password = "1234";
         String encrytedPassword = encrytePassword(password);
  
-        System.out.println("Encryted Password: " + encrytedPassword);
+        //System.out.println("Encryted Password: " + encrytedPassword);
     }
      
 }

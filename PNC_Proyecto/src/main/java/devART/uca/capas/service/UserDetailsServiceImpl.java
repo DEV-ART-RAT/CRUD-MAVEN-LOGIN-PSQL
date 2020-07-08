@@ -32,13 +32,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
  
         //verificando si usuario existe
         if (appUser == null) {
-            System.out.println("User not found! " + userName);
+            //System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("Usuario " + userName + " no se encontro en Base de Datos");
         }
         
         //verificando si usuario es activo
         if(!appUser.isEnabled()) {
-        	System.out.println("User not Active! " + userName);
+        	//System.out.println("User not Active! " + userName);
             throw new UsernameNotFoundException("Usuario " + userName + " no se encuentra activa, pedir activacion a Administrador");
         }
  
