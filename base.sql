@@ -1,3 +1,12 @@
+/*DATOS:
+Colegios: Colegio Nazareth,Colegio Fatima,Liceo Salvadoreño,Colegio Santa Celicia
+
+
+*/
+
+
+
+
 create table APP_USER
 (
   USER_ID           BIGINT,
