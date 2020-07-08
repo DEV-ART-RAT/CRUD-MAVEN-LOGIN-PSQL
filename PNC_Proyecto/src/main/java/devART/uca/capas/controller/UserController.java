@@ -153,13 +153,14 @@ public class UserController {
 			e.printStackTrace();
 		}
 
+   		/*
    		dptos.forEach(e->{
 			System.out.println("depta: "+e.getNombre());
 			e.getMunicipios().forEach(a->{
 				System.out.println("municipio :"+a.getNombre());
 			});
 				}
-		);
+		);*/
 		//System.out.println(dptos);
 		//System.out.println(municipios);
    		mav.addObject("userNew", new AppUser());
