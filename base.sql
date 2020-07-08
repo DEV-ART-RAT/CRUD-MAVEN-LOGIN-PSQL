@@ -92,10 +92,10 @@ ALTER TABLE public.minicipio ADD CONSTRAINT fk_c_municipio FOREIGN KEY(s_depto)
 REFERENCES public.dpto(s_depto);
 --drop table minicipio
 
-alter table APP_USER
-  add constraint APP_USER_FK1 foreign key (USER_EXP_ID)
-  references usuarioPersona (c_id);
-
+insert into dpto (s_depto , s_nombre)
+values (1, 'Libertad');
+insert into dpto (s_depto, s_nombre)
+values (2, 'SS ');
 
 insert into minicipio (s_minicipio, s_nombre,s_depto)
 values (1, 'municipio Libertad',1);
@@ -106,10 +106,6 @@ values (3, 'municipio Libertad 2',1);
 insert into minicipio (s_minicipio, s_nombre,s_depto)
 values (4, 'municipio SS 2',2);
 
-insert into dpto (s_depto , s_nombre)
-values (1, 'Libertad');
-insert into dpto (s_depto, s_nombre)
-values (2, 'SS ');
 
 
 insert into usuarioPersona (c_id, s_nombre, s_apellido, d_fnacimiento,s_edad,s_direccion,s_depto,s_minicipio )

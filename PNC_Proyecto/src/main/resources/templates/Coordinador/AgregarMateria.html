@@ -129,6 +129,7 @@ body {
 		</select>
 		<div data-validate="Name is required">
 			<input th:field="${alumnoxmateria.nota}" type="text" name="materia" placeholder="Nota">
+			<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
 		</div>
 <!--		class="form-control" placeholder=""-->
 		<input type="submit" value="Guardar">

@@ -31,7 +31,7 @@ public class AlumnoxMateria {
 
     @NotNull(message = "Este campo no puede estar vacio")
     @Column(name="s_nota")
-    @Size(message = "La nota no debe tener mas de 3 caracteres", max = 3)
+    @Size(message = "La nota tiene que tener 3 caracteres poe ejemplo 7.5", max = 3)
     @NotEmpty(message = "Este campo no puede estar vacio")
     private String nota;
 
