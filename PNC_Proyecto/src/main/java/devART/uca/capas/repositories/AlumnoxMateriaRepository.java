@@ -11,6 +11,6 @@ public interface AlumnoxMateriaRepository extends JpaRepository<AlumnoxMateria, 
     @Query(nativeQuery=true, value="SELECT * FROM public.alumnoxmateria")
     public List<AlumnoxMateria> mostrarTodo() throws DataAccessException;
 
-    @Query(nativeQuery=true, value="SELECT * FROM public.alumnoxmateria WHERE c_expediente = ?1")
+    @Query(nativeQuery=true, value="SELECT * FROM public.alumnoxmateria WHERE c_expediente = ?1 order by s_nota Desc")
     public List<AlumnoxMateria> mostrarPorAlumno(Integer cadena) throws DataAccessException;
 }

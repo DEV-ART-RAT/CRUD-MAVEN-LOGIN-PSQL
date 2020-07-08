@@ -287,8 +287,8 @@ public class CoordinadorController {
 		List<Materia> materias = null;
 		try {
 			//int codigoint = Integer.parseInt(codigo);
-//			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
-			alumnoxMaterias = alumnoxMateriaService.findAll();
+			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
+//			alumnoxMaterias = alumnoxMateriaService.findAll();
 			System.out.println("Codigo es :"+codigo);
 
 		}catch (Exception e) {
