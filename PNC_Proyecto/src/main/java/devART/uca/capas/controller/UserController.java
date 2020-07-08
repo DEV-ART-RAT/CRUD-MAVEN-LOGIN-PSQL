@@ -67,7 +67,6 @@ public class UserController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
-
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
