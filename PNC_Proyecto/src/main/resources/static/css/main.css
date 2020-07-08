@@ -20,13 +20,14 @@ html, body {
 
 .buttonMenu{
 	text-decoration: none;
-	color: white;
+	color: rgb(170, 102, 90);
 	margin: 0.5em;
 }
 
 .buttonMenu:hover{
 	text-decoration: none;
-	color: #8080c0;
+	transition: all 1s;
+	color: #b2b2ca;
 }
 
 .barMenuHead .buttonMenu{
@@ -76,4 +77,19 @@ td, th{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.flex-end{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.loginImg{
+	background-color: rgb(131, 5, 33);
+	border-radius: 2px;
+}
+
+.registerNote{
+	color: rgb(107, 107, 107);
 }

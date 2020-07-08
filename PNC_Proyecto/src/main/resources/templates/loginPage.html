@@ -1,48 +1,70 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-	    <title>Login</title>
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
-   </head>
-   <body class="tumbaNazarik">
-   <th:block th:include="menu"></th:block>
-      <h1 th:text="${message}"></h1>
-      <div class="modal-dialog text-center">
-      		<div class="col-sm-8 main-section">
-      			<div class="modal-content">
-            		<div class="col-12 user-img">
-                    	<img src="static/img/user.png" th:src="@{/img/user.png}"/>
-                	</div>
-				      <div th:if="${#request.getParameter('error') == 'true'}"
-				            style="color:red;margin:10px 0px;">
-				         Hubo un error en el inicio de sesion<br />
-				         debido a:
-				         <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-				            th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message }">
-				                Static summary
-				         </span>
-				      </div>
-				      <form class="col-12"  name='f' th:action="@{/j_spring_security_check}" method='POST'>
-				      		<div class="form-group" id="user-group">
-	                        	<input type='text' class="form-control" placeholder="Nombre de usuario"  name='username' value=''>
-	                    	</div>
-	                    	<div class="form-group" id="contrasena-group">
-		                        <input type='password' class="form-control" placeholder="Contrasenia" name='password' />
-		                    </div>
-		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
-		                    <br>
-		                    <span>No tienes cuenta?<a class="buttonMenu" href="registrarUsuario" >Registrate</a> </span>
-				      </form>
-				      <br> 
-	            </div>
-	        </div>
-	    </div>
-   </body>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Tempest</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">Tempest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	<h1 th:text="${message}"></h1>
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row flex-center">
+				<div class="col"></div>
+				<div class="col-4 m-4">
+					<div class="loginImg" style="height: 50vh;"></div>
+					<div class="card bg-dark p-3">
+						<div th:if="${#request.getParameter('error') == 'true'}"
+							style="color:red;margin:10px 0px;">
+							Hubo un error en el inicio de sesion<br />
+							debido a:
+							<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+							th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message }">
+								Static summary
+							</span>
+						</div>  
+						<form class="form"  name='f' th:action="@{/j_spring_security_check}" method='POST'>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-user"></i></div>
+								</div>
+								<input type='text' class="form-control" placeholder="Nombre de usuario"  name='username' value=''>
+							</div>
+				
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-key"></i></div>
+								</div>
+								<input type='password' class="form-control" placeholder="Contrasenia" name='password' />
+							</div>
+							<div class="flex-end mt-2 mb-2">
+								<button type="submit" class="btn btn-danger"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+							</div>
+							<div class="flex-center">
+								<p class="registerNote">No tienes cuenta?<a class="buttonMenu" href="registrarUsuario" >Registrate</a> </p>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+	</div>
+	
+</body>
     
 </html>

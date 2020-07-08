@@ -1,98 +1,135 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-	    <title>Login</title>
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-	    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-	    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
-   </head>
-   <body class="tumbaNazarik">
-   <th:block th:include="menu"></th:block>
-      <div class="modal-dialog text-center">
-      		<div class="col-sm-8 main-section">
-           		 <div class="modal-content">
-            		<div class="col-12 user-img">
-                    	<img src="static/img/user.png" th:src="@{/img/user.png}"/>
-                	</div>
-				          <div th:if="${#request.getParameter('error') == 'true'}" style="color:red;margin:10px 0px;">
-				         Login Failed!!!<br/>
-				         Reason :
-				         <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
-				                Static summary
-				         </span>
-				            
-				      </div>				       
-				      <form class="col-12"  name='f' th:action="@{/validarRegistrarUsuario}" th:object="${userNewExp}"   method='POST'>
-						  <!--span th:object="${userNewExp}"-->
-				      		<div class="form-group" id="user-group">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Tempest</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">Tempest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row flex-center">
+				<div class="col"></div>
+				<div class="col-5 m-4">
+					<div class="loginImg" style="height: 5vh;"></div>
+					<div class="card bg-dark p-3">
+						<div th:if="${#request.getParameter('error') == 'true'}" style="color:red;margin:10px 0px;">
+							Login Failed!!!<br/>
+							Reason :
+							<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+								Static summary
+							</span>   
+						</div>	
+						<form class="col-12"  name='f' th:action="@{/validarRegistrarUsuario}" th:object="${userNewExp}"   method='POST'>
+							
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-user"></i></div>
+								</div>
 								<p th:text="${message}" style="color:red"></p>
-	                        	<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
-								<span th:errors="${userNew.userName}" style="color:red;"></span><br>
-	                    	</div>
-	                    	<div class="form-group" id="contrasena-group">
-		                        <input type='password' class="form-control" th:field="${userNew.encrytedPassword}" placeholder="Contrasenia" name='password' />
-								<span  th:errors="${userNew.encrytedPassword}" style="color:red;"></span><br>
-		                    </div>
-
-						  	<!-- Expediente -->
-
-							<div class="form-group">
-								<input type='text' class="form-control"  th:field="${userNewExp.apellido}" placeholder="Apellido"  name='apellido' value=''>
-								<span th:errors="${userNewExp.apellido}" style="color:red;"></span><br>
+								<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
+								<span th:errors="${userNew.userName}" style="color:red;"></span>
 							</div>
-						    <div class="form-group">
-							  <input type='text' class="form-control"  th:field="${userNewExp.direccion}" placeholder="direccion"  name='direccion' value=''>
-							  <span th:errors="${userNewExp.direccion}" style="color:red;"></span><br>
-						    </div>
-
-							  <div class="form-group">
-								<input type='text' class="form-control"  th:field="${userNewExp.nombre}" placeholder="Nombre"  name='NombrePropio' value=''>
-								<span th:errors="${userNewExp.nombre}" style="color:red;"></span><br>
+					
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-key"></i></div>
+								</div>
+								<input type='password' class="form-control" th:field="${userNew.encrytedPassword}" placeholder="Contraseña" name='password' />
+								<span  th:errors="${userNew.encrytedPassword}" style="color:red;"></span>
 							</div>
-
-
-						  <div class="form-group">
-							  <h3>Fecha nacimiento:<input id="fnacimiento" type="date" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > </h3>
-							  <span th:errors="${userNewExp.fnacimiento}" style="color:red;"></span><br>
+							<div class="container p-2">
+								<div class="input-group mt-4 mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Nombre</div>
+									</div>
+									<input type='text' class="form-control"  th:field="${userNewExp.nombre}" placeholder="Nombre"  name='NombrePropio' value=''>
+									<span th:errors="${userNewExp.nombre}" style="color:red;"></span>
+								</div>
+						
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Apellido</div>
+									</div>
+									<input type='text' class="form-control"  th:field="${userNewExp.apellido}" placeholder="Apellido"  name='apellido' value=''>
+									<span th:errors="${userNewExp.apellido}" style="color:red;"></span>
+								</div>
+						
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Direccion</div>
+									</div>
+									<input type='text' class="form-control"  th:field="${userNewExp.direccion}" placeholder="direccion"  name='direccion' value=''>
+									<span th:errors="${userNewExp.direccion}" style="color:red;"></span>
+								</div>
+	
+								<div class="input-group mt-4 mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">F nacimiento</div>
+									</div>
+									<input id="fnacimiento" class="form-control" type="date" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > 
+									<span th:errors="${userNewExp.fnacimiento}" style="color:red;"></span><br>
+								</div>
+						
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Departamento</div>
+									</div>
+									<select class="form-control" th:field="${userNewExp.dpto.codigo}" id="categoriaBox">
+										<option th:each ="dpto: ${dptos}" th:value="${dpto.codigo}"
+												th:text ="${dpto.nombre}">
+										</option>
+									</select>
+								</div>
+						
+								<div class="input-group mb-3">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Munucipio</div>
+									</div>
+									<select class="form-control" th:field="${userNewExp.municipio.codigo}" id="categoriaBox2">
+										<option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
+												th:text ="${dpto.nombre}">
+										</option>
+									</select>
+								</div>
+						
+								<div class="input-group mt-4 mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Rol</div>
+									</div>
+									<select class="form-control" name="role">
+										<option th:value="2" th:text ="Coordinador"></option>
+										<option th:value="1" th:text ="Administrador"></option>
+									</select>
+								</div>
 							</div>
+							<div class="flex-end mt-2 mb-2">
+								<button type="submit" class="btn btn-danger"><i class="fas fa-sign-in-alt"></i>  Crear cuenta </button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+	</div>
 
+	
 
-						  <div class="form-group">
-						  <label for="categoriaBox">Departamento</label>
-						  <select th:field="${userNewExp.dpto.codigo}" id="categoriaBox">
-							  <option th:each ="dpto: ${dptos}" th:value="${dpto.codigo}"
-									  th:text ="${dpto.nombre}">
-							  </option>
-						  </select>
-						  </div>
-
-						  <div class="form-group">
-							  <label for="categoriaBox2">Municipio</label>
-							  <select th:field="${userNewExp.municipio.codigo}" id="categoriaBox2">
-								  <option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
-										  th:text ="${dpto.nombre}">
-								  </option>
-							  </select>
-						  </div>
-
-		                    <select class="form-control" name="role">
-		                    	<option th:value="2" th:text ="Coordinador"></option>
-								<option th:value="1" th:text ="Administrador"></option>
-							</select>
-
-		                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Crear Cuenta </button>
-
-				      </form>
-
-				      <br> 
-	            </div>
-	        </div>
-	    </div>
    </body>
     
 </html>
-
