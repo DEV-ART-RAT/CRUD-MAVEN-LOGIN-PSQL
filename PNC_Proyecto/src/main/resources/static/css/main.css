@@ -93,3 +93,8 @@ td, th{
 .registerNote{
 	color: rgb(107, 107, 107);
 }
+
+.hidden{
+	visibility: hidden;
+	display: ;
+  }
