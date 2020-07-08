@@ -72,10 +72,7 @@ CREATE TABLE public.usuarioPersona(
 	s_minicipio int not null
 );
 
-CREATE TABLE public.minicipio(
-	s_minicipio int PRIMARY KEY not null,
-	s_nombre varchar(50) not null
-);
+
 
 CREATE TABLE public.dpto(
 	s_depto int PRIMARY KEY not null,
@@ -86,10 +83,28 @@ alter table APP_USER
   add constraint APP_USER_FK1 foreign key (USER_EXP_ID)
   references usuarioPersona (c_id);
 
-insert into minicipio (s_minicipio, s_nombre)
-values (1, 'municipio Libertad');
-insert into minicipio (s_minicipio, s_nombre)
-values (2, 'municipio SS');
+CREATE TABLE public.minicipio(
+	s_minicipio int PRIMARY KEY not null,
+	s_nombre varchar(50) not null,
+	s_depto int not null
+);
+ALTER TABLE public.minicipio ADD CONSTRAINT fk_c_municipio FOREIGN KEY(s_depto) 
+REFERENCES public.dpto(s_depto);
+--drop table minicipio
+
+alter table APP_USER
+  add constraint APP_USER_FK1 foreign key (USER_EXP_ID)
+  references usuarioPersona (c_id);
+
+
+insert into minicipio (s_minicipio, s_nombre,s_depto)
+values (1, 'municipio Libertad',1);
+insert into minicipio (s_minicipio, s_nombre,s_depto)
+values (2, 'municipio SS',2);
+insert into minicipio (s_minicipio, s_nombre,s_depto)
+values (3, 'municipio Libertad 2',1);
+insert into minicipio (s_minicipio, s_nombre,s_depto)
+values (4, 'municipio SS 2',2);
 
 insert into dpto (s_depto , s_nombre)
 values (1, 'Libertad');

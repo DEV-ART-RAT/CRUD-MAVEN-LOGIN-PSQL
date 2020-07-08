@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(schema="public", name="dpto")
@@ -23,7 +24,18 @@ public class Dpto {
     @NotEmpty(message = "Este campo no puede estar vacio")
     private String nombre;
 
+    @OneToMany(mappedBy="dpto", fetch = FetchType.EAGER)
+    private List<Municipio> municipios;
+
     public Dpto() {
+    }
+
+    public List<Municipio> getMunicipios() {
+        return municipios;
+    }
+
+    public void setMunicipios(List<Municipio> municipios) {
+        this.municipios = municipios;
     }
 
     public Integer getCodigo() {

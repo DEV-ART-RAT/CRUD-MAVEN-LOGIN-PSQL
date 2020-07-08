@@ -23,7 +23,19 @@ public class Municipio {
     @NotEmpty(message = "Este campo no puede estar vacio")
     private String nombre;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "s_depto", nullable = false)
+    private Dpto dpto;
+
     public Municipio() {
+    }
+
+    public Dpto getDpto() {
+        return dpto;
+    }
+
+    public void setDpto(Dpto dpto) {
+        this.dpto = dpto;
     }
 
     public Integer getCodigo() {
