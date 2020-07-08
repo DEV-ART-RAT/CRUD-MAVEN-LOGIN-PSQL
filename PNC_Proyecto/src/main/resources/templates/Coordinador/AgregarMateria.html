@@ -40,7 +40,7 @@
 			<div class="col-4 card p-3">
 				<form method="post" th:action="@{/guardarExpedientemateria}" th:object="${alumnoxmateria}">
 					<div class="input-group mb-2">
-						<div class="input-group-prepend w-35">
+						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Materia</div>
 						</div>
 						<select class="form-control" th:field="${alumnoxmateria.materia.codigo}">
@@ -65,10 +65,8 @@
 						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Nota</div>
 						</div>
-						<div data-validate="Name is required">
-							<input class="form-control" th:field="${alumnoxmateria.nota}" type="text" name="materia" placeholder="Nota">
-							<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
-						</div>
+						<input class="form-control" th:field="${alumnoxmateria.nota}" type="text" name="materia" placeholder="Nota">
+						<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
 					</div>
 					<input type="submit" value="Guardar"  class="btn btn-danger form-control">
 		
