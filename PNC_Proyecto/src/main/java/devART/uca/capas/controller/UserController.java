@@ -30,9 +30,6 @@ import devART.uca.capas.utils.WebUtils;
 @Controller
 public class UserController {
 	@Autowired
-	UserDetailsServiceImpl userService;
-
-	@Autowired
 	ExpedienteServiceImpl expedienteService;
 
 	@Autowired
@@ -56,14 +53,6 @@ public class UserController {
 	@Autowired
 	UserExpedienteService userExpedienteService;
 
-	/*
-    @RequestMapping(value = {  "/welcome" }, method = RequestMethod.GET)
-    public String welcomePage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "welcomePage";
-    }
-	 */
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
@@ -78,15 +67,16 @@ public class UserController {
 
     @RequestMapping(value = {"/login","/"}, method = RequestMethod.GET)
     public String loginPage(Model model) {
-
         return "loginPage";
     }
 
+    /*
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Login");
         return "welcomePage";
     }
+     */
 
     @RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
     public ModelAndView listadoCoordinador(Principal principal) {
@@ -106,23 +96,6 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping(value = "/userAdministardor", method = RequestMethod.GET)
-    public ModelAndView listadoAdministrador(Principal principal) {
-        ModelAndView mav = new ModelAndView();
-        List<Expediente> expedientes = null;
-        try {
-
-            expedientes = expedienteService.findAllExpe();
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mav.addObject("expedientes", expedientes);
-        mav.setViewName("/Coordinador/coordinador");
-
-        return mav;
-    }
 
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
@@ -137,7 +110,7 @@ public class UserController {
         }
 
         if(rol.equals("ROLE_ADMIN")){
-            return "redirect:/403";
+            return "redirect:/admin";
         }
 		return "redirect:/";
     }
