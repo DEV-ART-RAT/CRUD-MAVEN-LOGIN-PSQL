@@ -122,31 +122,10 @@ public class CoordinadorController {
 	public ModelAndView guardarExpedientemateria(@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()) {
-			System.out.println(alumnoxMateria.getC_alumnoxmateria());
-			System.out.println(alumnoxMateria.getCod_materia());
-			System.out.println(alumnoxMateria.getC_expediente());
-			System.out.println(alumnoxMateria.getNota());
+
 			mav.setViewName("/Coordinador/AgregarMateria");
 		}else{
 			try {
-				System.out.println(alumnoxMateria.getC_alumnoxmateria());
-				System.out.println(alumnoxMateria.getCod_materia());
-				System.out.println(alumnoxMateria.getC_expediente());
-				System.out.println(alumnoxMateria.getNota());
-//				alumnoxMateria.setC_expediente();
-//				alumnoxMateria.setCod_materia();
-				alumnoxMateria.getMateria().getCodigo();
-				System.out.println(alumnoxMateria.getC_alumnoxmateria());
-				Materia materia = alumnoxMateria.getMateria();
-				String codigomateria = alumnoxMateria.setCod_materia(materia.getCodigo());
-				System.out.println(codigomateria);
-				alumnoxMateria.setCod_materia(codigomateria);
-				Expediente expediente =alumnoxMateria.getExpediente();
-				Integer codigoexpediente = alumnoxMateria.setC_expediente(expediente.getCodigo());
-				alumnoxMateria.setC_expediente(codigoexpediente);
-				System.out.println(codigoexpediente);
-
-				System.out.println(alumnoxMateria.getNota());
 				Integer nota = Integer.parseInt(alumnoxMateria.getNota());
 				if(nota>6){
 					alumnoxMateria.setEstado("Aprobado");
@@ -305,6 +284,7 @@ public class CoordinadorController {
 		List<AlumnoxMateria> alumnoxMaterias = null;
 		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		Expediente expediente=null;
+		List<Materia> materias = null;
 		try {
 			//int codigoint = Integer.parseInt(codigo);
 //			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
@@ -316,6 +296,8 @@ public class CoordinadorController {
 		}
 		mav.addObject("alumnoxmateria", alumnoxmateria);
 		expediente = expedienteService.filtrarUNO(codigo);
+		materias = materiaService.findAll();
+		mav.addObject("materias", materias);
 		mav.addObject("expediente", expediente);
 		mav.addObject("alumnoxmaterias", alumnoxMaterias);
 		mav.setViewName("/Coordinador/materiasCursadas");

@@ -48,7 +48,7 @@
                 </thead>
                 <th:block th:each="e, row: ${alumnoxmaterias}">
                     <tr>
-                        <td th:text="${e.cod_materia}"/>
+                        <td th:text="${e.materia.nombreMateria}"/>
                         <td th:text="${e.nota}"/>
                         <td th:text="${e.estado}"/>
                     </tr>

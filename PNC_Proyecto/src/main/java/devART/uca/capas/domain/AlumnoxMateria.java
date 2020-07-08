@@ -19,19 +19,15 @@ public class AlumnoxMateria {
     @Column(name="c_alumnoxmateria")
     private Integer c_alumnoxmateria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "c_expediente", nullable = false)
     private Expediente expediente;
 
-    @Transient
-    private Integer c_expediente;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cod_materia", nullable = false)
     private Materia materia ;
 
-    @Transient
-    private String cod_materia;
 
     @NotNull(message = "Este campo no puede estar vacio")
     @Column(name="s_nota")
@@ -52,23 +48,7 @@ public class AlumnoxMateria {
         this.c_alumnoxmateria = c_alumnoxmateria;
     }
 
-    public Integer getC_expediente() {
-        return c_expediente;
-    }
 
-    public Integer setC_expediente(Integer c_expediente) {
-        this.c_expediente = c_expediente;
-        return c_expediente;
-    }
-
-    public String getCod_materia() {
-        return cod_materia;
-    }
-
-    public String setCod_materia(String cod_materia) {
-        this.cod_materia = cod_materia;
-        return cod_materia;
-    }
 
     public Expediente getExpediente() {
         return expediente;
