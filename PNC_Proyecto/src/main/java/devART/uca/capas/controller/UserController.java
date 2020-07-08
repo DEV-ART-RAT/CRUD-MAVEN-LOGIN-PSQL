@@ -11,12 +11,14 @@ import javax.validation.Valid;
 import devART.uca.capas.domain.*;
 import devART.uca.capas.domain.Dpto;
 import devART.uca.capas.domain.Municipio;
+import devART.uca.capas.repositories.UserExpedienteRepository;
 import devART.uca.capas.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,6 +55,9 @@ public class UserController {
 
 	@Autowired
 	UserExpedienteService userExpedienteService;
+
+	@Autowired
+	UserExpedienteRepository userRepo;
 
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -161,8 +166,12 @@ public class UserController {
 
     @RequestMapping("/validarRegistrarUsuario")
 	public ModelAndView ingresarUsuarioVerificar(@RequestParam("role") Long role,
-												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {    	ModelAndView mav = new ModelAndView();
-		if(result.hasErrors() || result1.hasErrors()) {
+												 @ModelAttribute("userNew") @Valid AppUser usery,BindingResult result1, @ModelAttribute("userNewExp") @Valid UserExpediente userExp ,BindingResult result ) {
+    	ModelAndView mav = new ModelAndView();
+
+		System.out.println(usery.getUserName() + userExp.getDpto().getNombre());
+
+    	if(result.hasErrors() || result1.hasErrors()) {
 			List<Dpto> dptos = null;
 			List<Municipio> municipios=null;
 			try {
@@ -177,31 +186,46 @@ public class UserController {
 		}
 		else {
 			try {
-				//System.out.println("role: "+role);
-				//usery.setUserId((long) 5);
-				//System.out.println("id: "+usery.getUserId() +" nombre: "+usery.getUserName()+" password:"+ usery.getEncrytedPassword());
+				UserExpediente userExpRet;
+
 					if(userServices.findOne(usery.getUserName())==null)
 					{
-						usery.setEnabled(false);
-						//usery.setUserId((long) 5);
-						usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
-						userServices.insert(usery);
-						userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
-						userExp.setCodigo(usery.getUserId());
-
 						DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 						LocalDate ahora = LocalDate.now();
 						LocalDate fechaNac = LocalDate.parse(userExp.getFnacimiento(), fmt);
-						//System.out.println("Fecha Nacimiento es  "+fechaNac);
-						//System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 						Period periodo = Period.between(fechaNac, ahora);
 						if(periodo.getYears()>999){
 							userExp.setEdad(Integer.toString(999));
-							userExpedienteService.insert(userExp);
+							userExpRet=userRepo.save(userExp);
+							System.out.println(userExpRet.getCodigo());
+							userExp.setCodigo(userExpRet.getCodigo());
+
+							//userExpedienteService.insert(userExp);
 						}else {
 							userExp.setEdad(Integer.toString(periodo.getYears()));
-							userExpedienteService.insert(userExp);
+							//userExpedienteService.insert(userExp);
+							userExpRet = userRepo.save(userExp);
+							System.out.println(userExpRet.getCodigo());
+							userExp.setCodigo(userExpRet.getCodigo());
+							//userExp.setCodigo(userRepo.saveAndFlush(userExp).getCodigo());
 						}
+						//userExpedienteService
+						userRepo.flush();
+
+
+
+
+
+						usery.setEnabled(false);
+						usery.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(usery.getEncrytedPassword()));
+						usery.setUser(userExp);
+
+						userServices.insert(usery);
+
+						userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
+						userExp.setCodigo(usery.getUserId());
+
+
 
 
 						//userExpedienteService.insert(userExp);

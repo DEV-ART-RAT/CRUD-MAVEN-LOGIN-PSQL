@@ -63,7 +63,7 @@
 
 						  <div class="form-group">
 						  <label for="categoriaBox">Departamento</label>
-						  <select th:field="${userNewExp.dptoId}" id="categoriaBox">
+						  <select th:field="${userNewExp.dpto.codigo}" id="categoriaBox">
 							  <option th:each ="dpto: ${dptos}" th:value="${dpto.codigo}"
 									  th:text ="${dpto.nombre}">
 							  </option>
@@ -72,7 +72,7 @@
 
 						  <div class="form-group">
 							  <label for="categoriaBox2">Municipio</label>
-							  <select th:field="${userNewExp.municipioId}" id="categoriaBox2">
+							  <select th:field="${userNewExp.municipio.codigo}" id="categoriaBox2">
 								  <option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
 										  th:text ="${dpto.nombre}">
 								  </option>
