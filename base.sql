@@ -150,12 +150,6 @@ values (3, 2, 2);
 
 
 
-
-
-
-
-
-
 CREATE TABLE public.alumnoxmateria(
 	c_alumnoxmateria integer primary key,
 	cod_materia varchar(6) not null  ,

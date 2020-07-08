@@ -66,3 +66,14 @@ td, th{
 .fixed{
 	padding: 0.5em 3.2em;
 }
+
+.imgMenu{
+	height: 15em;
+	width: 15em;
+}
+
+.flex-center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

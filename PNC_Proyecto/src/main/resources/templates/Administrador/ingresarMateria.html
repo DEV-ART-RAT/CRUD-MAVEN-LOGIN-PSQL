@@ -1,61 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<title>Nueva Materia</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+	<link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
 </head>
+
 <body>
-	<div class="barMenu">
-      	<div class="barMenuHead">
-      		<a class="buttonMenu" href="/admin">Nazarick</a>
-      	</div>
-      	<div class="barMenuElements">
-      		<a class="buttonMenu" href="ingresarMateria">Agregar materias</a>
-      		<a class="buttonMenu" href="logout">Salir</a>
-      	</div>
-      </div> 
-	<div>
-		<div>
-			<form  th:action="@{/nuevaMateria}" th:object="${materia}" method="post">
-				<span > Nueva materia </span>
-					
-				<div data-validate="Name is required">
-					<span  th:errors="*{codigo}"></span> 
-					<input  th:field="*{codigo}" type="text" name="codigo"
-						placeholder="Codigo de materia">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/userInfo">Tempest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/admin">Inicio <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/ingresarMateria">Nueva materia</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/admin">Autorizar cuentas</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Salir</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="container row m-4 p-3">
+			<div class="col"></div>
+			<div class="col-8">
+				<div class="card text-white bg-dark col p-3 m-2">
+					<h3 class="card-header"> NUEVA MATERIA </h3>
+					<div class="card-body">
+						<form th:action="@{/nuevaMateria}" th:object="${materia}" method="post">
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Codigo</div>
+								</div>
+								<span th:errors="*{codigo}" style="color:red;"></span>
+								<input class="form-control" th:field="*{codigo}" type="text" name="codigo"
+									placeholder="Codigo de materia">
+							</div>
+
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Nombre</div>
+								</div>
+								<span th:errors="*{nombreMateria}" style="color:red;"></span>
+								<input class="form-control" th:field="*{nombreMateria}" type="text" name="materia"
+									placeholder="Nombre de la Materia">
+							</div>
+
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Descripcion</div>
+								</div>
+								<span th:errors="*{descripcion}" style="color:red;"></span>
+								<input class="form-control" th:field="*{descripcion}" type="text" name="descripcion"
+									placeholder="Descripcion de la Materia">
+							</div>
+
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Estado</div>
+								</div>
+								<select class="form-control" name="estado">
+									<option th:value="Activa" th:text="Activa">
+									</option>
+									<option th:value="Inactiva" th:text="Inactiva">
+									</option>
+								</select>
+							</div>
+
+							<div class="container flex mt-4">
+								<div class="col">
+									<input class="btn btn-success form-control" type="submit" value="Guardar materia">
+								</div>
+								<div class="col">
+									<a href="/admin" class="btn btn-danger form-control text-white">Cancelar</a>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-				<div data-validate="Name is required">
-					<span  th:errors="*{nombreMateria}"></span>
-					<input th:field="*{nombreMateria}" type="text" name="materia"
-						   placeholder="Nombre de la Materia">
-				</div>
-				<div data-validate="Name is required">
-					<span  th:errors="*{descripcion}"></span>
-					<input  th:field="*{descripcion}" type="text" name="descripcion"
-							placeholder="Descripcion de la Materia">
-				</div>
-				<select class="form-control" name="estado">
-					<option th:value="Activa"
-							th:text ="Activa">
-					</option>
-					<option th:value="Inactiva"
-							th:text ="Inactiva">
-					</option>
-				</select>
-				
-				<input type="submit" value="Guardar materia">
-			</form>
-			<a href="/userInfo" style="text-decoration:none; color: #000;">Volver</a>
+			</div>
+			<div class="col"></div>
 		</div>
 	</div>
-
 </body>
+
 </html>
