@@ -1,24 +1,29 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<meta charset="UTF-8">
 	<title>Acceso denegado</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
-    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
  
 <body>
     <th:block th:include="/menu"></th:block>
-    <h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
-    <img alt="" src="img/fail/overlord.jpg">
-    <h4 style=" font-style: italic; text-align: center;">"Nadie entra sin permiso en la Gran Tumba de Nazarick"</h4>
-
-    
-     
+    <div class="container-fluid flex-column h-100">
+        <div class="container flex-column card bg-dark p-4 h-75">
+            <h6 class="msg-danger">No tienes autorizacion para entrar a esta pagina</h6>
+            <br>
+            <img alt="" src="img/fail/Overlord.jpg">
+            <br>
+            <h6 class="msg-danger">"Nadie entra sin permiso en la Gran Tumba de Nazarick"</h6>
+        </div>
+        
+    </div>  
 </body>
  
 </html>

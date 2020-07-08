@@ -4,19 +4,6 @@ html, body {
     background-color: #2c2c31;
 }
 
-.barMenu{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	background-color: #3e4048;
-	align-items: center;
-	
-}
-
-.barMenuHead, .barMenuElements{
-	display: flex;
-	flex-direction: row;
-}
 
 .buttonMenu{
 	text-decoration: none;
@@ -30,9 +17,6 @@ html, body {
 	color: #b2b2ca;
 }
 
-.barMenuHead .buttonMenu{
-	font-size:1.2em;
-}
 
 td, th{
 	text-align: center;
@@ -74,6 +58,13 @@ td, th{
 	align-items: center;
 }
 
+.flex-column{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .flex-end{
 	display: flex;
 	justify-content: flex-end;
@@ -107,24 +98,12 @@ td, th{
 	border-radius: 0.50rem;
 	color: rgb(247, 247, 247);
 	transition: all 1;
-}
-
-.card2.bg-1{
-	background-color: rgb(17, 148, 180);
-}
-.card2.bg-2{
-	background-color: rgb(170, 27, 115);
-}
-.card2.bg-3{
-	background-color: rgb(17, 180, 44);
-}
-.card2.bg-4{
-	background-color: rgb(179, 28, 28);
+	background-color: rgb(14, 13, 27);
 }
 
 .card2:hover{
 	background-color: white;
-	transition: all 1s;
+	transition: all 0.5s;
 }
 
 .card2.bg-1:hover{
@@ -139,4 +118,11 @@ td, th{
 .card2.bg-4:hover{
 	color:  rgb(179, 28, 28);
 }
+
+.msg-danger{
+	color: rgb(243, 36, 36);
+	font-size: 1.5em;
+	font-style: italic;
+}
+
 
