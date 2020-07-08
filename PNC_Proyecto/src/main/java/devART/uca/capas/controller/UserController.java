@@ -1,10 +1,13 @@
 package devART.uca.capas.controller;
 
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.validation.Valid;
 
@@ -18,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -59,8 +61,13 @@ public class UserController {
 	@Autowired
 	UserExpedienteRepository userRepo;
 
+	@Autowired
+	AlumnoxMateriaServiceImpl alumnoxMateriaService;
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+	private static DecimalFormat df = new DecimalFormat("0.00");
+
+
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
@@ -87,11 +94,14 @@ public class UserController {
     public ModelAndView listadoCoordinador(Principal principal) {
         ModelAndView mav = new ModelAndView();
         List<Expediente> expedientes = null;
+		List<Expediente> expediente = null;
+		List<AlumnoxMateria> alumnoxMaterias = null;
         try {
 
             expedientes = expedienteService.findAllExpe();
-
-        }catch (Exception e) {
+            promedio(expedientes);
+			aprobadasreprobadas(expedientes);
+		}catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -266,6 +276,56 @@ public class UserController {
 		userUpdate.setEnabled(true);
 		userServices.insert(userUpdate);
 		return "redirect:/administarUsuario";
+	}
+
+	public void promedio(List<Expediente> expedientes){
+		expedientes.forEach(e->{
+			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
+			e.getAlumnoxMaterias().forEach(a-> {
+				if(a.getNota()!=""||a.getNota()!=null){
+					float nota = Float.parseFloat(a.getNota());
+					sumanotas.set(sumanotas.get() + nota);
+				}
+				else{
+					float sumatotal;
+					sumatotal = (float) 0.0;
+				}
+			});
+			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
+				double promedio;
+				promedio = sumanotas.get() / e.getAlumnoxMaterias().size();
+				if(promedio==Double.NaN){
+//					System.out.println("No tienen promedio");
+					e.setPromedio(0);
+				}else{
+//					System.out.println(promedio);
+					double roundedDouble = Math.round(promedio * 100.0) / 100.0;
+					e.setPromedio(roundedDouble);
+				}
+			}
+		});
+	};
+
+    public void aprobadasreprobadas(List<Expediente> expedientes){
+		expedientes.forEach(e->{
+			AtomicInteger aprobadas= new AtomicInteger();
+			AtomicInteger reprobadas= new AtomicInteger();
+			e.getAlumnoxMaterias().forEach(a-> {
+				float nota = Float.parseFloat(a.getNota());
+				if(6 >= nota){
+					aprobadas.set(aprobadas.get() + 1);
+
+				}
+				else
+				{
+					reprobadas.addAndGet(1);
+				}
+			});
+//			System.out.println("Aprobadas: "+aprobadas);
+//			System.out.println("Reprobadas: "+reprobadas);
+			e.setAprobadas(aprobadas.get());
+			e.setReprobadas(reprobadas.get());
+		});
 	}
 }
 

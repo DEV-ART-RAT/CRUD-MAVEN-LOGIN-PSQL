@@ -59,6 +59,9 @@
 					<th scope="col">Institucion</th>
 					<th scope="col">Edad</th>
 					<th scope="col">Telefono</th>
+					<th scope="col">Promedio</th>
+					<th scope="col">Aprobadas</th>
+					<th scope="col">Reprobadas</th>
 					<th scope="col">Opciones</th>
 				</thead>
 
@@ -71,6 +74,9 @@
 						<td th:text="${e.s_institucion}"/>
 						<td th:text="${e.s_edad}"/>
 						<td th:text="${e.s_telefonom}"/>
+						<td th:text="${e.promedio}"/>
+						<td th:text="${e.aprobadas}"/>
+						<td th:text="${e.reprobadas}"/>
 						<td>
 							<form class="form-inline center"  th:action="@{/expediente}" th:method="post">
 								<input type="hidden" name="id" th:value="${e.codigo}"/>

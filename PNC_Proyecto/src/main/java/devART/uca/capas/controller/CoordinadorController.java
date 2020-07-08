@@ -29,8 +29,10 @@ public class CoordinadorController {
 
 	@Autowired
 	MateriaService materiaService;
+
 	@Autowired
 	AlumnoxMateriaServiceImpl alumnoxMateriaService;
+
 	private static DecimalFormat df = new DecimalFormat("0.00");
 
 	@RequestMapping("/guardarExpediente")
