@@ -373,6 +373,8 @@ public class CoordinadorController {
 	public ModelAndView guardarExpedientemodificado(Principal principal,@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()) {
+			List<Institucion> instituciones=institucionRepository.findAll();
+			mav.addObject("institucion", instituciones);
 			mav.setViewName("/Coordinador/modificarExpediente");
 			return mav;
 
@@ -409,6 +411,7 @@ public class CoordinadorController {
 		try {
 			int codigoint = Integer.parseInt(codigo);
 			expediente = expedienteService.filtrarUNO(codigoint);
+
 			mav.addObject("expediente", expediente);
 			mav.setViewName("/Coordinador/expediente");
 
