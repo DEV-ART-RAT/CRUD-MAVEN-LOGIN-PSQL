@@ -30,7 +30,7 @@
 							</option>
 						</select>
 					</div>
-		
+
 					<div class="input-group mb-2 hidden" >
 						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Codigo</div>
@@ -41,13 +41,31 @@
 							</option>
 						</select>
 					</div>
-		
+
 					<div class="input-group mb-2">
 						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Nota</div>
 						</div>
 						<input class="form-control" th:field="${alumnoxmateria.nota}" type="text" name="materia" placeholder="Nota">
 						<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend w-25">
+							<div class="input-group-text">Annio</div>
+						</div>
+						<input class="form-control" th:field="${alumnoxmateria.annio}" type="number" >
+						<span th:errors="${alumnoxmateria.annio}" style="color:red;"></span>
+					</div>
+					<div class="input-group mb-4">
+						<div class="input-group-prepend w-25">
+							<div class="input-group-text">Ciclo</div>
+						</div>
+						<select th:field="${alumnoxmateria.ciclo}" class="form-control input-lg " name="ciclo" id="ciclo">
+							<option th:value="01" th:text="01"></option>
+							<option th:value="02" th:text="02"></option>
+							<option th:value="03" th:text="03"></option>
+						</select>
+						<span th:errors="${alumnoxmateria.ciclo}" style="color:red;"></span>
 					</div>
 					<input type="submit" value="Guardar"  class="btn btn-danger form-control">
 

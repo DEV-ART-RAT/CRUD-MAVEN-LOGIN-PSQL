@@ -261,18 +261,17 @@ public class UserController {
 
 	public void promedio(List<Expediente> expedientes){
 		expedientes.forEach(e->{
-			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
+			AtomicReference<Double> sumanotas= new AtomicReference<>((double) 0);
 			e.getAlumnoxMaterias().forEach(a-> {
-				if(a.getNota()!=""||a.getNota()!=null){
-					float nota = Float.parseFloat(a.getNota());
-					sumanotas.set(sumanotas.get() + nota);
+				if(a.getNota()!=0){
+					sumanotas.set(sumanotas.get() + a.getNota());
 				}
 				else{
 					float sumatotal;
 					sumatotal = (float) 0.0;
 				}
 			});
-			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
+			if(sumanotas.get() !=null||e.getAlumnoxMaterias().size()!=0){
 				double promedio;
 				promedio = sumanotas.get() / e.getAlumnoxMaterias().size();
 				if(promedio==Double.NaN){
@@ -292,10 +291,8 @@ public class UserController {
 			AtomicInteger aprobadas= new AtomicInteger();
 			AtomicInteger reprobadas= new AtomicInteger();
 			e.getAlumnoxMaterias().forEach(a-> {
-				float nota = Float.parseFloat(a.getNota());
-				if(nota>=6){
+				if(a.getNota()>=6){
 					aprobadas.addAndGet( 1);
-
 				}
 				else
 				{

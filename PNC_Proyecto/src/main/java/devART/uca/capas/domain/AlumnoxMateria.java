@@ -5,9 +5,7 @@ import devART.uca.capas.domain.Materia;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(schema="public", name="alumnoxmateria")
@@ -28,15 +26,23 @@ public class AlumnoxMateria {
     @JoinColumn(name = "cod_materia", nullable = false)
     private Materia materia ;
 
-
-    @NotNull(message = "Este campo no puede estar vacio")
     @Column(name="s_nota")
-    @Size(message = "La nota tiene que tener 3 caracteres poe ejemplo 7.5", max = 3)
-    @NotEmpty(message = "Este campo no puede estar vacio")
-    private String nota;
+    @NotNull(message = "Este campo no puede estar vacio")
+    @Min(value = 0,message = "La nota no puede ser menor a 0")
+    @Max(value = 10,message = "La nota no puede ser mayor a 10")
+    private double nota;
 
+    @NotEmpty(message = "Este campo no puede estar vacio")
     @Column(name = "s_estado")
     private String estado;
+
+    @Column(name = "i_annio_materia")
+    @Min(value = 2005,message = "El annio no puede ser menor a 2005")
+    @Max(value = 2021,message = "La annio no puede ser mayor a 2021")
+    private Integer annio;
+
+    @Column(name = "s_ciclo")
+    private String ciclo;
 
     public AlumnoxMateria(){}
 
@@ -66,12 +72,28 @@ public class AlumnoxMateria {
         this.materia = materia;
     }
 
-    public String getNota() {
-        return nota;
+    public void setNota(double nota) {
+        this.nota = nota;
     }
 
-    public void setNota(String nota) {
-        this.nota = nota;
+    public Integer getAnnio() {
+        return annio;
+    }
+
+    public void setAnnio(Integer annio) {
+        this.annio = annio;
+    }
+
+    public String getCiclo() {
+        return ciclo;
+    }
+
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
+    }
+
+    public double getNota() {
+        return nota;
     }
 
     public String getEstado() {

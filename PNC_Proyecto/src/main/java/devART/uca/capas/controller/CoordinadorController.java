@@ -133,8 +133,7 @@ public class CoordinadorController {
 //			return mav;
 		}else{
 			try {
-				Float nota = Float.parseFloat(alumnoxMateria.getNota());
-				if(nota>=6){
+				if(alumnoxMateria.getNota()>=6){
 					alumnoxMateria.setEstado("Aprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}else{
@@ -329,8 +328,7 @@ public class CoordinadorController {
 	public double promedio(List<AlumnoxMateria> alumnoxMaterias){
 		double suma = 0;
 		for (int i = 0; i < alumnoxMaterias.size(); i++) {
-			double nota = Float.parseFloat(alumnoxMaterias.get(i).getNota());
-			suma = suma + nota;
+			suma = suma + alumnoxMaterias.get(i).getNota();
 		}
 		suma = suma/alumnoxMaterias.size();
 		if(alumnoxMaterias.size()==0){
@@ -344,14 +342,7 @@ public class CoordinadorController {
 		expedientes.forEach(e->{
 			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
 			e.getAlumnoxMaterias().forEach(a-> {
-				if(a.getNota()!=""||a.getNota()!=null){
-					float nota = Float.parseFloat(a.getNota());
-					sumanotas.set(sumanotas.get() + nota);
-				}
-				else{
-					float sumatotal;
-					sumatotal = (float) 0.0;
-				}
+					sumanotas.set((float) (sumanotas.get() + a.getNota()));
 			});
 			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
 				double promedio;
@@ -373,8 +364,7 @@ public class CoordinadorController {
 			AtomicInteger aprobadas= new AtomicInteger();
 			AtomicInteger reprobadas= new AtomicInteger();
 			e.getAlumnoxMaterias().forEach(a-> {
-				float nota = Float.parseFloat(a.getNota());
-				if(nota>=6){
+				if(a.getNota()>=6){
 					aprobadas.addAndGet( 1);
 
 				}

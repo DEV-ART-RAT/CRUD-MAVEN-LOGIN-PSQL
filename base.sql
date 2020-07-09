@@ -1,12 +1,6 @@
 /*DATOS:
 Colegios: Colegio Nazareth,Colegio Fatima,Liceo Salvadoreño,Colegio Santa Celicia
-
-
 */
-
-
-
-
 create table APP_USER
 (
   USER_ID           BIGINT,
@@ -109,8 +103,10 @@ CREATE TABLE public.alumnoxmateria(
 	c_alumnoxmateria integer primary key,
 	cod_materia varchar(6) not null  ,
 	c_expediente integer not null  ,
-	s_nota varchar(3) not null,
-	s_estado varchar(10) not null
+	s_nota float not null,
+	s_estado varchar(10) not null,
+	i_annio_materia integer not null,
+	s_ciclo varchar(2) not null
 );
 --drop TABLE public.alumnoxmateria
 
