@@ -1,6 +1,7 @@
 package devART.uca.capas.service;
 
 import devART.uca.capas.domain.AlumnoxMateria;
+import devART.uca.capas.domain.Expediente;
 import devART.uca.capas.repositories.AlumnoxMateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -26,7 +27,10 @@ public class AlumnoxMateriaServiceImpl implements AlumnoxMateriaService{
     public void insert(AlumnoxMateria alumnoxMateria) throws DataAccessException {
         alumnoxMateriaRepository.save(alumnoxMateria);
     }
-
+    @Override
+    public AlumnoxMateria filtrarUNO(Integer cadena)  throws DataAccessException {
+        return alumnoxMateriaRepository.getOne(cadena);
+    }
     @Override
     public List<AlumnoxMateria> findOneEstudiante(int cadena) throws DataAccessException {
         return alumnoxMateriaRepository.mostrarPorAlumno(cadena);

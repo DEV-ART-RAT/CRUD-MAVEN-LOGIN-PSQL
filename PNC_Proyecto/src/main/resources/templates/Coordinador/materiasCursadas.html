@@ -32,21 +32,43 @@
             <table class="table table-sm table-dark table-hover table-condensed mt-3">
                 <thead>
                     <th scope="col">Materia</th>
+                    <th scope="col">Año</th>
+                    <th scope="col">Ciclo</th>
                     <th scope="col">Nota</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Resultado</th>
+                    <th scope="col">Opciones</th>
+
                 </thead>
                 <th:block th:each="e, row: ${alumnoxmaterias}" th:if="${e.estado == 'Aprobado'}">
                     <tr>
                         <td th:text="${e.materia.nombreMateria}" />
+                        <td th:text="${e.annio}" />
+                        <td th:text="${e.ciclo}" />
                         <td th:text="${e.nota}" />
+                        <td th:text="${e.estado}" />
                         <td class="text-success" th:text="${e.estado}" />
+                        <td class="space-between">
+                            <form class="form-inline center" th:action="@{/editarMateriaexpediente}" th:method="post">
+                                <input type="hidden" name="codigo" th:value="${e.c_alumnoxmateria}" />
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
+                            </form>
+                        </td>
                     </tr>
                 </th:block>
                 <th:block th:each="e, row: ${alumnoxmaterias}" th:if="${e.estado == 'Reprobado'}">
                     <tr>
                         <td th:text="${e.materia.nombreMateria}" />
+                        <td th:text="${e.annio}" />
+                        <td th:text="${e.ciclo}" />
                         <td th:text="${e.nota}" />
-                        <td class="text-danger" th:text="${e.estado}" />
+                        <td th:text="${e.estado}" />
+                        <td class="text-success" th:text="${e.estado}" />
+                        <td class="space-between">
+                            <form class="form-inline center" th:action="@{/editarMateriaexpediente}" th:method="post">
+                                <input type="hidden" name="codigo" th:value="${e.c_alumnoxmateria}" />
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
+                            </form>
+                        </td>
                     </tr>
                 </th:block>
             </table>
