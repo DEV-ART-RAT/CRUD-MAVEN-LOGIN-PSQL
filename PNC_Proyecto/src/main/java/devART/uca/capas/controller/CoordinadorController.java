@@ -365,7 +365,6 @@ public class CoordinadorController {
 	@RequestMapping("/guardarExpedientemodificado")
 	public ModelAndView guardarExpedientemodificado(Principal principal,@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		List<Expediente> expedientes = null;
 		if(result.hasErrors()) {
 			mav.setViewName("/Coordinador/modificarExpediente");
 			return mav;
@@ -389,25 +388,14 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			List<Expediente> expedientes1 = null;
-			List<Expediente> expediente1 = null;
-			List<AlumnoxMateria> alumnoxMaterias = null;
-			try {
-				expedientes1 = expedienteService.findAllExpe();
-				promediotodo(expedientes1);
-				aprobadasreprobadas(expedientes1);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-			mav.addObject("mensaje", "Expediente Agregado con Exito!");
-			mav.addObject("expedientes", expedientes1);
-			mav.setViewName("/Coordinador/coordinador");
-			return mav;
+			mav.addObject("mensaje","Modificado con exito");
+
+			return mostrarExpediente(principal,String.valueOf(expediente.getCodigo()),"Modificado con exito");
 		}
 	}
 
 	@RequestMapping(value="/expediente", method=RequestMethod.POST)
-	public ModelAndView mostrarExpediente(Principal principal,@RequestParam(value="id") String codigo)
+	public ModelAndView mostrarExpediente(Principal principal,@RequestParam(value="id") String codigo,String mensaje)
 	{
 		ModelAndView mav = new ModelAndView();
 		Expediente expediente=null;
@@ -420,6 +408,7 @@ public class CoordinadorController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		mav.addObject("mensaje",mensaje);
 		return mav;
 	}
 
@@ -470,7 +459,7 @@ public class CoordinadorController {
 			expedientes.forEach(e->{
 				AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
 				e.getAlumnoxMaterias().forEach(a-> {
-					System.out.println(a.getNota());
+//					System.out.println(a.getNota());
 					sumanotas.set((float) (sumanotas.get() + a.getNota()));
 				});
 					if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0)
