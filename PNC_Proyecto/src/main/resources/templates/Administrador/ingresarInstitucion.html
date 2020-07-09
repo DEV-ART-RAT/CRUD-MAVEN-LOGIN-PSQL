@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Nueva Instiitucion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/main.css}">
+</head>
+
+<body>
+<th:block th:include="/menuadmin"></th:block>
+<div class="container">
+    <div class="container row m-4 p-3">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class="card text-white bg-dark col p-3 m-2">
+                <h3 class="card-header"> NUEVA MATERIA </h3>
+                <div class="card-body">
+                    <form th:action="@{/validarIngresarInstitucion}" th:object="${institucion}" method="post">
+                        <p th:text="${message}" style="color:red"></p>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-35">
+                                <div class="input-group-text">Nombre</div>
+                            </div>
+                            <span th:errors="*{nombre}" style="color:red;"></span>
+                            <input class="form-control" th:field="*{nombre}" type="text" name="nombre"
+                                   placeholder="Nombre de Institucion">
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-35">
+                                <div class="input-group-text">Descripcion</div>
+                            </div>
+                            <span th:errors="*{descripcion}" style="color:red;"></span>
+                            <textarea class="form-control" th:field="*{descripcion}" name="descripcion"
+                                      placeholder="Descripcion de la Institucion"></textarea>
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-35">
+                                <div class="input-group-text">Departamento</div>
+                            </div>
+                            <select class="form-control" th:field="*{dpto.codigo}" id="categoriaBox">
+                                <option th:each ="dpto: ${dptos}" th:value="${dpto.codigo}"
+                                        th:text ="${dpto.nombre}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-35">
+                                <div class="input-group-text">Municipio</div>
+                            </div>
+                            <select  class="form-control" th:field="*{municipio.codigo}" id="categoriaBox2">
+                                <option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
+                                        th:text ="${dpto.nombre}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="container flex mt-4">
+                            <div class="col">
+                                <input class="btn btn-success form-control" type="submit" value="Guardar Institucion">
+                            </div>
+                            <div class="col">
+                                <a href="/ingresarInstitucion" class="btn btn-danger form-control text-white">Cancelar</a>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+</body>
+
+</html>

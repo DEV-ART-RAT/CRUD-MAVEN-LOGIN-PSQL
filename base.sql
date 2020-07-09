@@ -135,3 +135,10 @@ CREATE TABLE public.expediente(
 ALTER TABLE public.alumnoxmateria ADD CONSTRAINT fk_cod_materia FOREIGN KEY(cod_materia) REFERENCES public.materia(cod_materia);
 ALTER TABLE public.alumnoxmateria ADD CONSTRAINT fk_c_expediente FOREIGN KEY(c_expediente) REFERENCES public.expediente(c_expediente);
 
+create table centroescolar(
+	s_institucion int primary key,
+	s_nombre  varchar(50) not null,
+	s_descripcion  varchar(500) not null,
+	s_dpto  int not null,
+	s_municipio  int not null
+);
