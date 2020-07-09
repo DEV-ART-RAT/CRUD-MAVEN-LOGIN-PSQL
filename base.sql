@@ -106,7 +106,7 @@ CREATE TABLE public.alumnoxmateria(
 	s_nota float not null,
 	s_estado varchar(10) not null,
 	i_annio_materia integer not null,
-	s_ciclo varchar(2) not null
+	s_ciclo varchar(2) not null	
 );
 --drop TABLE public.alumnoxmateria
 

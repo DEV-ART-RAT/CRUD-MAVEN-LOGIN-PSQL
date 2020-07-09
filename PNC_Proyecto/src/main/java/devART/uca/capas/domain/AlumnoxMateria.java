@@ -32,13 +32,13 @@ public class AlumnoxMateria {
     @Max(value = 10,message = "La nota no puede ser mayor a 10")
     private double nota;
 
-    @NotEmpty(message = "Este campo no puede estar vacio")
     @Column(name = "s_estado")
+    @NotEmpty(message = "Este campo no puede estar vacio")
     private String estado;
 
     @Column(name = "i_annio_materia")
-    @Min(value = 2005,message = "El annio no puede ser menor a 2005")
-    @Max(value = 2021,message = "La annio no puede ser mayor a 2021")
+    @Min(value = 2005,message = "El año no puede ser menor a 2005")
+    @Max(value = 2020,message = "La año no puede ser mayor a 2020")
     private Integer annio;
 
     @Column(name = "s_ciclo")

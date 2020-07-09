@@ -112,7 +112,7 @@ public class CoordinadorController {
 
 	@RequestMapping(value="/nuevaMateriaexpediente", method=RequestMethod.POST)
 	public ModelAndView NuevoMateria(@RequestParam(value="codigo") Integer codigo) {
-		System.out.println("Codigo final  es :"+codigo);
+		System.out.println("Codigo final final final es :"+codigo);
 		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
@@ -128,11 +128,17 @@ public class CoordinadorController {
 	@RequestMapping(value="/guardarExpedientemateria", method=RequestMethod.POST)
 	public ModelAndView guardarExpedientemateria(Principal principal,@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
+
 		if(result.hasErrors()) {
 			mav.setViewName("/Coordinador/AgregarMateria");
 //			return mav;
 		}else{
 			try {
+				System.out.println(alumnoxMateria.getNota());
+				System.out.println(alumnoxMateria.getAnnio());
+				System.out.println(alumnoxMateria.getCiclo());
+				System.out.println(alumnoxMateria.getExpediente().getS_nombre());
+				System.out.println(alumnoxMateria.getMateria().getNombreMateria());
 				if(alumnoxMateria.getNota()>=6){
 					alumnoxMateria.setEstado("Aprobado");
 					System.out.println(alumnoxMateria.getEstado());
@@ -140,21 +146,23 @@ public class CoordinadorController {
 					alumnoxMateria.setEstado("Reprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}
+
+
 				alumnoxMateriaService.insert(alumnoxMateria);
 
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.addObject("mensaje","Agregado con exito!");
-			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
-			List<Materia> materias = null;
-			materias = materiaService.findAll();
-			List<Expediente> expedientes = null;
-			expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
-			mav.addObject("expedientes", expedientes);
-			mav.addObject("alumnoxmateria", alumnoxmateria);
-			mav.addObject("materias", materias);
-			mav.setViewName("/Coordinador/AgregarMateria");
+//			mav.addObject("mensaje","Agregado con exito!");
+//			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
+//			List<Materia> materias = null;
+//			materias = materiaService.findAll();
+//			List<Expediente> expedientes = null;
+//			expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
+//			mav.addObject("expedientes", expedientes);
+//			mav.addObject("alumnoxmateria", alumnoxmateria);
+//			mav.addObject("materias", materias);
+			return listadoCoordinador(principal);
 		}
 
 		return mav;
