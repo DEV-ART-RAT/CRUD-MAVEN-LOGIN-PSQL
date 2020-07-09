@@ -21,7 +21,7 @@
         <div class="col"></div>
         <div class="col-8">
             <div class="card text-white bg-dark col p-3 m-2">
-                <h3 class="card-header"> NUEVA INSTITUCION </h3>
+                <h3 class="card-header"> Editar Institucion </h3>
                 <div class="card-body">
                     <form th:action="@{/validarIngresarInstitucion}" th:object="${institucion}" method="post">
                         <p th:text="${message}" style="color:red"></p>
@@ -29,12 +29,14 @@
                             <div class="input-group-prepend w-35">
                                 <div class="input-group-text">Nombre</div>
                             </div>
+
+                            <input class="form-control"  th:field="*{codigo}" type="hidden" name="codigo"
+                                   value="${id}">
+
                             <span th:errors="*{nombre}" style="color:red;"></span>
                             <input class="form-control" th:field="*{nombre}" type="text" name="nombre"
                                    placeholder="Nombre de Institucion">
                         </div>
-                        <input class="form-control"  type="hidden" name="codigo"
-                               value="0">
 
                         <div class="input-group mb-2">
                             <div class="input-group-prepend w-35">
@@ -61,7 +63,7 @@
                                 <div class="input-group-text">Municipio</div>
                             </div>
                             <select  class="form-control" th:field="*{municipio.codigo}" id="categoriaBox2">
-                                <option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}" th:departamento="${dpto.dpto.codigo}"
+                                <option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
                                         th:text ="${dpto.nombre}">
                                 </option>
                             </select>
@@ -83,55 +85,6 @@
         <div class="col"></div>
     </div>
 </div>
-<script type="text/javascript" th:inline="javascript">
-
-
-
-		
-    var municipios = document.getElementById('categoriaBox2');
-    var municipiosList = [];
-
-    for(var i = 0; i<municipios.childElementCount; i++){
-        var listaAux = [];
-        listaAux.push(municipios.options[i].value);
-        listaAux.push(municipios.options[i].getAttribute("departamento"));
-        listaAux.push(municipios.options[i].text);
-        municipiosList.push(listaAux);
-    }
-
-    var departamentos = document.getElementById('categoriaBox');
-    var departamentosValue = document.getElementById('categoriaBox').value;
-    var MunicipiosFiltrados = listaFiltrada(departamentosValue, municipiosList);
-    rebuildSelect(MunicipiosFiltrados);
-    
-
-    departamentos.onchange = function municipiosAccess(){
-        var departamentosValue = document.getElementById('categoriaBox').value;
-        var MunicipiosFiltrados = listaFiltrada(departamentosValue, municipiosList);
-        rebuildSelect(MunicipiosFiltrados);
-    }
-    
-    function listaFiltrada (value, data){
-        var filtraData = []
-        for( var i = 0; i<data.length; i++){
-            if(value == data[i][1]){
-                filtraData.push(data[i]);
-            }
-        }
-        return filtraData;
-    }
-
-    function rebuildSelect(data){
-        var select = document.getElementById('categoriaBox2');
-        select.innerHTML= '';
-        for( var i = 0; i<data.length; i++){
-            var option = `
-                    <option  value="${data[i][0]}" departamento="${data[i][1]}">${data[i][2]}</option>
-            `
-            select.innerHTML += option;
-        }
-    }
-</script>
 </body>
 
 </html>
