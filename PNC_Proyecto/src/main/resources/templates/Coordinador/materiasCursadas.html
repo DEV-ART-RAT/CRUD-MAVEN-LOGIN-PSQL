@@ -39,14 +39,14 @@
                     <tr>
                         <td th:text="${e.materia.nombreMateria}" />
                         <td th:text="${e.nota}" />
-                        <td th:text="${e.estado}" />
+                        <td class="text-success" th:text="${e.estado}" />
                     </tr>
                 </th:block>
                 <th:block th:each="e, row: ${alumnoxmaterias}" th:if="${e.estado == 'Reprobado'}">
-                    <tr class="bg-danger">
+                    <tr>
                         <td th:text="${e.materia.nombreMateria}" />
                         <td th:text="${e.nota}" />
-                        <td th:text="${e.estado}" />
+                        <td class="text-danger" th:text="${e.estado}" />
                     </tr>
                 </th:block>
             </table>

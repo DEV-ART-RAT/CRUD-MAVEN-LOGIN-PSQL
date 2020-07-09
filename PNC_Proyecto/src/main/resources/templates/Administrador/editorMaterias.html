@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>Materias</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -11,6 +12,7 @@
 	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
+
 <body>
 	<th:block th:include="/menuadmin"></th:block>
 
@@ -25,25 +27,43 @@
 					<th scope="col">Opciones</th>
 				</thead>
 				<th:block th:each="m, row: ${materias}">
-					<tr>
-						<td th:text="${m.codigo}"/>
-						<td th:text="${m.nombreMateria}"/>
-						<td th:text="${m.descripcion}"/>
-						<td th:text="${m.estado}"/>
-						<td>
-							<form class="form-inline center" th:action="@{/editarMateria}" th:method="post">
-								<input type="hidden" name="id" th:value="${m.codigo}"/>
-								<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
-								</button>
-							</form>
-						</td>
-					</tr>
-				</th:block>
+						<th:block th:if="${m.estado == 'Activo'}">
+							<tr>
+								<td th:text="${m.codigo}" />
+								<td th:text="${m.nombreMateria}" />
+								<td th:text="${m.descripcion}" />
+								<td class="text-success" style="font-weight: bold;" th:text="${m.estado}" />
+								<td>
+									<form class="form-inline center" th:action="@{/editarMateria}" th:method="post">
+										<input type="hidden" name="id" th:value="${m.codigo}" />
+										<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</th:block>
+						<th:block th:if="${m.estado == 'Inactiva'}">
+							<tr>
+								<td th:text="${m.codigo}" />
+								<td th:text="${m.nombreMateria}" />
+								<td th:text="${m.descripcion}" />
+								<td class="text-danger" style="font-weight: bold;" th:text="${m.estado}" />
+								<td>
+									<form class="form-inline center" th:action="@{/editarMateria}" th:method="post">
+										<input type="hidden" name="id" th:value="${m.codigo}" />
+										<button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</th:block>
+					</th:block>
 			</table>
 
 		</div>
 	</div>
 
-			
+
 </body>
+
 </html>

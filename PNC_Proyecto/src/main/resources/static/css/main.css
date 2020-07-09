@@ -125,4 +125,9 @@ td, th{
 	font-style: italic;
 }
 
+.space-between{
+	display: flex;
+	justify-content: space-between;
+}
+
 

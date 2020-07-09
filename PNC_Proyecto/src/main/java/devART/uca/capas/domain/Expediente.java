@@ -86,6 +86,17 @@ public class Expediente {
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_nombreMadre;
 
+	@OneToMany(mappedBy="expediente", fetch = FetchType.EAGER)
+	private List<AlumnoxMateria> alumnoxMaterias;
+
+	@Transient
+	private double promedio;
+
+	@Transient
+	private int reprobadas;
+
+	@Transient
+	private int aprobadas;
 
 
 	public Expediente() {}
@@ -186,7 +197,42 @@ public class Expediente {
 		this.s_nombreMadre = s_nombreMadre;
 	}
 
-//	public String get_d_fnacimientoShort() {if(this.d_fnacimiento == null){return "";	}
+	public double getPromedio() {
+		if(promedio==Double.NaN)
+		{return 0 ;}
+		else{
+		return promedio;}
+	}
+
+	public void setPromedio(double promedio) {
+		this.promedio = promedio;
+	}
+
+	public int getReprobadas() {
+		return reprobadas;
+	}
+
+	public void setReprobadas(int reprobadas) {
+		this.reprobadas = reprobadas;
+	}
+
+	public int getAprobadas() {
+		return aprobadas;
+	}
+
+	public void setAprobadas(int aprobadas) {
+		this.aprobadas = aprobadas;
+	}
+
+	public List<AlumnoxMateria> getAlumnoxMaterias() {
+		return alumnoxMaterias;
+	}
+
+	public void setAlumnoxMaterias(List<AlumnoxMateria> alumnoxMaterias) {
+		this.alumnoxMaterias = alumnoxMaterias;
+	}
+
+	//	public String get_d_fnacimientoShort() {if(this.d_fnacimiento == null){return "";	}
 //	else{
 ////		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
 //		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
