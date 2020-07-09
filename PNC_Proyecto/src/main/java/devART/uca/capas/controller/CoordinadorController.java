@@ -314,11 +314,12 @@ public class CoordinadorController {
 					expedientes = expedienteService.filtrarPorCarne(cadena);
 					promediotodo(expedientes);
 					aprobadasreprobadas(expedientes);
-				}if (tipo ==5) {
-					expedientes = expedienteService.filtrarPorCentro(cadena);
-					promediotodo(expedientes);
-					aprobadasreprobadas(expedientes);
 				}
+//				if (tipo ==5) {
+//					expedientes = expedienteService.filtrarPorCentro(cadena);
+//					promediotodo(expedientes);
+//					aprobadasreprobadas(expedientes);
+//				}
 
 
 			}

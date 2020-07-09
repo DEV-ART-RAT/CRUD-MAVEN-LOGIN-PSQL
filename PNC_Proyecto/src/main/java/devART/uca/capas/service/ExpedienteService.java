@@ -17,5 +17,5 @@ public interface ExpedienteService {
 	public List<Expediente> filtrarPorNombre(String cadena) throws DataAccessException;
 	public List<Expediente> filtrarPorApellido(String cadena) throws DataAccessException;
 	public List<Expediente> filtrarPorCarne(String cadena) throws DataAccessException;
-	public List<Expediente> filtrarPorCentro(String cadena) throws DataAccessException;
+//	public List<Expediente> filtrarPorCentro(String cadena) throws DataAccessException;
 }
