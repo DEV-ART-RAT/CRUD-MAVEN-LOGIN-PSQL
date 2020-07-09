@@ -26,6 +26,7 @@ public class AlumnoxMateria {
     private Expediente expediente;
 
     @Column(name="s_nota")
+    @NotNull(message="No puede estar vacio")
     @Min(value = 0,message = "La nota no puede ser menor a 0")
     @Max(value = 10,message = "La nota no puede ser mayor a 10")
     private double nota;

@@ -79,6 +79,27 @@ public class CoordinadorController {
 
 		return mav;
 	}
+	@RequestMapping(value = "/busquedaexpedientes", method = RequestMethod.GET)
+	public ModelAndView listadobusqueda(Principal principal,@RequestParam(value="codigo") Integer codigo) {
+		ModelAndView mav = new ModelAndView();
+		List<Expediente> expedientes = null;
+		List<Expediente> expediente = null;
+		List<AlumnoxMateria> alumnoxMaterias = null;
+		try {
+
+			expedientes = expedienteService.findAllExpe();
+			promediotodo(expedientes);
+			aprobadasreprobadas(expedientes);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("expedientes", expedientes);
+		mav.setViewName("/Coordinador/coordinador");
+
+		return mav;
+	}
+
 
 	@RequestMapping("/guardarExpediente")
 	public ModelAndView guardarExpediente(Principal principal,@Valid @ModelAttribute Expediente expediente, BindingResult result) {
@@ -192,24 +213,39 @@ public class CoordinadorController {
 				return listadoCoordinador(principal);
 			}else {
 				if (tipo ==1) {
-					System.out.println("Nombre = "+cadena);
-					expedientes = expedienteService.filtrarPorNombre(cadena);
+					expedientes = expedienteService.filtrarPorGeneral(cadena);
 					promediotodo(expedientes);
 					aprobadasreprobadas(expedientes);
 				}
 				if (tipo ==2) {
+					expedientes = expedienteService.filtrarPorNombre(cadena);
+					promediotodo(expedientes);
+					aprobadasreprobadas(expedientes);
+				}
+				if (tipo ==3) {
 					System.out.println("Apellido = "+cadena);
 					expedientes = expedienteService.filtrarPorApellido(cadena);
 					promediotodo(expedientes);
 					aprobadasreprobadas(expedientes);
-				}}
+				}
+				if (tipo ==4) {
+					expedientes = expedienteService.filtrarPorCarne(cadena);
+					promediotodo(expedientes);
+					aprobadasreprobadas(expedientes);
+				}if (tipo ==5) {
+					expedientes = expedienteService.filtrarPorCentro(cadena);
+					promediotodo(expedientes);
+					aprobadasreprobadas(expedientes);
+				}
 
+
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		mav.addObject("expedientes", expedientes);
-		mav.setViewName("/Coordinador/coordinador");
+		mav.setViewName("/Coordinador/listadoexpedientes");
 
 		return mav;
 	}

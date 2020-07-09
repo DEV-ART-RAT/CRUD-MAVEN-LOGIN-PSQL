@@ -13,6 +13,9 @@ public interface ExpedienteService {
 	public void delete(Integer codigo) throws DataAccessException;
 	public Expediente filtrarUNO(Integer codigo) throws DataAccessException;
 	public List<Expediente> filtrarPorID(Integer cadena) throws DataAccessException;
+	public List<Expediente> filtrarPorGeneral(String cadena) throws DataAccessException;
 	public List<Expediente> filtrarPorNombre(String cadena) throws DataAccessException;
 	public List<Expediente> filtrarPorApellido(String cadena) throws DataAccessException;
+	public List<Expediente> filtrarPorCarne(String cadena) throws DataAccessException;
+	public List<Expediente> filtrarPorCentro(String cadena) throws DataAccessException;
 }

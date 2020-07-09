@@ -27,12 +27,24 @@ public class ExpedienteServiceImpl implements ExpedienteService{
 		expedienteRepo.save(expediente);
 	}
 	@Override
+	public List<Expediente> filtrarPorGeneral(String cadena)  throws DataAccessException {
+		return expedienteRepo.mostrarPorGeneral(cadena);
+	}
+	@Override
 	public List<Expediente> filtrarPorNombre(String cadena)  throws DataAccessException {
 		return expedienteRepo.mostrarPorNombre(cadena);
 	}
 	@Override
 	public List<Expediente> filtrarPorApellido(String cadena)throws DataAccessException {
 		return expedienteRepo.mostrarPorApellido(cadena);
+	}
+	@Override
+	public List<Expediente> filtrarPorCarne(String cadena)throws DataAccessException {
+		return expedienteRepo.mostrarPorCarne(cadena);
+	}
+	@Override
+	public List<Expediente> filtrarPorCentro(String cadena)throws DataAccessException {
+		return expedienteRepo.mostrarPorCentro(cadena);
 	}
 	@Override
 	public List<Expediente> filtrarPorID(Integer cadena)  throws DataAccessException {

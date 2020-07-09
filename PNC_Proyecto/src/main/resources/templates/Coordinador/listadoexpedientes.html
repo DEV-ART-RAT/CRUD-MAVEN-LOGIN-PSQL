@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlms:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Coordinador</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+</head>
+
+<body>
+	<th:block th:include="/menucoordinador"></th:block>
+	<div class="container-fluid">
+		<div class="container card bg-dark p-3 mt-4" style="min-height: 80vh;">
+
+
+			<div class="container-fluid p-3">
+				<table class="table table-sm table-dark table-hover table-condensed" id="tableExpediente">
+					<thead>
+						<th scope="col">Codigo</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellido</th>
+						<th scope="col">Carnet</th>
+						<th scope="col">Institucion</th>
+						<th scope="col">Edad</th>
+						<th scope="col">Telefono</th>
+						<th scope="col">Promedio</th>
+						<th scope="col">Aprobadas</th>
+						<th scope="col">Reprobadas</th>
+						<th scope="col">Opciones</th>
+					</thead>
+
+					<tbody:block th:each="e, row: ${expedientes}" id="tableInfo">
+						<tr>
+							<td th:text="${e.codigo}" name="codigo" th:value="${e.codigo}" />
+							<td th:text="${e.s_nombre}" />
+							<td th:text="${e.s_apellido}" />
+							<td th:text="${e.s_carne}" />
+							<td th:text="${e.s_institucion}" />
+							<td th:text="${e.s_edad}" />
+							<td th:text="${e.s_telefonom}" />
+							<td th:text="${e.promedio}" />
+							<td th:text="${e.aprobadas}" />
+							<td th:text="${e.reprobadas}" />
+							<td class="space-between">
+								<form class="form-inline center" th:action="@{/expediente}" th:method="post">
+									<input type="hidden" name="id" th:value="${e.codigo}" />
+									<button type="submit" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
+								</form>
+								<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
+									<input type="hidden" name="id" th:value="${e.codigo}" />
+									<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
+								</form>
+							</td>
+						</tr>
+					</tbody:block>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" th:inline="javascript">
+	
+		
+
+		var dataTable = document.getElementById('tableExpediente');
+		var datos = [];
+		var value;
+		for(var i = 0; i<dataTable.children[1].childElementCount; i++){
+			var listaAux = [];
+			for(var j = 0; j<10; j++){
+				listaAux.push(dataTable.children[1].children[i].children[j].innerText);
+			}
+			datos.push(listaAux);
+		}
+
+		var tipoValue = document.getElementById('tipo')
+
+		tipoValue.onchange = function busqueda(){
+			var value = $('#busqueda').val();
+			var tipoValue = document.getElementById('tipo').value;
+			var filterData = FilterTable(value, datos, tipoValue);
+			rebuildTable(filterData);
+		}
+
+		$('#busqueda').on('keyup',function(){
+			value = $(this).val();
+			var tipoValue = document.getElementById('tipo').value;
+			var filterData = FilterTable(value, datos, tipoValue);
+			rebuildTable(filterData);
+		})
+
+		function FilterTable(value,data,tipo){
+			var filterData = [];
+			for( var i = 0; i<data.length; i++){
+				value.toLowerCase();
+				var fname = data[i][1].toLowerCase();
+				var lname = data[i][2].toLowerCase();
+				var carnet = data[i][3].toLowerCase();
+				var centro = data[i][4].toLowerCase();
+				if(tipo == 1){
+					if(fname.includes(value) || lname.includes(value) || carnet.includes(value) || centro.includes(value)){
+						filterData.push(data[i]);
+					}
+				}
+				if(tipo == 2){
+					if(fname.includes(value)){
+						filterData.push(data[i]);
+					}
+				}
+				if(tipo == 3){
+					if(lname.includes(value)){
+						filterData.push(data[i]);
+					}
+				}
+				if(tipo == 4){
+					if(carnet.includes(value)){
+						filterData.push(data[i]);
+					}
+				}
+				if(tipo == 5){
+					if(centro.includes(value)){
+						filterData.push(data[i]);
+					}
+				}
+			}
+			return filterData;
+		}
+
+		function rebuildTable (data){
+			var table = document.getElementById('tableExpediente');
+			table.innerHTML = `
+						<thead>
+							<th scope="col">Codigo</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Carnet</th>
+							<th scope="col">Institucion</th>
+							<th scope="col">Edad</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Promedio</th>
+							<th scope="col">Aprobadas</th>
+							<th scope="col">Reprobadas</th>
+							<th scope="col">Opciones</th>
+						</thead>`
+
+			for( var i = 0; i<data.length; i++){
+				var row = `<tr>
+							<td name="codigo" value="${data[i][1]}">${data[i][0]}</td>
+								<td>${data[i][1]}</td>
+								<td>${data[i][2]}</td>
+								<td>${data[i][3]}</td>
+								<td>${data[i][4]}</td>
+								<td>${data[i][5]}</td>
+								<td>${data[i][6]}</td>
+								<td>${data[i][7]}</td>
+								<td>${data[i][8]}</td>
+								<td>${data[i][9]}</td>
+							<td class="space-between">
+								<form class="form-inline center" action="expediente" method="post">
+									<input type="hidden" name="id" value="${data[i][0]}"/>
+									<button type="submit" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
+								</form>
+								<form class="form-inline center" action="cursadas" method="post">
+									<input type="hidden" name="id" value="${data[i][0]}"/>
+									<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
+								</form>
+							</td>
+						</tr>`
+					table.innerHTML += row
+			}
+		}
+
+	</script>
+
+</body>
+
+</html>
