@@ -111,6 +111,8 @@ public class CoordinadorController {
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		if(result.hasErrors()) {
+			List<Institucion> instituciones=institucionRepository.findAll();
+			mav.addObject("institucion", instituciones);
 			mav.setViewName("/Coordinador/AgregarExpediente");
 			return mav;
 
@@ -133,19 +135,18 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			List<Expediente> expedientes1 = null;
-			List<Expediente> expediente1 = null;
-			List<AlumnoxMateria> alumnoxMaterias = null;
 			try {
-				expedientes1 = expedienteService.findAllExpe();
-				promediotodo(expedientes1);
-				aprobadasreprobadas(expedientes1);
+				Expediente expedienteA=new Expediente();
+				List<Institucion> instituciones=institucionRepository.findAll();
+				mav.addObject("institucion", instituciones);
+				mav.addObject("expedienteactual", expediente);
+				mav.addObject("expediente", expedienteA);
+				mav.addObject("mensaje","Agregado Con Exito!");
+				mav.setViewName("/Coordinador/AgregarExpedientefake");
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.addObject("mensaje", "Expediente Agregado con Exito!");
-			mav.addObject("expedientes", expedientes1);
-			mav.setViewName("/Coordinador/coordinador");
 			return mav;
 		}
 	}
