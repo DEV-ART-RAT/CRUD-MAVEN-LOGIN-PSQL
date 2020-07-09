@@ -21,17 +21,14 @@
 			<div class="container-fluid p-3">
 				<table class="table table-sm table-dark table-hover table-condensed" id="tableExpediente">
 					<thead>
-						<th scope="col">Codigo</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Apellido</th>
-						<th scope="col">Carnet</th>
-						<th scope="col">Institucion</th>
-						<th scope="col">Edad</th>
-						<th scope="col">Telefono</th>
-						<th scope="col">Promedio</th>
-						<th scope="col">Aprobadas</th>
-						<th scope="col">Reprobadas</th>
-						<th scope="col">Opciones</th>
+					<th scope="col">Codigo</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellido</th>
+					<th scope="col">Carnet</th>
+					<th scope="col">Promedio</th>
+					<th scope="col">Aprobadas</th>
+					<th scope="col">Reprobadas</th>
+					<th scope="col">Opciones</th>
 					</thead>
 
 					<tbody:block th:each="e, row: ${expedientes}" id="tableInfo">
@@ -39,9 +36,6 @@
 							<td th:text="${e.codigo}" name="codigo" th:value="${e.codigo}" />
 							<td th:text="${e.s_nombre}" />
 							<td th:text="${e.s_apellido}" />
-							<td th:text="${e.s_carne}" />
-							<td th:text="${e.s_institucion}" />
-							<td th:text="${e.s_edad}" />
 							<td th:text="${e.s_telefonom}" />
 							<td th:text="${e.promedio}" />
 							<td th:text="${e.aprobadas}" />
@@ -51,7 +45,7 @@
 									<input type="hidden" name="id" th:value="${e.codigo}" />
 									<button type="submit" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
 								</form>
-								<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
+								<form class="form-inline center" th:action="@{/cursadas}"  th:method="post">
 									<input type="hidden" name="id" th:value="${e.codigo}" />
 									<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
 								</form>
