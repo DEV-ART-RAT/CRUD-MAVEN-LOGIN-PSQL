@@ -5,6 +5,8 @@ import devART.uca.capas.dao.AppRoleDAO;
 import devART.uca.capas.dao.AppUserDAO;
 import devART.uca.capas.domain.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -33,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //verificando si usuario existe
         if (appUser == null) {
             //System.out.println("User not found! " + userName);
-            throw new UsernameNotFoundException("Usuario " + userName + " no se encontro en Base de Datos");
+            throw new AuthenticationCredentialsNotFoundException("Usuario " + userName + " no se encontro en Base de Datos");
         }
         
         //verificando si usuario es activo
