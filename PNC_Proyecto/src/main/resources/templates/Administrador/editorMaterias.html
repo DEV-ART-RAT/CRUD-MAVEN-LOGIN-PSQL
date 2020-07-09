@@ -27,7 +27,7 @@
 					<th scope="col">Opciones</th>
 				</thead>
 				<th:block th:each="m, row: ${materias}">
-						<th:block th:if="${m.estado == 'Activo'}">
+						<th:block th:if="${m.estado == 'Activa'}">
 							<tr>
 								<td th:text="${m.codigo}" />
 								<td th:text="${m.nombreMateria}" />

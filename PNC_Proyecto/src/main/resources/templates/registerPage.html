@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
+ 
 <head>
 	<meta charset="UTF-8">
 	<title>Tempest</title>
@@ -94,12 +94,13 @@
 									<div class="input-group-prepend w-35">
 										<div class="input-group-text">Municipio</div>
 									</div>
-									<select class="form-control" th:field="${userNewExp.municipio.codigo}" id="categoriaBox2">
+									<select  class="form-control" th:field="${userNewExp.municipio.codigo}" id="categoriaBox2">
 										<option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
 												th:text ="${dpto.nombre}">
 										</option>
 									</select>
 								</div>
+								
 						
 								<div class="input-group mt-4 mb-2">
 									<div class="input-group-prepend w-35">
@@ -122,6 +123,5 @@
 		</div>
 	</div>
 
-</body>
-    
+</body> 
 </html>

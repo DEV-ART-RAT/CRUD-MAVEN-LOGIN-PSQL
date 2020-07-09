@@ -47,8 +47,8 @@
 									<div class="input-group-text">Descripcion</div>
 								</div>
 								<span th:errors="*{descripcion}" style="color:red;"></span>
-								<input class="form-control" th:field="*{descripcion}" type="text" name="descripcion"
-									placeholder="Descripcion de la Materia">
+								<textarea class="form-control" th:field="*{descripcion}" name="descripcion"
+									placeholder="Descripcion de la Materia"></textarea>
 							</div>
 
 							<div class="input-group mb-2">
