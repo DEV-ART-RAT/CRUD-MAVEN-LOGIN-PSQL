@@ -1,5 +1,6 @@
 package devART.uca.capas.controller;
 
+import java.security.Principal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,7 +13,11 @@ import javax.validation.Valid;
 
 import devART.uca.capas.domain.*;
 import devART.uca.capas.service.*;
+import devART.uca.capas.utils.WebUtils;
+import org.apache.tomcat.util.bcel.classfile.EnumElementValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,13 +42,52 @@ public class CoordinadorController {
 
 	private static DecimalFormat df = new DecimalFormat("0.00");
 
-	@RequestMapping("/guardarExpediente")
-	public ModelAndView guardarExpediente(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 
+	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+	public String listado(Principal principal) {
+
+		User auth = (User) ((Authentication) principal).getPrincipal();
+		String rol = WebUtils.getRole(auth);
+		//System.out.println(rol);
+
+		if(rol.equals("ROLE_USER")){
+			return "redirect:/userCoordinador";
+		}
+
+		if(rol.equals("ROLE_ADMIN")){
+			return "redirect:/admin";
+		}
+		return "redirect:/";
+	}
+	@RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
+	public ModelAndView listadoCoordinador(Principal principal) {
+		ModelAndView mav = new ModelAndView();
+		List<Expediente> expedientes = null;
+		List<Expediente> expediente = null;
+		List<AlumnoxMateria> alumnoxMaterias = null;
+		try {
+
+			expedientes = expedienteService.findAllExpe();
+			promediotodo(expedientes);
+			aprobadasreprobadas(expedientes);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("expedientes", expedientes);
+		mav.setViewName("/Coordinador/coordinador");
+
+		return mav;
+	}
+
+	@RequestMapping("/guardarExpediente")
+	public ModelAndView guardarExpediente(Principal principal,@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		if(result.hasErrors()) {
 			mav.setViewName("/Coordinador/AgregarExpediente");
+			return mav;
+
 		}else{
 			try {
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -63,18 +107,13 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			expedientes = expedienteService.findAllExpe();
-			mav.addObject("expedientes", expedientes);
-			mav.addObject("message", "Estudiante Guardado!");
-			mav.setViewName("/Coordinador/coordinador");
-
+			return listadoCoordinador(principal);
 		}
-		return mav;
 	}
 
 	@RequestMapping(value="/nuevaMateriaexpediente", method=RequestMethod.POST)
 	public ModelAndView NuevoMateria(@RequestParam(value="codigo") Integer codigo) {
-		System.out.println("Codigo final  es :"+codigo);
+		System.out.println("Codigo final final final es :"+codigo);
 		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
@@ -88,15 +127,27 @@ public class CoordinadorController {
 		return mav;
 	}
 	@RequestMapping(value="/guardarExpedientemateria", method=RequestMethod.POST)
-	public ModelAndView guardarExpedientemateria(@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
+	public ModelAndView guardarExpedientemateria(@RequestParam("ciclo") Long ciclo, @ModelAttribute("alumnoxmateria") @Valid AlumnoxMateria alumnoxMateria, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		if(result.hasErrors()) {
 
+		if(result.hasErrors()) {
+			List<Materia> materias = materiaService.findAll();
+			List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
+			mav.addObject("expedientes", expedientes);
+			mav.addObject("materias", materias);
 			mav.setViewName("/Coordinador/AgregarMateria");
+			return mav;
 		}else{
 			try {
-				Float nota = Float.parseFloat(alumnoxMateria.getNota());
-				if(nota>=6){
+				if(ciclo==1){
+					alumnoxMateria.setCiclo("01");
+				}else if (ciclo==2){
+					alumnoxMateria.setCiclo("02");
+				}else if(ciclo==3){
+					alumnoxMateria.setCiclo("03");
+				}
+
+				if(alumnoxMateria.getNota()>=6){
 					alumnoxMateria.setEstado("Aprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}else{
@@ -104,17 +155,20 @@ public class CoordinadorController {
 					System.out.println(alumnoxMateria.getEstado());
 				}
 				alumnoxMateriaService.insert(alumnoxMateria);
-//
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			List<Expediente> expedientes = null;
-			expedientes = expedienteService.findAllExpe();
-			promediotodo(expedientes);
-			aprobadasreprobadas(expedientes);
-			mav.addObject("expedientes", expedientes);
-			mav.setViewName("/Coordinador/coordinador");
+			mav.addObject("mensaje","Agregado con exito!");
+			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
+			mav.addObject("alumnoxmateria", alumnoxmateria);
+
 		}
+		List<Materia> materias = materiaService.findAll();
+		List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
+		mav.addObject("expedientes", expedientes);
+		mav.addObject("materias", materias);
+		mav.setViewName("/Coordinador/AgregarMateria");
 		return mav;
 	}
 	@RequestMapping("/NuevoExpediente")
@@ -129,15 +183,13 @@ public class CoordinadorController {
 
 
 	@RequestMapping(value="/buscarexpediente", method=RequestMethod.POST)
-	public ModelAndView filtrar(@RequestParam(value="busqueda") String cadena,@RequestParam Long tipo)
+	public ModelAndView filtrar(Principal principal,@RequestParam(value="busqueda") String cadena,@RequestParam Long tipo)
 	{
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		try {
 			if (cadena==""){
-				expedientes = expedienteService.findAllExpe();
-				promediotodo(expedientes);
-				aprobadasreprobadas(expedientes);
+				return listadoCoordinador(principal);
 			}else {
 				if (tipo ==1) {
 					System.out.println("Nombre = "+cadena);
@@ -199,23 +251,20 @@ public class CoordinadorController {
 	}
 
 	@RequestMapping("/guardarExpedientemodificado")
-	public ModelAndView guardarExpedientemodificado(@Valid @ModelAttribute Expediente expediente, BindingResult result) {
+	public ModelAndView guardarExpedientemodificado(Principal principal,@Valid @ModelAttribute Expediente expediente, BindingResult result) {
 
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		if(result.hasErrors()) {
 			mav.setViewName("/Coordinador/modificarExpediente");
-
+			return mav;
 		}else{
 			try {
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate ahora = LocalDate.now();
 				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
-				System.out.println("Fecha NAch es  "+fechaNac);
-				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
 				if(periodo.getYears()>999){
-
 					expediente.setS_edad(Integer.toString(999));
 					expedienteService.insert(expediente);
 					expedientes = expedienteService.findAllExpe();
@@ -224,20 +273,17 @@ public class CoordinadorController {
 					expedienteService.insert(expediente);
 					expedientes = expedienteService.findAllExpe();
 				}
-
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.addObject("expedientes", expedientes);
-			mav.addObject("message", "Estudiante Modificado!");
-			mav.setViewName("/Coordinador/coordinador");
+			return listadoCoordinador(principal);
 		}
 
-		return mav;
+
 	}
 
 	@RequestMapping(value="/expediente", method=RequestMethod.POST)
-	public ModelAndView mostrarExpediente(@RequestParam(value="id") String codigo)
+	public ModelAndView mostrarExpediente(Principal principal,@RequestParam(value="id") String codigo)
 	{
 		ModelAndView mav = new ModelAndView();
 		Expediente expediente=null;
@@ -256,6 +302,7 @@ public class CoordinadorController {
 	@RequestMapping(value="/cursadas", method=RequestMethod.POST)
 	public ModelAndView mostrarMaterias(@RequestParam(value="id") Integer codigo)
 	{
+		System.out.println("Su codigo es :"+codigo);
 		ModelAndView mav = new ModelAndView();
 		List<AlumnoxMateria> alumnoxMaterias = null;
 		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
@@ -265,12 +312,12 @@ public class CoordinadorController {
 			//int codigoint = Integer.parseInt(codigo);
 			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
 			mav.addObject("promedio","Su promedio es: "+df.format(promedio(alumnoxMaterias)));
-
-//			alumnoxMaterias = alumnoxMateriaService.findAll();
-			System.out.println("Codigo es :"+codigo);
-
 		}catch (Exception e) {
 			e.printStackTrace();
+		}
+		if (codigo==null){
+			mav.setViewName("/Coordinador/expediente");
+			return mav;
 		}
 		mav.addObject("alumnoxmateria", alumnoxmateria);
 		expediente = expedienteService.filtrarUNO(codigo);
@@ -285,8 +332,7 @@ public class CoordinadorController {
 	public double promedio(List<AlumnoxMateria> alumnoxMaterias){
 		double suma = 0;
 		for (int i = 0; i < alumnoxMaterias.size(); i++) {
-			double nota = Float.parseFloat(alumnoxMaterias.get(i).getNota());
-			suma = suma + nota;
+			suma = suma + alumnoxMaterias.get(i).getNota();
 		}
 		suma = suma/alumnoxMaterias.size();
 		if(alumnoxMaterias.size()==0){
@@ -300,14 +346,7 @@ public class CoordinadorController {
 		expedientes.forEach(e->{
 			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
 			e.getAlumnoxMaterias().forEach(a-> {
-				if(a.getNota()!=""||a.getNota()!=null){
-					float nota = Float.parseFloat(a.getNota());
-					sumanotas.set(sumanotas.get() + nota);
-				}
-				else{
-					float sumatotal;
-					sumatotal = (float) 0.0;
-				}
+					sumanotas.set((float) (sumanotas.get() + a.getNota()));
 			});
 			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
 				double promedio;
@@ -329,10 +368,8 @@ public class CoordinadorController {
 			AtomicInteger aprobadas= new AtomicInteger();
 			AtomicInteger reprobadas= new AtomicInteger();
 			e.getAlumnoxMaterias().forEach(a-> {
-				float nota = Float.parseFloat(a.getNota());
-				if(nota>=6){
+				if(a.getNota()>=6){
 					aprobadas.addAndGet( 1);
-
 				}
 				else
 				{

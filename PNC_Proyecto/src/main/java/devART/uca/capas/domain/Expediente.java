@@ -37,7 +37,7 @@ public class Expediente {
 	
 	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_carne")
-	@Pattern(regexp = "^[a-zA-Z0-9]{9}$", message = "El carne debe tener exactamente 9 digitos")
+	@Pattern(regexp = "^[a-zA-Z0-9]{9}$", message = "El carne debe tener exactamente 9 digitos alfanumericos")
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_carne;
 

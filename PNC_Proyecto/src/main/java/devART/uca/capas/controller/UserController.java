@@ -90,46 +90,27 @@ public class UserController {
     }
      */
 
-    @RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
-    public ModelAndView listadoCoordinador(Principal principal) {
-        ModelAndView mav = new ModelAndView();
-        List<Expediente> expedientes = null;
-		List<Expediente> expediente = null;
-		List<AlumnoxMateria> alumnoxMaterias = null;
-        try {
-
-            expedientes = expedienteService.findAllExpe();
-            promedio(expedientes);
-			aprobadasreprobadas(expedientes);
-		}catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mav.addObject("expedientes", expedientes);
-        mav.setViewName("/Coordinador/coordinador");
-
-        return mav;
-    }
 
 
 
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public String listado(Principal principal) {
 
-        User auth = (User) ((Authentication) principal).getPrincipal();
-        String rol = WebUtils.getRole(auth);
-        //System.out.println(rol);
-
-        if(rol.equals("ROLE_USER")){
-            return "redirect:/userCoordinador";
-        }
-
-        if(rol.equals("ROLE_ADMIN")){
-            return "redirect:/admin";
-        }
-		return "redirect:/";
-    }
+//    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+//    public String listado(Principal principal) {
+//
+//        User auth = (User) ((Authentication) principal).getPrincipal();
+//        String rol = WebUtils.getRole(auth);
+//        //System.out.println(rol);
+//
+//        if(rol.equals("ROLE_USER")){
+//            return "redirect:/userCoordinador";
+//        }
+//
+//        if(rol.equals("ROLE_ADMIN")){
+//            return "redirect:/admin";
+//        }
+//		return "redirect:/";
+//    }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
@@ -280,18 +261,17 @@ public class UserController {
 
 	public void promedio(List<Expediente> expedientes){
 		expedientes.forEach(e->{
-			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
+			AtomicReference<Double> sumanotas= new AtomicReference<>((double) 0);
 			e.getAlumnoxMaterias().forEach(a-> {
-				if(a.getNota()!=""||a.getNota()!=null){
-					float nota = Float.parseFloat(a.getNota());
-					sumanotas.set(sumanotas.get() + nota);
+				if(a.getNota()!=0){
+					sumanotas.set(sumanotas.get() + a.getNota());
 				}
 				else{
 					float sumatotal;
 					sumatotal = (float) 0.0;
 				}
 			});
-			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
+			if(sumanotas.get() !=null||e.getAlumnoxMaterias().size()!=0){
 				double promedio;
 				promedio = sumanotas.get() / e.getAlumnoxMaterias().size();
 				if(promedio==Double.NaN){
@@ -311,10 +291,8 @@ public class UserController {
 			AtomicInteger aprobadas= new AtomicInteger();
 			AtomicInteger reprobadas= new AtomicInteger();
 			e.getAlumnoxMaterias().forEach(a-> {
-				float nota = Float.parseFloat(a.getNota());
-				if(nota>=6){
+				if(a.getNota()>=6){
 					aprobadas.addAndGet( 1);
-
 				}
 				else
 				{

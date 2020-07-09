@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
 
 <head>
 	<meta charset="UTF-8">
@@ -15,6 +15,7 @@
 <body>
 	<th:block th:include="/menucoordinador"></th:block>
 	<div class="container">
+		<h1 th:text="${mensaje}"></h1>
 		<div class="container row m-4 p-3">
 			<div class="col"></div>
 			<div class="col-4 card p-3">
@@ -24,12 +25,12 @@
 							<div class="input-group-text">Materia</div>
 						</div>
 						<select class="form-control" th:field="${alumnoxmateria.materia.codigo}">
-							<option th:each="c: ${materias}" th:value="${c.codigo}">
-								<th th:text="${c.nombreMateria}"></th>
+							<option th:each="m: ${materias}" th:value="${m.codigo}">
+								<th th:text="${m.nombreMateria}"></th>
 							</option>
 						</select>
 					</div>
-		
+
 					<div class="input-group mb-2 hidden" >
 						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Codigo</div>
@@ -40,20 +41,44 @@
 							</option>
 						</select>
 					</div>
-		
+
 					<div class="input-group mb-2">
 						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Nota</div>
 						</div>
-						<input class="form-control" th:field="${alumnoxmateria.nota}" type="text" name="materia" placeholder="Nota">
+						<input class="form-control" th:field="${alumnoxmateria.nota}" type="text" >
 						<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
 					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend w-25">
+							<div class="input-group-text">Annio</div>
+						</div>
+						<input class="form-control" th:field="${alumnoxmateria.annio}" value="2005" type="number" >
+						<span th:errors="${alumnoxmateria.annio}" style="color:red;"></span>
+					</div>
+					<div class="input-group mb-4">
+						<div class="input-group-prepend w-25">
+							<div class="input-group-text">Ciclo</div>
+						</div>
+						<select  class="form-control input-lg" name="ciclo">
+							<option th:value="1" th:text="01"></option>
+							<option th:value="2" th:text="02"></option>
+							<option th:value="3" th:text="03"></option>
+						</select>
+					</div>
 					<input type="submit" value="Guardar"  class="btn btn-danger form-control">
-		
+
 				</form>
 			</div>
+			<tbody:block th:each="e, row: ${expedientes}">
+				<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
+					<input type="hidden" name="id" th:value="${e.codigo}" />
+					<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
+				</form>
+			</tbody:block>
 			<div class="col"></div>
+
 		</div>
-	</div>	
+	</div>
 </body>
 </html>
