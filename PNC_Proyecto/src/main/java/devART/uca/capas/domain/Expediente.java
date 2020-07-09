@@ -68,13 +68,11 @@ public class Expediente {
 	@Pattern(regexp = "^[0-9]{8}$", message = "El carne debe tener exactamente 8 digitos")
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_telefonom;
-	
-	@NotNull(message = "Este campo no puede estar vacio")
-	@Column(name="s_institucion")
-	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
-	@NotEmpty(message = "Este campo no puede estar vacio")
-	private String s_institucion;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "s_institucion", nullable = false)
+	private Institucion institucion;
+
 	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_nombrePadre")
 	@Size(message = "El nombre no debe tener mas de 50 caracteres", max = 50)
@@ -174,12 +172,12 @@ public class Expediente {
 		this.s_telefonom = s_telefonom;
 	}
 
-	public String getS_institucion() {
-		return s_institucion;
+	public Institucion getInstitucion() {
+		return institucion;
 	}
 
-	public void setS_institucion(String s_institucion) {
-		this.s_institucion = s_institucion;
+	public void setInstitucion(Institucion institucion) {
+		this.institucion = institucion;
 	}
 
 	public String getS_nombrePadre() {

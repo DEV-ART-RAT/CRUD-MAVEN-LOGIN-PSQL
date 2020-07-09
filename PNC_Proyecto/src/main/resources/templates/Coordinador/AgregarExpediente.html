@@ -51,13 +51,15 @@
 										id="s_telefonom" th:field="${expediente.s_telefonom}"></h3>
 									<span th:errors="${expediente.s_telefonom}" style="color:red;"></span>
 								</div>
-								<div class="input-group mb-2">
-									<div class="input-group-prepend w-35">
-										<div class="input-group-text">Institucion</div>
+								<div class="input-group mb-2" >
+									<div class="input-group-prepend w-25">
+										<div class="input-group-text">Centro</div>
 									</div>
-									<input class="form-control" placeholder="Institucion" type="text" id="institucion"
-										th:field="${expediente.s_institucion}"></h3>
-									<span th:errors="${expediente.s_institucion}" style="color:red;"></span>
+									<select th:field="${expediente.institucion.codigo}">
+										<option th:each="c: ${institucion}" th:value="${c.codigo}">
+											<th th:text="${c.nombre}"></th>
+										</option>
+									</select>
 								</div>
 							</div>
 							<div class="col card centerPic">

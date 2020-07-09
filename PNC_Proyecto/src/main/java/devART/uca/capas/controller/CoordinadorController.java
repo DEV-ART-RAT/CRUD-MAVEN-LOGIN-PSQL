@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.validation.Valid;
 
 import devART.uca.capas.domain.*;
+import devART.uca.capas.repositories.InstitucionRepository;
 import devART.uca.capas.service.*;
 import devART.uca.capas.utils.WebUtils;
 import org.apache.tomcat.util.bcel.classfile.EnumElementValue;
@@ -34,6 +35,8 @@ public class CoordinadorController {
 	@Autowired
 	ExpedienteServiceImpl expedienteService;
 
+	@Autowired
+	InstitucionRepository institucionRepository;
 	@Autowired
 	MateriaService materiaService;
 
@@ -272,6 +275,8 @@ public class CoordinadorController {
 	public ModelAndView NuevoExpediente() {
 		ModelAndView mav = new ModelAndView();
 		Expediente expediente=new Expediente();
+		List<Institucion> instituciones=institucionRepository.findAll();
+		mav.addObject("institucion", instituciones);
 		mav.addObject("expediente", expediente);
 		mav.setViewName("/Coordinador/AgregarExpediente");
 		return mav;
@@ -351,6 +356,8 @@ public class CoordinadorController {
 		try {
 			int codigoint = Integer.parseInt(codigo);
 			expediente = expedienteService.filtrarUNO(codigoint);
+			List<Institucion> instituciones=institucionRepository.findAll();
+			mav.addObject("institucion", instituciones);
 			mav.addObject("expediente", expediente);
 			mav.setViewName("/Coordinador/modificarExpediente");
 
