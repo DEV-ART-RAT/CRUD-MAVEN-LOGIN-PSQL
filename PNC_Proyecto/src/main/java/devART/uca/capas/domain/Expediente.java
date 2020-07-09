@@ -69,9 +69,9 @@ public class Expediente {
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	private String s_telefonom;
 
-	@OneToOne(mappedBy="expediente", fetch = FetchType.EAGER)
-	private Institucion instituciones;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "s_institucion", nullable = false)
+	private Institucion institucion;
 
 	@NotNull(message = "Este campo no puede estar vacio")
 	@Column(name="s_nombrePadre")
@@ -172,12 +172,12 @@ public class Expediente {
 		this.s_telefonom = s_telefonom;
 	}
 
-	public Institucion getInstituciones() {
-		return instituciones;
+	public Institucion getInstitucion() {
+		return institucion;
 	}
 
-	public void setInstituciones(Institucion instituciones) {
-		this.instituciones = instituciones;
+	public void setInstitucion(Institucion institucion) {
+		this.institucion = institucion;
 	}
 
 	public String getS_nombrePadre() {
