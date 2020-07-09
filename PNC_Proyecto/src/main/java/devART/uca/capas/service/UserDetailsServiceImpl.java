@@ -1,6 +1,7 @@
 package devART.uca.capas.service;
 
 //import com.sun.deploy.security.UserDeclinedException;
+import com.sun.deploy.security.UserDeclinedException;
 import devART.uca.capas.dao.AppRoleDAO;
 import devART.uca.capas.dao.AppUserDAO;
 import devART.uca.capas.domain.AppUser;
@@ -41,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //verificando si usuario es activo
         if(!appUser.isEnabled()) {
         	//System.out.println("User not Active! " + userName);
-//            throw new UserDeclinedException("Usuario " + userName + " no se encuentra activa, pedir activacion a Administrador");
+            throw new AuthenticationCredentialsNotFoundException("La Cuenta " + userName + " no se encuentra activa, pedir activacion a Administrador");
         }
  
         //System.out.println("Found User: " + appUser);

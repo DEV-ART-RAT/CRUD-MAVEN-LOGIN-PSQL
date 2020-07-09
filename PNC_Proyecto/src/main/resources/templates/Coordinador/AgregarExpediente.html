@@ -57,7 +57,7 @@
 									</div>
 									<select th:field="${expediente.institucion.codigo}">
 										<option th:each="c: ${institucion}" th:value="${c.codigo}">
-											<th th:text="${c.codigo}"></th>
+											<th th:text="${c.nombre}"></th>
 										</option>
 									</select>
 								</div>
