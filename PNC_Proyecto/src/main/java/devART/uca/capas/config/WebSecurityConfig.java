@@ -73,14 +73,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/userCoordinador").access("hasAnyRole('ROLE_USER')");
         http.authorizeRequests().antMatchers("/NuevoExpediente").access("hasAnyRole('ROLE_USER')");
         http.authorizeRequests().antMatchers("/Cursadas").access("hasAnyRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/editarexpedienteeditar").access("hasAnyRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/expediente").access("hasAnyRole('ROLE_USER')");
  
         // For ADMIN only.
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/ingresarMateria").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/editarMateria").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/materiasLista").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/administarUsuario").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/usuarioDesactive").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/usuarioActive").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/ingresarInstitucion").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/editarInstitucion").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/institucionLista").access("hasRole('ROLE_ADMIN')");
 
  
         // When the user has logged in as XX.

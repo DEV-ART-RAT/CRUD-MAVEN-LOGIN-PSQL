@@ -16,8 +16,12 @@
 <body>
 <th:block th:include="/menuadmin"></th:block>
 
-<div class="container-fluid">
-    <div class="container p-3">
+<div class="container-fluid pt-4">
+    <div class="container card bg-dark p-3 mt-4" style="min-height: 80vh;">
+        <div class="flex mt-3 mb-3">
+            <a class="btn btn-primary form-control col-3 mr-2" href="/userInfo"> Regresar </a>
+            <a class="btn btn-danger form-control col" href="/ingresarInstitucion"> Ingresar nueva institucion </a>
+        </div>
         <table class="table table-sm table-dark  table-hover table-condensed">
             <thead>
             <th scope="col">Institucion</th>

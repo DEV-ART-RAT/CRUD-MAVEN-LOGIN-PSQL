@@ -33,9 +33,11 @@
 						<input class="form-control" type="text" id="busqueda" name="busqueda"
 							placeholder="Palabra a buscar">
 					</div>
-					<input class="btn btn-success" type="submit" value="Buscar" />
-					<input class="btn btn-success" type="button" value="ver todo"
-						onclick="location.href='./userInfo'" />
+					<div class="flex mt-3 mb-3">
+						<input class="btn btn-primary form-control col-3 mr-2" type="submit" value="Buscar" />
+						<a class="btn btn-primary form-control col-3 mr-2" href="/userInfo"> Mostrar todo </a>
+						<a class="btn btn-success form-control col"  href="/NuevoExpediente">Crear nuevo expediente <i class="fas fa-plus"></i></a>
+					</div>
 				</form>
 			</div>
 

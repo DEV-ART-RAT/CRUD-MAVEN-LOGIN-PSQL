@@ -90,18 +90,18 @@ public class InstitucionController {
     public ModelAndView ingresarUsuarioVerificar(@RequestParam(value="codigo") Integer codigo,@ModelAttribute("institucion") @Valid Institucion institucion, BindingResult result) {
         ModelAndView mav = new ModelAndView();
         //System.out.println(usery.getUserName() + userExp.getDpto().getNombre());
-
+        List<Dpto> dptos = null;
+        List<Municipio> municipios = null;
+        try {
+            dptos = dptoService.findAll();
+            municipios = municipioService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject("dptos", dptos);
+        mav.addObject("municipios", municipios);
         if (result.hasErrors()) {
-            List<Dpto> dptos = null;
-            List<Municipio> municipios = null;
-            try {
-                dptos = dptoService.findAll();
-                municipios = municipioService.findAll();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            mav.addObject("dptos", dptos);
-            mav.addObject("municipios", municipios);
+
         } else {
             try {
                 institucionRepository.save(institucion);
@@ -114,6 +114,7 @@ public class InstitucionController {
         if(codigo.equals("")||codigo.equals(0)){
             mav.setViewName("/Administrador/ingresarInstitucion");
         }else {
+
             mav.setViewName("/Administrador/modificarInstitucion");
             mav.addObject("id",codigo);
             mav.addObject("institucion", institucion);
