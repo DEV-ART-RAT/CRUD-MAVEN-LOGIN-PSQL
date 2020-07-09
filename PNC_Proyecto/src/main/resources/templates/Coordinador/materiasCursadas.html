@@ -62,7 +62,7 @@
                         <td th:text="${e.ciclo}" />
                         <td th:text="${e.nota}" />
                         <td th:text="${e.estado}" />
-                        <td class="text-success" th:text="${e.estado}" />
+                        <td class="text-danger" th:text="${e.estado}" />
                         <td class="space-between">
                             <form class="form-inline center" th:action="@{/editarMateriaexpediente}" th:method="post">
                                 <input type="hidden" name="codigo" th:value="${e.c_alumnoxmateria}" />

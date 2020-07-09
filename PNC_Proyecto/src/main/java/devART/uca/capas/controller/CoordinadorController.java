@@ -60,20 +60,22 @@ public class CoordinadorController {
 		return "redirect:/";
 	}
 	@RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
-	public ModelAndView listadoCoordinador(Principal principal) {
+	public ModelAndView listadoCoordinador(Principal principal,String mensaje) {
+		if (mensaje==null){
+			mensaje="";
+		}
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		List<Expediente> expediente = null;
 		List<AlumnoxMateria> alumnoxMaterias = null;
 		try {
-
 			expedientes = expedienteService.findAllExpe();
 			promediotodo(expedientes);
 			aprobadasreprobadas(expedientes);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		mav.addObject("mensaje",mensaje);
 		mav.addObject("expedientes", expedientes);
 		mav.setViewName("/Coordinador/coordinador");
 
@@ -128,7 +130,20 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			return listadoCoordinador(principal);
+			List<Expediente> expedientes1 = null;
+			List<Expediente> expediente1 = null;
+			List<AlumnoxMateria> alumnoxMaterias = null;
+			try {
+				expedientes1 = expedienteService.findAllExpe();
+				promediotodo(expedientes1);
+				aprobadasreprobadas(expedientes1);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.addObject("mensaje", "Expediente Agregado con Exito!");
+			mav.addObject("expedientes", expedientes1);
+			mav.setViewName("/Coordinador/coordinador");
+			return mav;
 		}
 	}
 
@@ -241,7 +256,7 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.addObject("mensaje","Agregado con exito!");
+			mav.addObject("mensaje","Editado con exito!");
 			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 			mav.addObject("alumnoxmateria", alumnoxmateria);
 
@@ -271,7 +286,7 @@ public class CoordinadorController {
 		List<Expediente> expedientes = null;
 		try {
 			if (cadena==""){
-				return listadoCoordinador(principal);
+				return listadoCoordinador(principal,"");
 			}else {
 				if (tipo ==1) {
 					expedientes = expedienteService.filtrarPorGeneral(cadena);
@@ -349,34 +364,46 @@ public class CoordinadorController {
 
 	@RequestMapping("/guardarExpedientemodificado")
 	public ModelAndView guardarExpedientemodificado(Principal principal,@Valid @ModelAttribute Expediente expediente, BindingResult result) {
-
 		ModelAndView mav = new ModelAndView();
 		List<Expediente> expedientes = null;
 		if(result.hasErrors()) {
 			mav.setViewName("/Coordinador/modificarExpediente");
 			return mav;
+
 		}else{
 			try {
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate ahora = LocalDate.now();
 				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
+				System.out.println("Fecha Nacimiento es  "+fechaNac);
+				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
 				if(periodo.getYears()>999){
 					expediente.setS_edad(Integer.toString(999));
 					expedienteService.insert(expediente);
-					expedientes = expedienteService.findAllExpe();
 				}else {
 					expediente.setS_edad(Integer.toString(periodo.getYears()));
 					expedienteService.insert(expediente);
-					expedientes = expedienteService.findAllExpe();
 				}
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			return listadoCoordinador(principal);
+			List<Expediente> expedientes1 = null;
+			List<Expediente> expediente1 = null;
+			List<AlumnoxMateria> alumnoxMaterias = null;
+			try {
+				expedientes1 = expedienteService.findAllExpe();
+				promediotodo(expedientes1);
+				aprobadasreprobadas(expedientes1);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.addObject("mensaje", "Expediente Agregado con Exito!");
+			mav.addObject("expedientes", expedientes1);
+			mav.setViewName("/Coordinador/coordinador");
+			return mav;
 		}
-
-
 	}
 
 	@RequestMapping(value="/expediente", method=RequestMethod.POST)
@@ -440,23 +467,26 @@ public class CoordinadorController {
 		}
 	};
 	public void promediotodo(List<Expediente> expedientes){
-		expedientes.forEach(e->{
-			AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
-			e.getAlumnoxMaterias().forEach(a-> {
+			expedientes.forEach(e->{
+				AtomicReference<Float> sumanotas = new AtomicReference<>((float) 0);
+				e.getAlumnoxMaterias().forEach(a-> {
+					System.out.println(a.getNota());
 					sumanotas.set((float) (sumanotas.get() + a.getNota()));
-			});
-			if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0){
-				double promedio;
-				promedio = sumanotas.get() / e.getAlumnoxMaterias().size();
-				if(promedio==Double.NaN){
-//					System.out.println("No tienen promedio");
-					e.setPromedio(0);
-				}else{
-//					System.out.println(promedio);
-					double roundedDouble = Math.round(promedio * 100.0) / 100.0;
-					e.setPromedio(roundedDouble);
-				}
-			}
+				});
+					if(sumanotas!=null||e.getAlumnoxMaterias().size()!=0)
+					{
+						double promedio;
+						promedio = sumanotas.get() / e.getAlumnoxMaterias().size();
+						if(promedio==Double.NaN){
+							e.setPromedio(0);
+						}else{
+							double roundedDouble = Math.round(promedio * 100.0) / 100.0;
+							e.setPromedio(roundedDouble);
+						}
+					}
+					else{
+						e.setPromedio(0);
+					}
 		});
 	};
 

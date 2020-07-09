@@ -43,6 +43,7 @@ public class Expediente {
 
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@NotNull(message = "El campo Fecha no puede quedar vacio")
+	@Pattern(regexp = "^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$", message = "Lo sentimos pero no creemos que tengas esa edad")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "d_fnacimiento")
 	private String d_fnacimiento;
@@ -242,3 +243,9 @@ public class Expediente {
 //}
 
 }
+
+
+
+//	@Pattern(regexp = "^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$\n", message = "Solo Se acepta valores entre 1900 y 2999")
+
+//https://www.baeldung.com/java-date-regular-expressions
