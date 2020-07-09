@@ -126,7 +126,7 @@ public class CoordinadorController {
 		return mav;
 	}
 	@RequestMapping(value="/guardarExpedientemateria", method=RequestMethod.POST)
-	public ModelAndView guardarExpedientemateria(Principal principal,@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
+	public ModelAndView guardarExpedientemateria(@Valid @ModelAttribute AlumnoxMateria alumnoxMateria, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 
 		if(result.hasErrors()) {
@@ -146,25 +146,24 @@ public class CoordinadorController {
 					alumnoxMateria.setEstado("Reprobado");
 					System.out.println(alumnoxMateria.getEstado());
 				}
-
-
 				alumnoxMateriaService.insert(alumnoxMateria);
 
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-//			mav.addObject("mensaje","Agregado con exito!");
-//			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
-//			List<Materia> materias = null;
-//			materias = materiaService.findAll();
-//			List<Expediente> expedientes = null;
-//			expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
-//			mav.addObject("expedientes", expedientes);
-//			mav.addObject("alumnoxmateria", alumnoxmateria);
-//			mav.addObject("materias", materias);
-			return listadoCoordinador(principal);
-		}
+			mav.addObject("mensaje","Agregado con exito!");
+			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
+			List<Materia> materias = null;
+			materias = materiaService.findAll();
+			List<Expediente> expedientes = null;
+			expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
+			mav.addObject("expedientes", expedientes);
+			mav.addObject("alumnoxmateria", alumnoxmateria);
+			mav.addObject("materias", materias);
 
+		//	return listadoCoordinador(principal);
+		}
+		mav.setViewName("/Coordinador/AgregarMateria");
 		return mav;
 	}
 	@RequestMapping("/NuevoExpediente")
@@ -259,11 +258,8 @@ public class CoordinadorController {
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate ahora = LocalDate.now();
 				LocalDate fechaNac = LocalDate.parse(expediente.getD_fnacimiento(), fmt);
-				System.out.println("Fecha NAch es  "+fechaNac);
-				System.out.println("getD_fnacimiento() es  "+expediente.getD_fnacimiento());
 				Period periodo = Period.between(fechaNac, ahora);
 				if(periodo.getYears()>999){
-
 					expediente.setS_edad(Integer.toString(999));
 					expedienteService.insert(expediente);
 					expedientes = expedienteService.findAllExpe();
@@ -272,7 +268,6 @@ public class CoordinadorController {
 					expedienteService.insert(expediente);
 					expedientes = expedienteService.findAllExpe();
 				}
-
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -312,10 +307,6 @@ public class CoordinadorController {
 			//int codigoint = Integer.parseInt(codigo);
 			alumnoxMaterias = alumnoxMateriaService.findOneEstudiante(codigo);
 			mav.addObject("promedio","Su promedio es: "+df.format(promedio(alumnoxMaterias)));
-
-//			alumnoxMaterias = alumnoxMateriaService.findAll();
-			System.out.println("Codigo es :"+codigo);
-
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -374,7 +365,6 @@ public class CoordinadorController {
 			e.getAlumnoxMaterias().forEach(a-> {
 				if(a.getNota()>=6){
 					aprobadas.addAndGet( 1);
-
 				}
 				else
 				{

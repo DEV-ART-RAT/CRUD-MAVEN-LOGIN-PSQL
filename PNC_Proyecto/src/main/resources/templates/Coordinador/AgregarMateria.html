@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
 
 <head>
 	<meta charset="UTF-8">
@@ -31,7 +31,7 @@
 						</select>
 					</div>
 
-					<div class="input-group mb-2" >
+					<div class="input-group mb-2 hidden" >
 						<div class="input-group-prepend w-25">
 							<div class="input-group-text">Codigo</div>
 						</div>
@@ -71,14 +71,15 @@
 
 				</form>
 			</div>
-			<div class="col"></div>
 			<tbody:block th:each="e, row: ${expedientes}">
-			<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
-				<input type="hidden" name="id" th:value="${e.codigo}" />
-				<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
-			</form>
+				<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
+					<input type="hidden" name="id" th:value="${e.codigo}" />
+					<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
+				</form>
 			</tbody:block>
+			<div class="col"></div>
+
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

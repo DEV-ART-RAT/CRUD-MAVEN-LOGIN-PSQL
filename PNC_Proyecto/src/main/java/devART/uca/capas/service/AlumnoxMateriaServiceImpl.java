@@ -24,7 +24,7 @@ public class AlumnoxMateriaServiceImpl implements AlumnoxMateriaService{
     @Override
     @Transactional
     public void insert(AlumnoxMateria alumnoxMateria) throws DataAccessException {
-        alumnoxMateriaRepository.saveAndFlush(alumnoxMateria);
+        alumnoxMateriaRepository.save(alumnoxMateria);
     }
 
     @Override

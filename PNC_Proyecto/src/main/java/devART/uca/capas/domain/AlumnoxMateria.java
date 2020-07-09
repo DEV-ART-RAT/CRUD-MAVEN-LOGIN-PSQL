@@ -18,13 +18,12 @@ public class AlumnoxMateria {
     private Integer c_alumnoxmateria;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "c_expediente", nullable = false)
-    private Expediente expediente;
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cod_materia", nullable = false)
     private Materia materia ;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "c_expediente", nullable = false)
+    private Expediente expediente;
 
     @Column(name="s_nota")
     @NotNull(message = "Este campo no puede estar vacio")
@@ -33,7 +32,6 @@ public class AlumnoxMateria {
     private double nota;
 
     @Column(name = "s_estado")
-    @NotEmpty(message = "Este campo no puede estar vacio")
     private String estado;
 
     @Column(name = "i_annio_materia")
@@ -54,7 +52,13 @@ public class AlumnoxMateria {
         this.c_alumnoxmateria = c_alumnoxmateria;
     }
 
+    public Materia getMateria() {
+        return materia;
+    }
 
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
 
     public Expediente getExpediente() {
         return expediente;
@@ -64,16 +68,20 @@ public class AlumnoxMateria {
         this.expediente = expediente;
     }
 
-    public Materia getMateria() {
-        return materia;
-    }
-
-    public void setMateria(Materia materia) {
-        this.materia = materia;
+    public double getNota() {
+        return nota;
     }
 
     public void setNota(double nota) {
         this.nota = nota;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Integer getAnnio() {
@@ -90,17 +98,5 @@ public class AlumnoxMateria {
 
     public void setCiclo(String ciclo) {
         this.ciclo = ciclo;
-    }
-
-    public double getNota() {
-        return nota;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 }
