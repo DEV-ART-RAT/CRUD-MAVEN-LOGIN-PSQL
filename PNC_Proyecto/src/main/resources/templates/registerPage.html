@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
 </head>
 
-<body>
+<body id="body">
 	<th:block th:include="/menu"></th:block>
 	<div class="container-fluid">
 		<div class="container">
@@ -94,9 +94,9 @@
 									<div class="input-group-prepend w-35">
 										<div class="input-group-text">Municipio</div>
 									</div>
-									<select  class="form-control" th:field="${userNewExp.municipio.codigo}" id="categoriaBox2">
-										<option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}"
-												th:text ="${dpto.nombre}">
+									<select  class="form-control" th:field="${userNewExp.municipio.codigo}"  id="categoriaBox2">
+										<option th:each ="dpto: ${municipios}" th:value="${dpto.codigo}" th:departamento="${dpto.dpto.codigo}"
+										th:text ="${dpto.nombre}">
 										</option>
 									</select>
 								</div>
@@ -122,6 +122,58 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" th:inline="javascript">
 
+
+
+		
+		var municipios = document.getElementById('categoriaBox2');
+		var municipiosList = [];
+
+		for(var i = 0; i<municipios.childElementCount; i++){
+			var listaAux = [];
+			listaAux.push(municipios.options[i].value);
+			listaAux.push(municipios.options[i].getAttribute("departamento"));
+			listaAux.push(municipios.options[i].text);
+			municipiosList.push(listaAux);
+		}
+
+		var departamentos = document.getElementById('categoriaBox');
+		var departamentosValue = document.getElementById('categoriaBox').value;
+		var MunicipiosFiltrados = listaFiltrada(departamentosValue, municipiosList);
+		rebuildSelect(MunicipiosFiltrados);
+		
+
+		departamentos.onchange = function municipiosAccess(){
+			var departamentosValue = document.getElementById('categoriaBox').value;
+			var MunicipiosFiltrados = listaFiltrada(departamentosValue, municipiosList);
+			rebuildSelect(MunicipiosFiltrados);
+		}
+		
+		function listaFiltrada (value, data){
+			var filtraData = []
+			for( var i = 0; i<data.length; i++){
+				if(value == data[i][1]){
+					filtraData.push(data[i]);
+				}
+			}
+			return filtraData;
+		}
+
+		function rebuildSelect(data){
+			var select = document.getElementById('categoriaBox2');
+			select.innerHTML= '';
+			for( var i = 0; i<data.length; i++){
+				var option = `
+						<option  value="${data[i][0]}" departamento="${data[i][1]}">${data[i][2]}</option>
+				`
+				select.innerHTML += option;
+			}
+		}
+
+
+
+
+	</script>
 </body> 
 </html>
