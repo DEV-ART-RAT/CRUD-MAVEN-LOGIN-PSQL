@@ -26,7 +26,6 @@ public class AlumnoxMateria {
     private Expediente expediente;
 
     @Column(name="s_nota")
-    @NotNull(message = "Este campo no puede estar vacio")
     @Min(value = 0,message = "La nota no puede ser menor a 0")
     @Max(value = 10,message = "La nota no puede ser mayor a 10")
     private double nota;
@@ -35,11 +34,13 @@ public class AlumnoxMateria {
     private String estado;
 
     @Column(name = "i_annio_materia")
+    @NotNull(message="No puede estar vacio")
     @Min(value = 2005,message = "El año no puede ser menor a 2005")
     @Max(value = 2020,message = "La año no puede ser mayor a 2020")
     private Integer annio;
 
     @Column(name = "s_ciclo")
+    @NotNull(message = "Este campo no puede estar vacio")
     private String ciclo;
 
     public AlumnoxMateria(){}
