@@ -13,48 +13,53 @@
 <body>
     <th:block th:include="/menuadmin"></th:block>
 
-    <div class="container p-3">
-		<table class="table table-sm table-dark  table-hover table-condensed">
-			<thead>
-                
-                <th scope="col">Codigo</th>
-                <th scope="col">Usuario</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Departamento</th>
-                <th scope="col">Municipio</th>
-                <th scope="col">Accion</th>
-            </thead>
+    <div class="container-fluid pt-4">
+        <div class="container card bg-dark p-3 mt-4" style="min-height: 80vh;">
+            <div class="flex mt-3 mb-3">
+				<a class="btn btn-primary form-control col-3 mr-2" href="/userInfo"> Regresar </a>
+			</div>
+            <table class="table table-sm table-dark  table-hover table-condensed">
+                <thead>
+                    
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Municipio</th>
+                    <th scope="col">Accion</th>
+                </thead>
 
-        <th:block th:each="e, row: ${userList}">
-            <tr>
-                <td th:text="${e.userId}" name="codigo" th:value="${e.userId}"  />
-                <td th:text="${e.userName}"/>
-                <td th:text="${e.user.nombre}"/>
-                <td th:text="${e.user.apellido}"/>
-                <td th:text="${e.user.direccion}"/>
-                <td th:text="${e.user.edad}"/>
-                <td th:text="${e.user.dpto.nombre}"/>
-                <td th:text="${e.user.municipio.nombre}"/>
-                <td>
-                    <form  th:if="${e.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
-                        <input type="hidden" name="disable" th:value="${e.userName}"/>
-                        <button type="submit" class="btn btn-success">Habilitado
-                        </button>
-                    </form>
-                    <form  th:if="${!e.enabled}"  th:action="@{/usuarioActive}" th:method="post">
-                        <input type="hidden" name="enabled" th:value="${e.userName}"/>
-                        <button type="submit" class="btn btn-danger">Deshabilitado
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        </th:block>
+            <th:block th:each="e, row: ${userList}">
+                <tr>
+                    <td th:text="${e.userId}" name="codigo" th:value="${e.userId}"  />
+                    <td th:text="${e.userName}"/>
+                    <td th:text="${e.user.nombre}"/>
+                    <td th:text="${e.user.apellido}"/>
+                    <td th:text="${e.user.direccion}"/>
+                    <td th:text="${e.user.edad}"/>
+                    <td th:text="${e.user.dpto.nombre}"/>
+                    <td th:text="${e.user.municipio.nombre}"/>
+                    <td>
+                        <form  th:if="${e.enabled}"  th:action="@{/usuarioDesactive}" th:method="post">
+                            <input type="hidden" name="disable" th:value="${e.userName}"/>
+                            <button type="submit" class="btn btn-success">Habilitado
+                            </button>
+                        </form>
+                        <form  th:if="${!e.enabled}"  th:action="@{/usuarioActive}" th:method="post">
+                            <input type="hidden" name="enabled" th:value="${e.userName}"/>
+                            <button type="submit" class="btn btn-danger">Deshabilitado
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
 
 
-    </table>
-</div>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
