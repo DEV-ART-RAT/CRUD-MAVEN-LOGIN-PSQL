@@ -90,46 +90,27 @@ public class UserController {
     }
      */
 
-    @RequestMapping(value = "/userCoordinador", method = RequestMethod.GET)
-    public ModelAndView listadoCoordinador(Principal principal) {
-        ModelAndView mav = new ModelAndView();
-        List<Expediente> expedientes = null;
-		List<Expediente> expediente = null;
-		List<AlumnoxMateria> alumnoxMaterias = null;
-        try {
-
-            expedientes = expedienteService.findAllExpe();
-            promedio(expedientes);
-			aprobadasreprobadas(expedientes);
-		}catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mav.addObject("expedientes", expedientes);
-        mav.setViewName("/Coordinador/coordinador");
-
-        return mav;
-    }
 
 
 
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public String listado(Principal principal) {
 
-        User auth = (User) ((Authentication) principal).getPrincipal();
-        String rol = WebUtils.getRole(auth);
-        //System.out.println(rol);
-
-        if(rol.equals("ROLE_USER")){
-            return "redirect:/userCoordinador";
-        }
-
-        if(rol.equals("ROLE_ADMIN")){
-            return "redirect:/admin";
-        }
-		return "redirect:/";
-    }
+//    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
+//    public String listado(Principal principal) {
+//
+//        User auth = (User) ((Authentication) principal).getPrincipal();
+//        String rol = WebUtils.getRole(auth);
+//        //System.out.println(rol);
+//
+//        if(rol.equals("ROLE_USER")){
+//            return "redirect:/userCoordinador";
+//        }
+//
+//        if(rol.equals("ROLE_ADMIN")){
+//            return "redirect:/admin";
+//        }
+//		return "redirect:/";
+//    }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {

@@ -15,6 +15,7 @@
 <body>
 	<th:block th:include="/menucoordinador"></th:block>
 	<div class="container">
+		<h1 th:text="${mensaje}"></h1>
 		<div class="container row m-4 p-3">
 			<div class="col"></div>
 			<div class="col-4 card p-3">
@@ -49,10 +50,16 @@
 						<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
 					</div>
 					<input type="submit" value="Guardar"  class="btn btn-danger form-control">
-		
+
 				</form>
 			</div>
 			<div class="col"></div>
+			<tbody:block th:each="e, row: ${expedientes}">
+			<form class="form-inline center" th:action="@{/cursadas}" th:method="post">
+				<input type="hidden" name="id" th:value="${e.codigo}" />
+				<button type="submit" class="btn btn-danger"><i class="fas fa-plus"></i></button>
+			</form>
+			</tbody:block>
 		</div>
 	</div>	
 </body>
