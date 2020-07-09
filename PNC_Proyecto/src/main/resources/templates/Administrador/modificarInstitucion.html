@@ -21,7 +21,7 @@
         <div class="col"></div>
         <div class="col-8">
             <div class="card text-white bg-dark col p-3 m-2">
-                <h3 class="card-header"> NUEVA MATERIA </h3>
+                <h3 class="card-header"> Editar Institucion </h3>
                 <div class="card-body">
                     <form th:action="@{/validarIngresarInstitucion}" th:object="${institucion}" method="post">
                         <p th:text="${message}" style="color:red"></p>
@@ -29,13 +29,14 @@
                             <div class="input-group-prepend w-35">
                                 <div class="input-group-text">Nombre</div>
                             </div>
+
+                            <input class="form-control"  th:field="*{codigo}" type="hidden" name="codigo"
+                                   value="${id}">
+
                             <span th:errors="*{nombre}" style="color:red;"></span>
                             <input class="form-control" th:field="*{nombre}" type="text" name="nombre"
                                    placeholder="Nombre de Institucion">
                         </div>
-
-                        <input class="form-control"  type="hidden" name="codigo"
-                               value="0">
 
                         <div class="input-group mb-2">
                             <div class="input-group-prepend w-35">

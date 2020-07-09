@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Materias</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+</head>
+
+<body>
+<th:block th:include="/menuadmin"></th:block>
+
+<div class="container-fluid">
+    <div class="container p-3">
+        <table class="table table-sm table-dark  table-hover table-condensed">
+            <thead>
+            <th scope="col">Institucion</th>
+            <th scope="col">descripcion</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Municipio</th>
+            <th scope="col">Editar</th>
+            </thead>
+            <th:block th:each="m, row: ${instituciones}">
+                    <tr>
+                        <td th:text="${m.nombre}" />
+                        <td th:text="${m.descripcion}" />
+                        <td th:text="${m.dpto.nombre}" />
+                        <td th:text="${m.municipio.nombre}" />
+                        <td>
+                            <form class="form-inline center" th:action="@{/editarInstitucion}" th:method="post">
+                                <input type="hidden" name="id" th:value="${m.codigo}" />
+                                <button type="submit" class="btn btn-danger">Editar <i class="fa fa-edit"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+            </th:block>
+        </table>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>
