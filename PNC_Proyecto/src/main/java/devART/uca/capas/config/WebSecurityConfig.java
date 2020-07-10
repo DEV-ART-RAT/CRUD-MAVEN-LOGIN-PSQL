@@ -1,9 +1,12 @@
 package devART.uca.capas.config;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 
@@ -19,6 +22,9 @@ import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
@@ -26,7 +32,8 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import devART.uca.capas.service.UserDetailsServiceImpl;
- 
+import org.springframework.stereotype.Component;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -51,15 +58,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
  
     }
- 
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        SessionRegistry sessionRegistry = new SessionRegistryImpl();
+        return sessionRegistry;
+    }
+
+
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     
     	
     	
     	//limitando sesiones por usuario
-    	http.sessionManagement().maximumSessions(1);
-    	
+    	http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(false)
+                .sessionRegistry(sessionRegistry()).expiredUrl("/errorSeccion");
     	
         http.csrf().disable();
  
@@ -104,9 +123,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Config for Logout Page
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
-        
-        
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll();
+//                .logoutSuccessHandler(logoutSuccessHandler());
+
+
+
         // Config Remember Me.
         http.authorizeRequests().and() //
                 .rememberMe().tokenRepository(this.persistentTokenRepository()) //
@@ -143,3 +167,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  */
     
 }
+//public class CustomLogoutSuccessHandler extends
+//        SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
+//
+//    @Autowired
+//    private AuditService auditService;
+//
+//    @Override
+//    public void onLogoutSuccess(
+//            HttpServletRequest request,
+//            HttpServletResponse response,
+//            Authentication authentication)
+//            throws IOException, ServletException {
+//
+//        String refererUrl = request.getHeader("Referer");
+//        auditService.track("Logout from: " + refererUrl);
+//
+//        super.onLogoutSuccess(request, response, authentication);
+//    }
+//}

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Acceso denegado</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+ 
+<body>
+    <th:block th:include="/menu"></th:block>
+    <div class="container-fluid flex-column h-100">
+        <div class="container flex-column card bg-dark p-4 h-75">
+            <h6 class="msg-danger">Lo sentimos Tu cuenta esta siento utilizada en otro dispositico o expiro tu secion</h6>
+            <br>
+            <br>
+        </div>
+        
+    </div>  
+</body>
+ 
+</html>
