@@ -28,6 +28,11 @@ public class MateriaServiceImpl implements MateriaService {
 	}
 
 	@Override
+	public List<Materia> findAllActiva() throws DataAccessException {
+		return materiaRepo.mostrarTodoActiva();
+	}
+	
+	@Override
 	@Transactional
 	public void insert(Materia materia) throws DataAccessException {
 		materiaRepo.save(materia);

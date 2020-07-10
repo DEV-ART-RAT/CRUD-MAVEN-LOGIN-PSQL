@@ -16,31 +16,41 @@
 					<h3 class="card-header"> EDITAR MATERIA </h3>
 					<div class="card-body">
 						<form th:action="@{/updateMateria}" th:object="${materia}" method="post">
-							<div class="input-group mb-2">
-								<div class="input-group-prepend w-35">
-									<div class="input-group-text">Codigo</div>
+								
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Codigo</div>
+									</div>
+									
+									<input class="form-control" th:field="*{codigo}" type="text" name="codigo"
+										placeholder="Codigo de materia">
 								</div>
-								<span th:errors="*{codigo}" style="color:red;"></span>
-								<input class="form-control" th:field="*{codigo}" type="text" name="codigo"
-									placeholder="Codigo de materia">
+								<span th:errors="*{codigo}" class="text-white errorText"></span>
 							</div>
 
-							<div class="input-group mb-2">
-								<div class="input-group-prepend w-35">
-									<div class="input-group-text">Nombre</div>
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Nombre</div>
+									</div>
+									
+									<input class="form-control" th:field="*{nombreMateria}" type="text" name="materia"
+										placeholder="Nombre de la Materia">
 								</div>
-								<span th:errors="*{nombreMateria}" style="color:red;"></span>
-								<input class="form-control" th:field="*{nombreMateria}" type="text" name="materia"
-									placeholder="Nombre de la Materia">
+								<span th:errors="*{nombreMateria}" class="text-white errorText"></span>
 							</div>
 
-							<div class="input-group mb-2">
-								<div class="input-group-prepend w-35">
-									<div class="input-group-text">Descripcion</div>
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Descripcion</div>
+									</div>
+									
+									<textarea class="form-control" th:field="*{descripcion}" name="descripcion"
+										placeholder="Descripcion de la Materia"></textarea>
 								</div>
-								<span th:errors="*{descripcion}" style="color:red;"></span>
-								<textarea class="form-control" th:field="*{descripcion}" name="descripcion"
-									placeholder="Descripcion de la Materia"></textarea>
+								<span th:errors="*{descripcion}" class="text-white errorText"></span>
 							</div>
 
 							<div class="input-group mb-2">
@@ -60,7 +70,7 @@
 									<input class="btn btn-success form-control" type="submit" value="Guardar materia">
 								</div>
 								<div class="col">
-									<a href="/admin" class="btn btn-danger form-control text-white">Cancelar</a>
+									<a href="/materiasLista" class="btn btn-danger form-control text-white">Cancelar</a>
 									</button>
 								</div>
 							</div>

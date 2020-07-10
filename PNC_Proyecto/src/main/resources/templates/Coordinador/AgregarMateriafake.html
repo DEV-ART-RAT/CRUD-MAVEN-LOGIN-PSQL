@@ -33,7 +33,6 @@
 									</option>
 								</select>
 							</div>
-		
 							<div class="input-group mb-2 hidden" >
 								<div class="input-group-prepend w-25">
 									<div class="input-group-text">Codigo</div>
@@ -44,20 +43,23 @@
 									</option>
 								</select>
 							</div>
-		
+						<div class="form-group">
 							<div class="input-group mb-2">
 								<div class="input-group-prepend w-25">
 									<div class="input-group-text">Nota</div>
 								</div>
 								<input class="form-control" th:field="${alumnoxmateria.nota}" type="text" >
-								<span th:errors="${alumnoxmateria.nota}" style="color:red;"></span>
 							</div>
-							<div class="input-group mb-2">
-								<div class="input-group-prepend w-25">
-									<div class="input-group-text">Año</div>
+							<span th:errors="${alumnoxmateria.nota}" class="text-white errorText"></span>
+						</div>
+						<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-25">
+										<div class="input-group-text">Año</div>
+									</div>
+									<input class="form-control" th:field="${alumnoxmateria.annio}" value="2005" type="number" >
 								</div>
-								<input class="form-control" th:field="${alumnoxmateria.annio}" value="2005" type="number" >
-								<span th:errors="${alumnoxmateria.annio}" style="color:red;"></span>
+								<span th:errors="${alumnoxmateria.annio}" class="text-white errorText"></span>				
 							</div>
 							<div class="input-group mb-4">
 								<div class="input-group-prepend w-50 h-50">

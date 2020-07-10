@@ -16,24 +16,33 @@
                     <h3 class="card-header"> NUEVA INSTITUCION </h3>
                     <div class="card-body">
                         <form th:action="@{/validarIngresarInstitucion}" th:object="${institucion}" method="post">
+
                             <p th:text="${message}" style="color:red"></p>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend w-35">
-                                    <div class="input-group-text">Nombre</div>
+
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-35">
+                                        <div class="input-group-text">Nombre</div>
+                                    </div>
+                                    
+                                    <input class="form-control" th:field="*{nombre}" type="text" name="nombre"
+                                        placeholder="Nombre de Institucion">
                                 </div>
-                                <span th:errors="*{nombre}" style="color:red;"></span>
-                                <input class="form-control" th:field="*{nombre}" type="text" name="nombre"
-                                    placeholder="Nombre de Institucion">
+                                <span th:errors="*{nombre}" class="text-white errorText"></span>
                             </div>
+
                             <input class="form-control" type="hidden" name="codigo" value="0">
 
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend w-35">
-                                    <div class="input-group-text">Descripcion</div>
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-35">
+                                        <div class="input-group-text">Descripcion</div>
+                                    </div>
+                                    
+                                    <textarea class="form-control" th:field="*{descripcion}" name="descripcion"
+                                        placeholder="Descripcion de la Institucion"></textarea>
                                 </div>
-                                <span th:errors="*{descripcion}" style="color:red;"></span>
-                                <textarea class="form-control" th:field="*{descripcion}" name="descripcion"
-                                    placeholder="Descripcion de la Institucion"></textarea>
+                                <span th:errors="*{descripcion}" class="text-white errorText"></span>
                             </div>
 
                             <div class="input-group mb-2">
