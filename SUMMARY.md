@@ -3,8 +3,8 @@
 * [Proyecto Capas](README.md)
 * [Definicion](definicion.md)
 * [Instrucciones](instrucciones.md)
+* [Base de Datos](descargas.md)
 * [Requisitos](requisitos.md)
-* [Descargas](descargas.md)
 
 ## Imagenes
 

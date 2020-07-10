@@ -1,5 +1,7 @@
 # Definicion
 
+
+
 ![](.gitbook/assets/0.png)
 
 ## Programación N-Capas, Ciclo 01/2020
@@ -25,9 +27,7 @@ Una institución educativa privada ha implementado un proyecto de estudiantes be
 
 ![](.gitbook/assets/2.png)Este componente será el encargado de autenticar y autorizar a los usuarios del sistema. El sistema manejará dos roles: administrador y coordinador. Cada usuario solo puede estar asociado a un rol específico. La autenticación del sistema se hará mediante el ingreso de las credenciales de su cuenta \(nombre de usuario y su contraseña\), la cual ha sido registrada y activada previamente por parte del administrador, en el componente de administración. Un usuario no podrá ingresar al sistema si su cuenta se encuentra e ![](.gitbook/assets/3.png) mostrando un mensaje advirtiendo de dicha causa.
 
-El sistema no debe permitir que haya dos usuarios conectados al mismo tiempo \(doble inicio de sesión\). Esto
-
-![](.gitbook/assets/4.png) que haya terminado su sesión \(haya salido del sistema\). Si el sistema detecta un doble inicio de sesión, le mostrará un mensaje al usuario advirtiendo la causa del error.
+El sistema no debe permitir que haya dos usuarios conectados al mismo tiempo \(doble inicio de sesión\). Esto es si el usuario x ingreso al sistema , no puede volver a entrar en el hasta que haya terminado su sesión \(haya salido del sistema\). Si el sistema detecta un doble inicio de sesión, le mostrará un mensaje al usuario advirtiendo la causa del error.
 
 Habrá en la pantalla de inicio de sesión, un vínculo donde se pueda crear una nueva cuenta. La información de lo que debe llevar la cuenta se detalla en el punto número dos \(componente de administración\).
 
@@ -39,7 +39,7 @@ El componente de administración tendrá como objetivo administrar los distintos
   2. Catálogo de materias
   3. Catálogo de usuarios del sistema
 
-Cada catalogo tendrá su propia pantalla en la que se podrán visualizar todos los registros que posee actualmente en formato de tabla, así como agregar y modificar registros ![](.gitbook/assets/5.png) uno, sin embargo, no será posible eliminar registros. La información básica que contendrán será la llave primaria \(correlativo\), la descripción, estado \(activo o inactivo\). Cualquier otro campo que considere requerido queda a su criterio.
+Cada catalogo tendrá su propia pantalla en la que se podrán visualizar todos los registros que posee actualmente en formato de tabla, así como agregar y modificar registros al dar clic al boton "Editar" correspondiente a cada uno, sin embargo, no será posible eliminar registros. La información básica que contendrán será la llave primaria \(correlativo\), la descripción, estado \(activo o inactivo\). Cualquier otro campo que considere requerido queda a su criterio.
 
 ![](.gitbook/assets/6.png)
 
