@@ -13,6 +13,10 @@ public interface MateriaRepository extends JpaRepository<Materia, String> {
 	@Query(nativeQuery=true, value="SELECT * FROM public.materia")
 	public List<Materia> mostrarTodo() throws DataAccessException;
 
+	@Query(nativeQuery=true, value="SELECT * FROM public.materia WHERE estado_materia = 'Activa'")
+	public List<Materia> mostrarTodoActiva() throws DataAccessException;
+	
 	@Query(nativeQuery=true, value="SELECT * FROM public.materia WHERE codigo = ?1")
 	public List<Materia> mostrarPorID(String cadena) throws DataAccessException;
 }
+//SELECT * FROM public.materia WHERE estado_materia = 'Activa'
