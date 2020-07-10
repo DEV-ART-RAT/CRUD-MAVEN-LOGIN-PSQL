@@ -109,13 +109,13 @@
 		function FilterTable(value,data,tipo){
 			var filterData = [];
 			for( var i = 0; i<data.length; i++){
-				value.toLowerCase();
+				var valueLower = value.toLowerCase();
 				var fname = data[i][1].toLowerCase();
 				var lname = data[i][2].toLowerCase();
 				var carnet = data[i][3].toLowerCase();
 				var centro = data[i][4].toLowerCase();
 				if(tipo == 1){
-					if(fname.includes(value) || lname.includes(value) || carnet.includes(value) || centro.includes(value)){
+					if(fname.includes(valueLower) || lname.includes(valueLower) || carnet.includes(valueLower) || centro.includes(valueLower)){
 						filterData.push(data[i]);
 					}
 				}

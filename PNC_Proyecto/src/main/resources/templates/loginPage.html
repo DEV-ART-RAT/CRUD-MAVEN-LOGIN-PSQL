@@ -10,10 +10,9 @@
 	<th:block th:include="/menu"></th:block>
 	<h1 th:text="${message}"></h1>
 	<div class="container-fluid">
-		<div class="container container-min">
+		<div class="container-fluid container-min">
 			<div class="row flex-center">
-				<div class="col"></div>
-				<div class="col-xl-4 col-md-8 col-sm-10 col-12 m-4">
+				<div class="col-xl-4 col-md-8 m-4">
 					<div class="loginImg" style="height: 50vh;"></div>
 					<div class="card bg-dark p-3">
 						<div th:if="${#request.getParameter('error') == 'true'}"
@@ -48,7 +47,6 @@
 						</form>
 					</div>
 				</div>
-				<div class="col"></div>
 			</div>
 		</div>
 	</div>
