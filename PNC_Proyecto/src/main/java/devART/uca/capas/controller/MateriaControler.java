@@ -90,13 +90,14 @@ public class MateriaControler {
             }catch (Exception e) {
                 e.printStackTrace();
             }
-
-            materia = new Materia();
-            mav.addObject("materias", materias);
+            mav.addObject("materias", materia);
             mav.addObject("message", "Materia Modificada!");
-        }
+            mav.setViewName("/Administrador/modificarMateriafake");
+        }else{
+            mav.addObject("materias", materia);
+            mav.setViewName("/Administrador/modificarMateria");
 
-        mav.setViewName("/Administrador/editorMaterias");
+        }
         return mav;
     }
 
