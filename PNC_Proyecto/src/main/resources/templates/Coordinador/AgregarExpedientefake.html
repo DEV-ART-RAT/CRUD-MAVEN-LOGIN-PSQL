@@ -1,47 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-	body {font-family: Arial, Helvetica, sans-serif;}
 
-	/* The Modal (background) */
-	.modal {
-		/*display: none; !* Hidden by default *!*/
-		position: fixed; /* Stay in place */
-		z-index: 1; /* Sit on top */
-		padding-top: 100px; /* Location of the box */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
-
-	/* Modal Content */
-	.modal-content {
-		background-color: #fefefe;
-		margin: auto;
-		padding: 20px;
-		border: 1px solid #888;
-		width: 80%;
-	}
-
-	/* The Close Button */
-	.close {
-		color: #aaaaaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-
-	.close:hover,
-	.close:focus {
-		color: #000;
-		text-decoration: none;
-		cursor: pointer;
-	}
-</style>
 <head>
 	<title>Nuevo expediente</title>
 	<th:block th:include="/header"></th:block>
@@ -86,7 +45,7 @@
 										id="s_telefonom" th:field="${expediente.s_telefonom}"></h3>
 									<span th:errors="${expediente.s_telefonom}" style="color:red;"></span>
 								</div>
-								<div class="input-group mb-2" >
+								<div class="input-group mb-2">
 									<div class="input-group-prepend w-25">
 										<div class="input-group-text">Centro</div>
 									</div>
@@ -108,7 +67,8 @@
 									<div class="input-group-text">Fecha de nacimiento</div>
 								</div>
 								<input class="form-control" id="d_fnacimiento" type="date"
-									th:field="${expediente.d_fnacimiento}" value="2000-01-01" min="1960-01-01" max="2021-01-01"> </h3>
+									th:field="${expediente.d_fnacimiento}" value="2000-01-01" min="1960-01-01"
+									max="2021-01-01"> </h3>
 								<span th:errors="${expediente.d_fnacimiento}" style="color:red;"></span>
 							</div>
 							<div class="input-group mb-2">
@@ -166,54 +126,49 @@
 			</div>
 			<div class="col"></div>
 		</div>
+
 		<!-- Trigger/Open The Modal -->
 		<div id="myModal" class="modal">
-
 			<!-- Modal content -->
-			<div class="modal-content">
+			<div class="modal-content w-50">
 				<span class="close">&times;</span>
-				<p>Guardado Con Exito!</p>
-				<div class="col">
-					<a href="/userInfo" class="btn btn-danger form-control text-white">Ver todo <i
-							class="fa fa-trash"></i></a>
+				<h4 class="mb-4">Guardado con exito!</h4>
+				<div class="container w-75 p-4 mt-4">
+					<a href="/userInfo" class="btn btn-success form-control text-white w-100 mb-3">Ver todos los
+						expedientes <i class="fa fa-user"></i></a>
 					</button>
+					<form class="form-horizontal w-100" th:action="@{/expediente}" th:object="${expedienteactual}"
+						method="post">
+						<input type="hidden" name="id" th:value="${expedienteactual.codigo}" />
+						<button type="submit" class="btn btn-primary form-control"> Ver expediente <i
+								class="fas fa-info-circle"></i></button>
+					</form>
 				</div>
-				<form class="form-inline center" th:action="@{/expediente}"  th:object="${expedienteactual}" method="post">
-					<input type="hidden" name="id" th:value="${expedienteactual.codigo}" />
-					<button type="submit" class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
-				</form>
 			</div>
-
 		</div>
 	</div>
 
 </body>
+
+
 <script type="text/javascript" th:inline="javascript">
+
 	var modal = document.getElementById("myModal");
-
-	// Get the button that opens the modal
 	var btn = document.getElementById("myBtn");
-
-	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
 
 	modal.style.display = "block";
-	// When the user clicks the button, open the modal
-	btn.onclick = function() {
-		modal.style.display = "block";
-	}
 
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
+	span.onclick = function () {
 		modal.style.display = "none";
 	}
 
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
+	window.onclick = function (event) {
 		if (event.target == modal) {
 			modal.style.display = "none";
 		}
 	}
 
 </script>
+
 </html>
