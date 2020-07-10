@@ -3,6 +3,7 @@
 * [Proyecto Capas](README.md)
 * [Definicion](definicion.md)
 * [Instrucciones](instrucciones.md)
+* [Primer Uso](primer-uso.md)
 
 ## Base de Datos
 
@@ -21,4 +22,8 @@
 ---
 
 * [Autores](autores.md)
+
+## Ayuda
+
+* [Crear Usuario](ayuda/crear-usuario.md)
 

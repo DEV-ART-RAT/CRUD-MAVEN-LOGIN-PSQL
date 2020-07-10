@@ -6,7 +6,9 @@ description: ¿como usar?
 
 Ver Proyecto en Github:
 
-[https://github.com/DEV-ART-RAT/PNC\_Proyecto](https://github.com/DEV-ART-RAT/PNC_Proyecto)
+{% embed url="https://github.com/DEV-ART-RAT/PNC\_Proyecto" %}
+
+
 
 ### Instrucciones:
 
@@ -21,6 +23,10 @@ Base de datos nombre: PNC\_PROYECTO
 Usuario:  PNC\_proyecto
 
 Contraseña : root
+
+
+
+
 
 
 
