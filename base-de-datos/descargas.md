@@ -1,4 +1,4 @@
-# Inserts
+# Create Table and Alter Table
 
 ```sql
 create table APP_USER

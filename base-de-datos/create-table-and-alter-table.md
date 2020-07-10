@@ -1,4 +1,4 @@
-# Create Table and Alter Table
+# Inserts
 
 ```sql
 

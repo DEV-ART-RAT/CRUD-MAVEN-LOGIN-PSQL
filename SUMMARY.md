@@ -6,8 +6,8 @@
 
 ## Base de Datos
 
-* [Inserts](base-de-datos/descargas.md)
-* [Create Table and Alter Table](base-de-datos/create-table-and-alter-table.md)
+* [Create Table and Alter Table](base-de-datos/descargas.md)
+* [Inserts](base-de-datos/create-table-and-alter-table.md)
 
 ---
 
