@@ -28,10 +28,10 @@
 								<div class="input-group-prepend">
 									<div class="input-group-text"><i class="fas fa-user"></i></div>
 								</div>
-								<p th:text="${message}" style="color:red"></p>
 								<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
 								<span th:errors="${userNew.userName}" style="color:red;"></span>
 							</div>
+							<p th:text="${message}" style="color:red"></p>
 					
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -69,7 +69,7 @@
 									<div class="input-group-prepend w-35">
 										<div class="input-group-text">F nacimiento</div>
 									</div>
-									<input id="fnacimiento" class="form-control" type="date" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > 
+									<input id="fnacimiento" class="form-control" type="date" min="1960-01-01"  max="2021-01-01" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > 
 									<span th:errors="${userNewExp.fnacimiento}" style="color:red;"></span><br>
 								</div>
 						
