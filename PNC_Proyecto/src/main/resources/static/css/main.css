@@ -73,6 +73,9 @@ td, th{
 
 .loginImg{
 	background-color: rgb(131, 5, 33);
+	background-image: url(../img/inicio.png);
+	background-position: center;
+	background-size: cover;
 	border-radius: 2px;
 }
 

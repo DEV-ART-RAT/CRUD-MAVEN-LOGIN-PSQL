@@ -15,8 +15,8 @@
 					<div class="loginImg" style="height: 50vh;"></div>
 					<div class="card bg-dark p-3">
 						<div th:if="${#request.getParameter('error') == 'true'}"
-							class="text-white errorText">
-							Hubo un error en el inicio de sesion<br/>
+							class="text-white errorText mb-2">
+							Hubo un error en el inicio de sesion <br>
 							<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
 							th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message }">
 								Static summary
