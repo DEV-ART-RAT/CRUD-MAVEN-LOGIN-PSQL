@@ -6,7 +6,11 @@
 
 {% page-ref page="instrucciones.md" %}
 
-{% page-ref page="requisitos.md" %}
+{% page-ref page="primer-uso.md" %}
+
+{% page-ref page="autores.md" %}
+
+
 
 
 

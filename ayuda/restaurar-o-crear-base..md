@@ -8,5 +8,9 @@ Database: PNC\_PROYECTO
 
 Restauramos o creamos un Query.
 
+{% page-ref page="../primer-uso.md" %}
+
+
+
 
 
