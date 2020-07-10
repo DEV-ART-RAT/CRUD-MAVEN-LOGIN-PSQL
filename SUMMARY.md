@@ -26,4 +26,5 @@
 ## Ayuda
 
 * [Crear Usuario](ayuda/crear-usuario.md)
+* [Restaurar o Crear Base.](ayuda/restaurar-o-crear-base..md)
 

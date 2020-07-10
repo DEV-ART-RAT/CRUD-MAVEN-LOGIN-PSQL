@@ -1,22 +1,22 @@
 # Crear Usuario
 
-Crear Login:
+Crear Login/Role:
 
-![](../.gitbook/assets/imagen%20%283%29.png)
+![](../.gitbook/assets/imagen%20%287%29.png)
 
-Nombre: PNC\_PROYECTO
+Nombre: PNC\_proyecto
 
-![](../.gitbook/assets/imagen%20%281%29.png)
+![](../.gitbook/assets/imagen.png)
 
 Establecer Contraseña : root
 
-![](../.gitbook/assets/imagen%20%282%29.png)
+![](../.gitbook/assets/imagen%20%286%29.png)
 
 
 
 Dar privilegios:
 
-![](../.gitbook/assets/imagen.png)
+![](../.gitbook/assets/imagen%20%282%29.png)
 
 
 
