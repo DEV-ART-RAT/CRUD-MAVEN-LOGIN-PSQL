@@ -1,5 +1,7 @@
 package devART.uca.capas.controller;
 
+import java.io.IOException;
+import java.lang.management.MonitorInfo;
 import java.security.Principal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -9,6 +11,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import devART.uca.capas.domain.*;
@@ -22,10 +26,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -510,7 +511,13 @@ public class CoordinadorController {
 			e.setReprobadas(reprobadas.get());
 		});
 	}
+	@RequestMapping(value="/errorSeccion", method=RequestMethod.GET)
+	public String expireSession() {
+//		request.getSession(false).invalidate();
+		return "errorSeccionPage";
+	}
 }
+//https://stackoverflow.com/questions/14740301/spring-concurrent-session-control-error-disappears-after-page-refresh
 //https://parzibyte.me/blog/2019/09/02/th-each-thymeleaf-recorrer-listas/
 
 //https://stackoverflow.com/questions/24802681/org-springframework-validation-beanpropertybindingresult-exception
