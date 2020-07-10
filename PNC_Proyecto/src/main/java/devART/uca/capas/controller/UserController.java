@@ -210,6 +210,16 @@ public class UserController {
 						userRoleServices.insert(new UserRole(userServices.findOne(usery.getUserName()),roleServices.findOne(role)));
 						userExp.setCodigo(usery.getUserId());
 					}else {
+						List<Dpto> dptos = null;
+						List<Municipio> municipios=null;
+						try {
+							dptos = dptoService.findAll();
+							municipios = municipioService.findAll();
+						}catch (Exception e){
+							e.printStackTrace();
+						}
+						mav.addObject("dptos",dptos);
+						mav.addObject("municipios",municipios);
 						mav.addObject("userNew", new AppUser());
 						mav.addObject("message", "Nombre de Usuario ya existe");
 						mav.setViewName("registerPage");
