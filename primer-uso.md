@@ -46,9 +46,7 @@ Pagina principal :
 
 [http://localhost:8080/](http://localhost:8080/)
 
-![](.gitbook/assets/imagen%20%281%29.png)
-
-
+![](.gitbook/assets/imagen.png)
 
 ### Paso 5:
 
@@ -60,11 +58,15 @@ User:            dbadmin1
 
 Pass:            123
 
+![](.gitbook/assets/imagen%20%286%29.png)
+
 #### Coordinador
 
 User:            dbuser1
 
 Pass:            123
+
+
 
 
 
