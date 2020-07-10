@@ -2,9 +2,19 @@
 
 ## Autores:
 
-Diego Rubi             [https://github.com/Drubico](https://github.com/Drubico)
+Diego Alejandro Rubi Cordova          00121117
 
-Luis Trujillo                [https://github.com/luist23](https://github.com/luist23)
+{% embed url="https://github.com/Drubico" %}
 
-Cristian Alfaro         [https://github.com/CristianAlfaro](https://github.com/CristianAlfaro)
+
+
+Luis Adalberto Trujillo  Perez     00127717
+
+{% embed url="https://github.com/luist23" %}
+
+Cristian Mauricio  Alfaro Contreras  00167917
+
+{% embed url="https://github.com/CristianAlfaro" %}
+
+
 

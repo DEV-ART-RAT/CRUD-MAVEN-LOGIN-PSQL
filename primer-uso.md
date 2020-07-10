@@ -4,9 +4,15 @@
 
 Clonar el Repositorio.
 
+{% embed url="https://github.com/DEV-ART-RAT/PNC\_Proyecto" %}
+
 ### Paso 2:
 
 Crear Usuario.
+
+Nombre : PNC\_proyecto
+
+Contraseña : root
 
 ¿Necesita ayuda para crear usuario?
 
@@ -16,6 +22,8 @@ Crear Usuario.
 
 Crear o Restaurar la Base de datos .
 
+Nombre: PNC\_PROYECTO
+
 Archivos:
 
 {% embed url="https://github.com/DEV-ART-RAT/PNC\_Proyecto/tree/master/BaseDeDatos" %}
@@ -24,11 +32,17 @@ Ayuda para restaurar base:
 
 {% page-ref page="ayuda/restaurar-o-crear-base..md" %}
 
+O tambien puedes hacer los inserts :
+
+{% page-ref page="base-de-datos/descargas.md" %}
+
+{% page-ref page="base-de-datos/create-table-and-alter-table.md" %}
+
 ### Paso 4:
 
 Correr el proyecto:
 
-pagina principal :
+Pagina principal :
 
 [http://localhost:8080/](http://localhost:8080/)
 
