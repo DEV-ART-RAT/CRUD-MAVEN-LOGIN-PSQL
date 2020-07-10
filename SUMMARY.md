@@ -2,7 +2,7 @@
 
 * [Proyecto Capas](README.md)
 * [Definicion](definicion.md)
-* [Instrucciones](instrucciones.md)
+* [Instrucciones Generales](instrucciones.md)
 * [Primer Uso](primer-uso.md)
 
 ## Base de Datos
