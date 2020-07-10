@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Modificar expediente</title>
+	<th:block th:include="/header"></th:block>
+
+</head>
+
+<body>
+	<th:block th:include="/menucoordinador"></th:block>
+	<div class="container">
+		<div class="container row m-4 p-3">
+			<div class="col"></div>
+			<div class="col-8 card p-3">
+				<form class="card" method="post" th:action="@{/guardarExpedientemodificado}" th:object="${expediente}">
+					<input type="hidden" th:field="${expediente.codigo}" th:value="${expediente.codigo}">
+					<span class="card-header">
+						<div class="row">
+							<div class="col"><input type="text" class="form-control" name="first_name"
+									placeholder="First Name" id="s_nombre" th:field="${expediente.s_nombre}"></h3>
+							</div>
+							<div class="col"><input type="text" class="form-control" name="last_name"
+									placeholder="Last Name" id="s_apellido" th:field="${expediente.s_apellido}"></h3>
+							</div>
+						</div>
+						<span th:errors="${expediente.s_nombre}" style="color:red;"></span>
+						<span th:errors="${expediente.s_apellido}" style="color:red;"></span>
+					</span>
+					<div class="card-body">
+						<div class="row p-3">
+							<div class="col">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Carnet</div>
+									</div>
+									<input placeholder="Carnet de Minoridad" class="form-control" type="text"
+										id="s_carne" th:field="${expediente.s_carne}"></h3>
+									<span th:errors="${expediente.s_carne}" style="color:red;"></span>
+								</div>
+								<div class="input-group mb-2">
+									<div class="input-group-prepend w-35">
+										<div class="input-group-text">Telefono</div>
+									</div>
+									<input class="form-control" placeholder="Telefono Movil" type="text"
+										id="s_telefonom" th:field="${expediente.s_telefonom}"></h3>
+									<span th:errors="${expediente.s_telefonom}" style="color:red;"></span>
+								</div>
+								<div class="input-group mb-2" >
+									<div class="input-group-prepend w-25">
+										<div class="input-group-text">Centro</div>
+									</div>
+									<select th:field="${expediente.institucion.codigo}">
+										<option th:each="c: ${institucion}" th:value="${c.codigo}">
+											<th th:text="${c.nombre}"></th>
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col card centerPic">
+								<img class="card-img-top w-50" src="static/img/user.png" th:src="@{/img/user.png}"
+									alt="Profile picture">
+							</div>
+						</div>
+						<div class="m-2 p-3">
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Fecha de nacimiento</div>
+								</div>
+								<input class="form-control" id="d_fnacimiento" type="date"
+									th:field="${expediente.d_fnacimiento}" value="2000-01-01" min="1960-01-01" max="2021-01-01"> </h3>
+								<span th:errors="${expediente.d_fnacimiento}" style="color:red;"></span>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Direccion</div>
+								</div>
+								<input placeholder="Direccion" class="form-control" type="text" id="s_direccion"
+									th:field="${expediente.s_direccion}"></h3>
+								<span th:errors="${expediente.s_direccion}" style="color:red;"></span>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Telefono fijo</div>
+								</div>
+								<input class="form-control" placeholder="Telefono Fijo" type="text" id="s_telefonof"
+									th:field="${expediente.s_telefonof}"></h3>
+								<span th:errors="${expediente.s_telefonof}" style="color:red;"></span>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Nombre del padre</div>
+								</div>
+								<input class="form-control" placeholder="Nombre Padre" type="text" id="nombrePadre"
+									th:field="${expediente.s_nombrePadre}"></h3>
+								<span th:errors="${expediente.s_nombrePadre}" style="color:red;"></span>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend w-35">
+									<div class="input-group-text">Nombre de la madre</div>
+								</div>
+								<input class="form-control" placeholder="Nombre Madre" type="text" id="nombreMadre"
+									th:field="${expediente.s_nombreMadre}"></h3>
+								<span th:errors="${expediente.s_nombreMadre}" style="color:red;"></span>
+							</div>
+						</div>
+						<div class="container flex">
+							<div class="col">
+								<button type="submit" class="btn btn-success form-control">Guardar <i
+										class="fa fa-edit"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="container flex center fixed">
+					<form class="center w-100" th:action="@{/expediente}" th:method="post">
+						<input type="hidden" name="id" th:value="${expediente.codigo}" />
+						<button type="submit" class="btn btn-danger form-control">Cancelar <i
+								class="fa fa-trash"></i></button>
+					</form>
+				</div>
+			</div>
+			<div class="col"></div>
+		</div>
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content w-50">
+				<span class="close">&times;</span>
+				<h4 class="mb-4">Guardado con exito!</h4>
+				<div class="container w-75 p-4 mt-4">
+					<a href="/userInfo" class="btn btn-success form-control text-white w-100 mb-3">Ver todos los
+						expedientes <i class="fa fa-user"></i></a>
+					</button>
+					<form class="form-horizontal w-100" th:action="@{/expediente}" th:object="${expediente}"
+						method="post">
+						<input type="hidden" name="id" th:value="${expediente.codigo}" />
+						<button type="submit" class="btn btn-primary form-control"> Ver expediente <i
+								class="fas fa-info-circle"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+
+	var modal = document.getElementById("myModal");
+	var btn = document.getElementById("myBtn");
+	var span = document.getElementsByClassName("close")[0];
+
+	modal.style.display = "block";
+
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+
+</script>
+</html>
