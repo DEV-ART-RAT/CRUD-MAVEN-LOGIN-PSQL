@@ -101,7 +101,14 @@ public class InstitucionController {
         mav.addObject("dptos", dptos);
         mav.addObject("municipios", municipios);
         if (result.hasErrors()) {
+            if(codigo.equals("")||codigo.equals(0)){
+                mav.setViewName("/Administrador/ingresarInstitucion");
+            }else {
 
+                mav.setViewName("/Administrador/modificarInstitucion");
+                mav.addObject("id",codigo);
+                mav.addObject("institucion", institucion);
+            }
         } else {
             try {
                 institucionRepository.save(institucion);
@@ -110,17 +117,36 @@ public class InstitucionController {
             }
             mav.addObject("institucion", new Institucion());
             mav.addObject("message", "Instituion Guardada!");
+            if(codigo.equals("")||codigo.equals(0)){
+                List<Dpto> dptosA = null;
+                List<Municipio> municipiosA=null;
+                try {
+                    dptosA = dptoService.findAll();
+                    municipiosA = municipioService.findAll();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                mav.addObject("dptos", dptosA);
+                mav.addObject("municipios",municipiosA);
+                mav.addObject("institucion", new Institucion());
+                mav.setViewName("/Administrador/ingresarInstitucionfake");
+            }else {
+
+                List<Dpto> dptosC = null;
+                List<Municipio> municipiosC=null;
+                try {
+                    dptosC = dptoService.findAll();
+                    municipiosC = municipioService.findAll();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mav.addObject("institucion", institucion);
+                mav.addObject("dptos", dptosC);
+                mav.addObject("municipios",municipiosC);
+                mav.setViewName("/Administrador/modificarInstitucionfake");
+            }
         }
-        if(codigo.equals("")||codigo.equals(0)){
-            mav.setViewName("/Administrador/ingresarInstitucion");
-        }else {
-
-            mav.setViewName("/Administrador/modificarInstitucion");
-            mav.addObject("id",codigo);
-            mav.addObject("institucion", institucion);
-        }
-
-
         return mav;
     }
 

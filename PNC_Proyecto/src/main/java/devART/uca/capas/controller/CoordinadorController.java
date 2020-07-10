@@ -158,7 +158,7 @@ public class CoordinadorController {
 		AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
-		materias = materiaService.findAll();
+		materias = materiaService.findAllActiva();
 		List<Expediente> expedientes = null;
 		expedientes = expedienteService.filtrarPorID(codigo);
 		mav.addObject("expedientes", expedientes);
@@ -172,7 +172,7 @@ public class CoordinadorController {
 		ModelAndView mav = new ModelAndView();
 
 		if(result.hasErrors()) {
-			List<Materia> materias = materiaService.findAll();
+			List<Materia> materias = materiaService.findAllActiva();
 			List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
 			mav.addObject("expedientes", expedientes);
 			mav.addObject("materias", materias);
@@ -205,7 +205,7 @@ public class CoordinadorController {
 			mav.addObject("alumnoxmateria", alumnoxmateria);
 
 		}
-		List<Materia> materias = materiaService.findAll();
+		List<Materia> materias = materiaService.findAllActiva();
 		List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
 		mav.addObject("expedientes", expedientes);
 		mav.addObject("materias", materias);
@@ -220,7 +220,7 @@ public class CoordinadorController {
 		alumnoxmateria=alumnoxMateriaService.filtrarUNO(codigo);
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias = null;
-		materias = materiaService.findAll();
+		materias = materiaService.findAllActiva();
 		List<Expediente> expedientes = null;
 		expedientes = expedienteService.filtrarPorID(alumnoxmateria.getExpediente().getCodigo());
 		mav.addObject("expedientes", expedientes);
@@ -234,7 +234,7 @@ public class CoordinadorController {
 		ModelAndView mav = new ModelAndView();
 
 		if(result.hasErrors()) {
-			List<Materia> materias = materiaService.findAll();
+			List<Materia> materias = materiaService.findAllActiva();
 			List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
 			mav.addObject("expedientes", expedientes);
 			mav.addObject("materias", materias);
@@ -264,7 +264,7 @@ public class CoordinadorController {
 			}
 //			mav.addObject("mensaje","Editado con exito!");
 		}
-		List<Materia> materias = materiaService.findAll();
+		List<Materia> materias = materiaService.findAllActiva();
 		List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
 		mav.addObject("expedientes", alumnoxMateria.getExpediente());
 		mav.addObject("materias", materias);
@@ -448,7 +448,7 @@ public class CoordinadorController {
 		}
 		mav.addObject("alumnoxmateria", alumnoxmateria);
 		expediente = expedienteService.filtrarUNO(codigo);
-		materias = materiaService.findAll();
+		materias = materiaService.findAllActiva();
 		mav.addObject("materias", materias);
 		mav.addObject("expediente", expediente);
 		mav.addObject("alumnoxmaterias", alumnoxMaterias);

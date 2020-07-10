@@ -39,9 +39,11 @@ public class MateriaControler {
 
             materia = new Materia();
             mav.addObject("materia", materia);
+            mav.setViewName("/Administrador/ingresarMateriafake");
+        }else{
+            mav.setViewName("/Administrador/ingresarMateria");
 
         }
-        mav.setViewName("/Administrador/ingresarMateria");
         return mav;
     }
 
