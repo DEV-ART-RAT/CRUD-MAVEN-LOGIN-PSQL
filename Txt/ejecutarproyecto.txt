@@ -1,0 +1,24 @@
+Para ver la Wiki del proyecto donde se detalla todo:
+https://drubico.gitbook.io/proyecto-n-capas/
+
+(Mejor ver wiki para que funcione todo correctamente )
+
+Puerto:
+
+https://localhost:8080/
+
+Base de Datos:
+
+Base de datos nombre: PNC_PROYECTO
+Usuario:  PNC_proyecto
+Contraseña : root
+
+Usuarios Principales:
+
+Coordinador:
+user:dbuser1
+pass:123
+
+Administrador:
+user:dbadmin1
+pass:123

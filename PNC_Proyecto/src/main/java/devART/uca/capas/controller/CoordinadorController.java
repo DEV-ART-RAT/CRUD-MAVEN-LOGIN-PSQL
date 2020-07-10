@@ -261,16 +261,14 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.addObject("mensaje","Editado con exito!");
-			AlumnoxMateria alumnoxmateria = new AlumnoxMateria();
-			mav.addObject("alumnoxmateria", alumnoxmateria);
-
+//			mav.addObject("mensaje","Editado con exito!");
 		}
 		List<Materia> materias = materiaService.findAll();
 		List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
-		mav.addObject("expedientes", expedientes);
+		mav.addObject("expedientes", alumnoxMateria.getExpediente());
 		mav.addObject("materias", materias);
-		mav.setViewName("/Coordinador/editarMateria");
+		mav.addObject("alumnoxmateriaactual", alumnoxMateria);
+		mav.setViewName("/Coordinador/editarMateriafake");
 		return mav;
 	}
 	@RequestMapping("/NuevoExpediente")
@@ -400,9 +398,11 @@ public class CoordinadorController {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			mav.addObject("mensaje","Modificado con exito");
-
-			return mostrarExpediente(principal,String.valueOf(expediente.getCodigo()),"Modificado con exito");
+			List<Institucion> instituciones=institucionRepository.findAll();
+			mav.addObject("institucion", instituciones);
+			mav.addObject("expediente",expediente);
+			mav.setViewName("/Coordinador/modificarExpedientefake");
+			return mav;
 		}
 	}
 

@@ -20,11 +20,9 @@
 					</form>
 				</div:block>
 				<div class="card text-white bg-dark col p-3 m-2">
-					<h3 class="card-header"> EDITAR MATERIA </h3>
+					<h3 class="card-header"> NUEVA MATERIA </h3>
 					<div class="card-body">
-						<h1 th:text="${mensaje}"></h1>
-						<form method="post" th:action="@{/editarExpedientemateria}" th:object="${alumnoxmateria}">
-							<input type="hidden" th:field="${alumnoxmateria.c_alumnoxmateria}" th:value="${alumnoxmateria.c_alumnoxmateria}">
+						<form method="post" th:action="@{/guardarExpedientemateria}" th:object="${alumnoxmateria}">
 							<div class="input-group mb-2">
 								<div class="input-group-prepend w-25">
 									<div class="input-group-text">Materia</div>
@@ -73,7 +71,7 @@
 							</div>
 							<input type="submit" value="Guardar"  class="btn btn-danger form-control">
 		
-						</form> 
+						</form>
 					</div>
 				</div>
 			</div>
@@ -82,7 +80,42 @@
 	</div>
 	<script type="text/javascript" th:inline="javascript">
 
-	
+		var materias = document.getElementById('selectMaterias');
+		var materiasList = [];
+
+		for(var i = 0; i<materias.childElementCount; i++){
+			var listaAux = [];
+			listaAux.push(materias.options[i].value);
+			listaAux.push(materias.options[i].getAttribute("estado"));
+			listaAux.push(materias.options[i].text);
+			materiasList.push(listaAux);
+		}
+
+		var materiasFiltradas = listaFiltrada("Activa", materiasList);
+		rebuildSelect(materiasFiltradas);
+
+		function listaFiltrada (value, data){
+			var filtraData = []
+			for( var i = 0; i<data.length; i++){
+				if(value == data[i][1]){
+					filtraData.push(data[i]);
+				}
+			}
+			return filtraData;
+		}
+
+		function rebuildSelect(data){
+			var select = document.getElementById('selectMaterias');
+			select.innerHTML= '';
+			for( var i = 0; i<data.length; i++){
+				var option = `
+						<option  value="${data[i][0]}" estado="${data[i][1]}">${data[i][2]}</option>
+				`
+				select.innerHTML += option;
+			}
+		}
+
 	</script>
+
 </body>
 </html>

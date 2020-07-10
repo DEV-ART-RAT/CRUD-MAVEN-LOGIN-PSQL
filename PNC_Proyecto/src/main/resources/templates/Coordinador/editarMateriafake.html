@@ -23,7 +23,7 @@
 					<h3 class="card-header"> EDITAR MATERIA </h3>
 					<div class="card-body">
 						<h1 th:text="${mensaje}"></h1>
-						<form method="post" th:action="@{/editarExpedientemateria}" th:object="${alumnoxmateria}">
+						<form method="post" th:action="@{/editarExpedientemateria}" th:object="${alumnoxmateriaactual}">
 							<input type="hidden" th:field="${alumnoxmateria.c_alumnoxmateria}" th:value="${alumnoxmateria.c_alumnoxmateria}">
 							<div class="input-group mb-2">
 								<div class="input-group-prepend w-25">
@@ -79,9 +79,46 @@
 			</div>
 			<div class="col"></div>
 		</div>
+<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content w-50">
+				<span class="close">&times;</span>
+				<h4 class="mb-4">Modificado con exito!</h4>
+				<div class="container w-75 p-4 mt-4">
+					<a href="/userInfo" class="btn btn-success form-control text-white w-100 mb-3">Ver todos los
+						expedientes <i class="fa fa-user"></i></a>
+					</button>
+					<form class="form-horizontal w-100" th:action="@{/cursadas}" th:object="${alumnoxmateriaactual}"
+						method="post">
+						<input type="hidden" name="id" th:value="${alumnoxmateriaactual.expediente.codigo}" />
+						<button type="submit" class="btn btn-primary form-control"> Ver Materias <i
+								class="fas fa-info-circle"></i></button>
+					</form>
+					
+				</div>
+			</div>
+</div>
 	</div>
+	
+	
 	<script type="text/javascript" th:inline="javascript">
 
+	var modal = document.getElementById("myModal");
+	var btn = document.getElementById("myBtn");
+	var span = document.getElementsByClassName("close")[0];
+
+	modal.style.display = "block";
+
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	
 	
 	</script>
 </body>

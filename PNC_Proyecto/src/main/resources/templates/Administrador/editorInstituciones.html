@@ -17,6 +17,7 @@
         </div>
         <table class="table table-sm table-dark  table-hover table-condensed">
             <thead>
+            <th scope="col">Codigo</th>
             <th scope="col">Institucion</th>
             <th scope="col">descripcion</th>
             <th scope="col">Departamento</th>
@@ -25,6 +26,7 @@
             </thead>
             <th:block th:each="m, row: ${instituciones}">
                     <tr>
+                      	<td th:text="${m.codigo}" />
                         <td th:text="${m.nombre}" />
                         <td th:text="${m.descripcion}" />
                         <td th:text="${m.dpto.nombre}" />
