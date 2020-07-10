@@ -8,8 +8,6 @@
 
 {% page-ref page="requisitos.md" %}
 
-{% page-ref page="descargas.md" %}
-
 
 
 ### 

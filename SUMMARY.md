@@ -3,7 +3,14 @@
 * [Proyecto Capas](README.md)
 * [Definicion](definicion.md)
 * [Instrucciones](instrucciones.md)
-* [Base de Datos](descargas.md)
+
+## Base de Datos
+
+* [Inserts](base-de-datos/descargas.md)
+* [Create Table and Alter Table](base-de-datos/create-table-and-alter-table.md)
+
+---
+
 * [Requisitos](requisitos.md)
 
 ## Imagenes
