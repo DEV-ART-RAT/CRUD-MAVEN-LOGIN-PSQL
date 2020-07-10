@@ -18,17 +18,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(19, 18, 29);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     height: 50%;
+    border-radius: 0.5em;
 }
 
 /* The Close Button */
 .close {
-    color: #aaaaaa;
+    color: #f8f8f8;
     float: right;
     font-size: 28px;
     font-weight: bold;
