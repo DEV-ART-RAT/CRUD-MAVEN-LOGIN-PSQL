@@ -4,7 +4,9 @@ description: ¿como usar?
 
 # Instrucciones
 
+Ver Proyecto en Github:
 
+[https://github.com/DEV-ART-RAT/PNC\_Proyecto](https://github.com/DEV-ART-RAT/PNC_Proyecto)
 
 ### Instrucciones:
 
