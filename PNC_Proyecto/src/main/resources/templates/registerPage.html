@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
- 
+
 <head>
 	<title>Tempest</title>
 	<th:block th:include="/header"></th:block>
@@ -24,55 +24,73 @@
 						</div>	
 						<form class="col-12"  name='f' th:action="@{/validarRegistrarUsuario}" th:object="${userNewExp}"   method='POST'>
 							
-							<div class="input-group mb-2">
-								<div class="input-group-prepend">
-									<div class="input-group-text"><i class="fas fa-user"></i></div>
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<div class="input-group-text"><i class="fas fa-user"></i></div>
+									</div>
+									<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
 								</div>
-								<p th:text="${message}" style="color:red"></p>
-								<input type='text' class="form-control"  th:field="${userNew.userName}" placeholder="Nombre de usuario"  name='username' value=''>
-								<span th:errors="${userNew.userName}" style="color:red;"></span>
+								<span th:errors="${userNew.userName}" class="text-white errorText"></span>
+								<p id="message" th:text="${message}" class="text-white errorText"></p>
 							</div>
-					
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text"><i class="fas fa-key"></i></div>
+
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text"><i class="fas fa-key"></i></div>
+									</div>
+									<input type='password' class="form-control" th:field="${userNew.encrytedPassword}" placeholder="Contraseña" name='password' />
 								</div>
-								<input type='password' class="form-control" th:field="${userNew.encrytedPassword}" placeholder="Contraseña" name='password' />
-								<span  th:errors="${userNew.encrytedPassword}" style="color:red;"></span>
+								<span  th:errors="${userNew.encrytedPassword}" class="text-white errorText"></span>
 							</div>
+
 							<div class="container p-2">
-								<div class="input-group mt-4 mb-2">
-									<div class="input-group-prepend w-35">
-										<div class="input-group-text">Nombre</div>
+
+								<div class="form-group">
+									<div class="input-group mt-4 mb-2">
+										<div class="input-group-prepend w-35">
+											<div class="input-group-text">Nombre</div>
+										</div>
+										<input type='text' class="form-control"  th:field="${userNewExp.nombre}" placeholder="Nombre"  name='NombrePropio' value=''>
 									</div>
-									<input type='text' class="form-control"  th:field="${userNewExp.nombre}" placeholder="Nombre"  name='NombrePropio' value=''>
-									<span th:errors="${userNewExp.nombre}" style="color:red;"></span>
+									<span th:errors="${userNewExp.nombre}" class="text-white errorText"></span>
 								</div>
-						
-								<div class="input-group mb-2">
-									<div class="input-group-prepend w-35">
-										<div class="input-group-text">Apellido</div>
+
+								<div class="form-group">
+									<div class="input-group mb-2">
+										<div class="input-group-prepend w-35">
+											<div class="input-group-text">Apellido</div>
+										</div>
+										<input type='text' class="form-control"  th:field="${userNewExp.apellido}" placeholder="Apellido"  name='apellido' value=''>
+										
 									</div>
-									<input type='text' class="form-control"  th:field="${userNewExp.apellido}" placeholder="Apellido"  name='apellido' value=''>
-									<span th:errors="${userNewExp.apellido}" style="color:red;"></span>
+									<span th:errors="${userNewExp.apellido}" class="text-white errorText"></span>
 								</div>
-						
-								<div class="input-group mb-2">
-									<div class="input-group-prepend w-35">
-										<div class="input-group-text">Direccion</div>
+
+								<div class="form-group">
+									<div class="input-group mb-2">
+										<div class="input-group-prepend w-35">
+											<div class="input-group-text">Direccion</div>
+										</div>
+										<input type='text' class="form-control"  th:field="${userNewExp.direccion}" placeholder="direccion"  name='direccion' value=''>
 									</div>
-									<input type='text' class="form-control"  th:field="${userNewExp.direccion}" placeholder="direccion"  name='direccion' value=''>
-									<span th:errors="${userNewExp.direccion}" style="color:red;"></span>
+									<span th:errors="${userNewExp.direccion}" class="text-white errorText"></span>
 								</div>
-	
-								<div class="input-group mt-4 mb-2">
-									<div class="input-group-prepend w-35">
-										<div class="input-group-text">F nacimiento</div>
+								
+
+								<div class="form-group">
+									<div class="input-group mt-4 mb-2">
+										<div class="input-group-prepend w-35">
+											<div class="input-group-text">F nacimiento</div>
+										</div>
+										<input id="fnacimiento" class="form-control" type="date" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > 
 									</div>
-									<input id="fnacimiento" class="form-control" type="date" th:field="${userNewExp.fnacimiento}"value="2000-01-01" > 
-									<span th:errors="${userNewExp.fnacimiento}" style="color:red;"></span><br>
+									<span th:errors="${userNewExp.fnacimiento}" class="text-white errorText"></span>
 								</div>
-						
+								
+								<br>
+
 								<div class="input-group mb-2">
 									<div class="input-group-prepend w-35">
 										<div class="input-group-text">Departamento</div>
@@ -105,6 +123,7 @@
 										<option th:value="1" th:text ="Administrador"></option>
 									</select>
 								</div>
+
 							</div>
 							<div class="flex-end mt-2 mb-2">
 								<button type="submit" class="btn btn-danger"><i class="fas fa-sign-in-alt"></i>  Crear cuenta </button>
@@ -118,13 +137,16 @@
 	</div>
 	<script type="text/javascript" th:inline="javascript">
 
-
-
 		
+		var message = document.getElementById('message');
+		if(message.textContent == ""){
+			message.hidden = true;
+		}
+
 		var municipios = document.getElementById('categoriaBox2');
 		var municipiosList = [];
 
-		for(var i = 0; i<municipios.childElementCount; i++){
+		for (var i = 0; i < municipios.childElementCount; i++) {
 			var listaAux = [];
 			listaAux.push(municipios.options[i].value);
 			listaAux.push(municipios.options[i].getAttribute("departamento"));
@@ -136,28 +158,28 @@
 		var departamentosValue = document.getElementById('categoriaBox').value;
 		var MunicipiosFiltrados = listaFiltrada(departamentosValue, municipiosList);
 		rebuildSelect(MunicipiosFiltrados);
-		
 
-		departamentos.onchange = function municipiosAccess(){
+
+		departamentos.onchange = function municipiosAccess() {
 			var departamentosValue = document.getElementById('categoriaBox').value;
 			var MunicipiosFiltrados = listaFiltrada(departamentosValue, municipiosList);
 			rebuildSelect(MunicipiosFiltrados);
 		}
-		
-		function listaFiltrada (value, data){
+
+		function listaFiltrada(value, data) {
 			var filtraData = []
-			for( var i = 0; i<data.length; i++){
-				if(value == data[i][1]){
+			for (var i = 0; i < data.length; i++) {
+				if (value == data[i][1]) {
 					filtraData.push(data[i]);
 				}
 			}
 			return filtraData;
 		}
 
-		function rebuildSelect(data){
+		function rebuildSelect(data) {
 			var select = document.getElementById('categoriaBox2');
-			select.innerHTML= '';
-			for( var i = 0; i<data.length; i++){
+			select.innerHTML = '';
+			for (var i = 0; i < data.length; i++) {
 				var option = `
 						<option  value="${data[i][0]}" departamento="${data[i][1]}">${data[i][2]}</option>
 				`

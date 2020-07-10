@@ -8,7 +8,6 @@
 
 <body>
 	<th:block th:include="/menu"></th:block>
-	<h1 th:text="${message}"></h1>
 	<div class="container-fluid">
 		<div class="container-fluid container-min">
 			<div class="row flex-center">
@@ -16,13 +15,13 @@
 					<div class="loginImg" style="height: 50vh;"></div>
 					<div class="card bg-dark p-3">
 						<div th:if="${#request.getParameter('error') == 'true'}"
-							style="color:red;margin:10px 0px;">
-							Hubo un error en el inicio de sesion<br />
-							debido a:
+							class="text-white errorText">
+							Hubo un error en el inicio de sesion<br/>
 							<span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
 							th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message }">
 								Static summary
 							</span>
+							<h5 class="text-white" th:text="${message}"></h5>
 						</div>  
 						<form class="form"  name='f' th:action="@{/j_spring_security_check}" method='POST'>
 							<div class="input-group mb-2">

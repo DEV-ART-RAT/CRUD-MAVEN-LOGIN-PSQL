@@ -130,4 +130,14 @@ td, th{
 	justify-content: space-between;
 }
 
+.errorText{
+	text-align: center;
+    background-color: rgba(107, 31, 31, 0.5);
+    border-radius: 0.25em;
+    font-size: 0.7em;
+    padding: 0.7em;
+	margin-top: 1em;
+	display: flex;
+	justify-content: center;
+}
 

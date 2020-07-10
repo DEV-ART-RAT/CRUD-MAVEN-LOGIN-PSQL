@@ -82,11 +82,17 @@
 		var dataTable = document.getElementById('tableExpediente');
 		var datos = [];
 		var value;
-		for(var i = 0; i<dataTable.children[1].childElementCount; i++){
+		var tbody = dataTable.children[1]; 
+		for(var i = 0; i< tbody.childElementCount; i++){
 			var listaAux = [];
-			for(var j = 0; j<8; j++){
-				listaAux.push(dataTable.children[1].children[i].children[j].innerText);
-			}
+			listaAux.push(tbody.children[i].children[0].innerText);
+			listaAux.push(tbody.children[i].children[1].innerText);
+			listaAux.push(tbody.children[i].children[2].innerText);
+			listaAux.push(tbody.children[i].children[3].innerText);
+			listaAux.push(tbody.children[i].children[4].innerText);
+			listaAux.push(tbody.children[i].children[5].innerText);
+			listaAux.push(tbody.children[i].children[6].innerText);
+			listaAux.push(tbody.children[i].children[7].innerText);
 			datos.push(listaAux);
 		}
 
