@@ -209,7 +209,8 @@ public class CoordinadorController {
 		List<Expediente> expedientes = expedienteService.filtrarPorID(alumnoxMateria.getExpediente().getCodigo());
 		mav.addObject("expedientes", expedientes);
 		mav.addObject("materias", materias);
-		mav.setViewName("/Coordinador/AgregarMateria");
+		mav.addObject("alumnoxmateria", alumnoxMateria);
+		mav.setViewName("/Coordinador/AgregarMateriafake");
 		return mav;
 	}
 	@RequestMapping(value="/editarMateriaexpediente", method=RequestMethod.POST)
